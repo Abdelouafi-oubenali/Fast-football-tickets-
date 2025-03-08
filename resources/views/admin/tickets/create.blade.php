@@ -210,61 +210,7 @@
                             </div>
                         </div>
                         
-                        <!-- Options et services additionnels -->
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold mb-4 border-b pb-2">Options et Services Additionnels</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <div class="p-4 border rounded-lg">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <label for="parking_toggle" class="font-medium">Parking</label>
-                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                                            <input type="checkbox" id="parking_toggle" name="parking_actif" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                                            <label for="parking_toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2">
-                                        <label class="block text-sm text-gray-700 mb-1">Prix (€)</label>
-                                        <input type="number" name="prix_parking" value="15" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                    </div>
-                                    <div class="mt-2">
-                                        <label class="block text-sm text-gray-700 mb-1">Places disponibles</label>
-                                        <input type="number" name="places_parking" value="500" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                    </div>
-                                </div>
-                                
-                                <div class="p-4 border rounded-lg">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <label for="programme_toggle" class="font-medium">Programme Match</label>
-                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                                            <input type="checkbox" id="programme_toggle" name="programme_actif" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                                            <label for="programme_toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2">
-                                        <label class="block text-sm text-gray-700 mb-1">Prix (€)</label>
-                                        <input type="number" name="prix_programme" value="5" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                    </div>
-                                    <div class="mt-2">
-                                        <label class="block text-sm text-gray-700 mb-1">Quantité disponible</label>
-                                        <input type="number" name="qte_programme" value="2000" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                    </div>
-                                </div>
-                                
-                                <div class="p-4 border rounded-lg">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <label for="assurance_toggle" class="font-medium">Assurance Annulation</label>
-                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                                            <input type="checkbox" id="assurance_toggle" name="assurance_actif" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                                            <label for="assurance_toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2">
-                                        <label class="block text-sm text-gray-700 mb-1">Prix (€)</label>
-                                        <input type="number" name="prix_assurance" value="8" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+     
                         
                         <!-- Paramètres supplémentaires -->
                         <div class="mb-6">
