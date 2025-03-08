@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\StadesController;
+use App\Http\Controllers\TicketsController;
 
 
 
@@ -60,6 +61,8 @@ Route::get('/regster', function () {
 Route::resource('match', MatchsController::class);
 Route::resource('equipe', EquipeController::class);
 Route::resource('stades', StadesController::class);
+Route::resource('tickets', TicketsController::class);
+
 
 
 

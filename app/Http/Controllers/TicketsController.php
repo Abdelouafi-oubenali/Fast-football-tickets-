@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Matchs;
-use App\Http\Requests\StoreMatchsRequest;
-use App\Http\Requests\UpdateMatchsRequest;
+use App\Models\tickets;
+use App\Http\Requests\StoreticketsRequest;
+use App\Http\Requests\UpdateticketsRequest;
 
-class MatchsController extends Controller
+class TicketsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +21,13 @@ class MatchsController extends Controller
      */
     public function create()
     {
-        return view('admin.matchs.cerate');
+        return view('admin.tickets.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMatchsRequest $request)
+    public function store(StoreticketsRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class MatchsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Matchs $matchs)
+    public function show(tickets $tickets)
     {
         //
     }
@@ -43,7 +43,7 @@ class MatchsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Matchs $matchs)
+    public function edit(tickets $tickets)
     {
         //
     }
@@ -51,7 +51,7 @@ class MatchsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMatchsRequest $request, Matchs $matchs)
+    public function update(UpdateticketsRequest $request, tickets $tickets)
     {
         //
     }
@@ -59,7 +59,7 @@ class MatchsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Matchs $matchs)
+    public function destroy(tickets $tickets)
     {
         //
     }
