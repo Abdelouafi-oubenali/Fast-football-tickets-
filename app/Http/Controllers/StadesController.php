@@ -21,7 +21,7 @@ class StadesController extends Controller
      */
     public function create()
     {
-        return view('stades.create');
+        return view('admin.stades.create');
     }
 
     /**
