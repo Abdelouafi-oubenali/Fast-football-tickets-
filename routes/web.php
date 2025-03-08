@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MatchsController;
+use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\StadesController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,23 +28,38 @@ Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
 
-Route::get('/admin/gestion-des-matchs', function () {
-    return view('admin.gestion-des-matchs');
+Route::get('/admin/matchs/gestion-des-matchs', function () {
+    return view('admin.matchs.gestion-des-matchs');
 })->name('admin.gestion-des-matchs');
 
 
-Route::get('/admin/gestion-des-equipes', function () {
-    return view('admin.gestion-des-equipes');
+Route::get('/admin/equipe/gestion-des-equipes', function () {
+    return view('admin.equipe.gestion-des-equipes');
 })->name('admin.gestion-des-equipes');
 
-Route::get('/admin/gestion-des-stades', function () {
-    return view('admin.gestion-des-stades');
+Route::get('/admin/stades/gestion-des-stades', function () {
+    return view('admin.stades.gestion-des-stades');
 })->name('admin.gestion-des-stades');
 
-Route::get('/admin/gestion-des-tickets', function () {
-    return view('admin.gestion-des-tickets');
+Route::get('/admin/tickets/gestion-des-tickets', function () {
+    return view('admin.tickets.gestion-des-tickets');
 })->name('admin.gestion-des-tickets');
 
 Route::get('/admin/historique', function () {
     return view('admin.historique');
 })->name('admin.historique');
+
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+Route::get('/regster', function () {
+    return view('auth.regster');
+});
+// les route de match
+Route::resource('match', MatchsController::class);
+Route::resource('equipe', EquipeController::class);
+Route::resource('stades', StadesController::class);
+
+
+
