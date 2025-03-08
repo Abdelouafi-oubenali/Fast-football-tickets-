@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\StadesController;
@@ -54,14 +55,18 @@ Route::get('/admin/historique', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
-Route::get('/regster', function () {
-    return view('auth.regster');
-});
+// Route::get('/register', function () {
+//     return view('auth.register');
+// });
+
 // les route de match
 Route::resource('match', MatchsController::class);
 Route::resource('equipe', EquipeController::class);
 Route::resource('stades', StadesController::class);
 Route::resource('tickets', TicketsController::class);
+
+Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 
 
