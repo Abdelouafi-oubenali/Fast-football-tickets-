@@ -6,7 +6,6 @@
     <title>Connexion à votre compte</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- Vous pouvez ajouter d'autres liens CSS ici -->
 </head>
 <body class="bg-gradient-to-br from-green-500 to-blue-600 min-h-screen flex items-center justify-center p-4">
     <div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -23,9 +22,10 @@
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
-                <form class="space-y-6" action="#" method="POST">
+                <form class="space-y-6" action="{{ route('login') }}" method="POST">
                     @csrf <!-- Directive Blade pour la protection CSRF -->
 
+                    <!-- Champ Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">
                             Adresse Email
@@ -40,15 +40,20 @@
                             <input 
                                 id="email" 
                                 name="email" 
-                                type="email" 
-                                required 
+                                type="email"  
                                 autocomplete="email"
                                 class="pl-10 block w-full pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 placeholder="vous@exemple.com"
+                                value="{{ old('email') }}"
                             >
                         </div>
+                        <!-- Message d'erreur pour l'email -->
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
+                    <!-- Champ Mot de passe -->
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">
                             Mot de Passe
@@ -62,15 +67,19 @@
                             <input 
                                 id="password" 
                                 name="password" 
-                                type="password" 
-                                required 
+                                type="password"  
                                 autocomplete="current-password"
                                 class="pl-10 block w-full pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 placeholder="Votre mot de passe"
                             >
                         </div>
+                        <!-- Message d'erreur pour le mot de passe -->
+                        @error('password')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
+                    <!-- Champ "Se souvenir de moi" -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <input 
@@ -91,6 +100,7 @@
                         </div>
                     </div>
 
+                    <!-- Bouton de connexion -->
                     <div>
                         <button 
                             type="submit" 

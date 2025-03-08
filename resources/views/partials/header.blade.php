@@ -53,12 +53,15 @@
                     </div>
                     
                     <!-- Bouton de déconnexion -->
-                    <button 
-                        class="px-4 py-2 text-red-600 hover:text-white hover:bg-red-600 rounded-lg border border-red-600 transition-colors duration-300"
-                        onclick="logout()"
-                    >
-                        Déconnexion
-                    </button>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf 
+                        <button
+                            type="submit"
+                            class="px-4 py-2 text-red-600 hover:text-white hover:bg-red-600 rounded-lg border border-red-600 transition-colors duration-300">
+                            Déconnexion
+                        </button>
+                    </form>
+                 
                 </div>
             </div>
         </div>

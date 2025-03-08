@@ -52,9 +52,9 @@ Route::get('/admin/historique', function () {
 })->name('admin.historique');
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Route::get('/login', function () {
+//     return view('auth.login');
+// });
 // Route::get('/register', function () {
 //     return view('auth.register');
 // });
@@ -69,5 +69,9 @@ Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('regis
 Route::post('/register', [AuthController::class, 'register']);
 
 
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
