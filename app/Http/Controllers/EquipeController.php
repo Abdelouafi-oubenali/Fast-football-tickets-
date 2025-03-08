@@ -21,7 +21,7 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        return view('equipe.create');
+        return view('admin.equipe.create');
     }
 
     /**
