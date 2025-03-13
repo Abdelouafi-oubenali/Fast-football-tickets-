@@ -13,7 +13,13 @@
             <h2 class="text-3xl font-bold text-gray-800">FootTeam Manager</h2>
             <p class="text-gray-600 mt-2">Créez votre compte gestionnaire</p>
         </div>
-        <form>
+
+    
+        <!-- Formulaire d'inscription -->
+        <form method="POST" action="{{ route('register') }}">
+            @csrf <!-- Protection CSRF -->
+
+            <!-- Champ Prénom -->
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="prenom">
@@ -23,9 +29,16 @@
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" 
                         id="prenom" 
                         type="text" 
+                        name="prenom" 
                         placeholder="Votre prénom"
+                        value="{{ old('prenom') }}"
                     >
+                    @error('prenom')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
+
+                <!-- Champ Nom -->
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="nom">
                         Nom
@@ -34,11 +47,17 @@
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" 
                         id="nom" 
                         type="text" 
+                        name="nom" 
                         placeholder="Votre nom"
+                        value="{{ old('nom') }}"
                     >
+                    @error('nom')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             
+            <!-- Champ Email -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
@@ -47,10 +66,16 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" 
                     id="email" 
                     type="email" 
+                    name="email" 
                     placeholder="votre.email@exemple.com"
+                    value="{{ old('email') }}"
                 >
+                @error('email')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Champ Rôle -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
                     Rôle
@@ -58,14 +83,19 @@
                 <select 
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500"
                     id="role"
+                    name="role"
                 >
-                    <option>Entraîneur</option>
-                    <option>Manager</option>
-                    <option>Directeur Sportif</option>
-                    <option>Autre</option>
+                    <option value="Entraîneur">Entraîneur</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Directeur Sportif">Directeur Sportif</option>
+                    <option value="Autre">Autre</option>
                 </select>
+                @error('role')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Champ Mot de passe -->
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -75,43 +105,60 @@
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" 
                         id="password" 
                         type="password" 
+                        name="password" 
                         placeholder="******************"
                     >
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
+
+                <!-- Champ Confirmation du mot de passe -->
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm-password">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirmation">
                         Confirmer
                     </label>
                     <input 
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" 
-                        id="confirm-password" 
+                        id="password_confirmation" 
                         type="password" 
+                        name="password_confirmation" 
                         placeholder="******************"
                     >
+                    @error('password_confirmation')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
+            <!-- Champ Conditions d'utilisation -->
             <div class="mb-4">
                 <label class="flex items-center">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 text-green-600">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-green-600" name="terms" required>
                     <span class="ml-2 text-gray-700 text-sm">
                         J'accepte les conditions d'utilisation
                     </span>
                 </label>
+                @error('terms')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Bouton d'inscription -->
             <div class="flex items-center justify-between">
                 <button 
                     class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" 
-                    type="button"
+                    type="submit"
                 >
                     S'inscrire
                 </button>
             </div>
+
+            <!-- Lien de connexion -->
             <div class="text-center mt-4">
                 <p class="text-sm text-gray-600">
                     Déjà un compte ? 
-                    <a href="/login" class="text-blue-500 hover:text-blue-700">
+                    <a href="#" class="text-blue-500 hover:text-blue-700">
                         Connectez-vous
                     </a>
                 </p>

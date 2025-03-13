@@ -7,8 +7,6 @@
 
   <!-- Sidebar -->
   <div class="flex">
-
-
     <!-- Main Content -->
     <div class="ml-64 flex-1 p-6">
       <div class="flex justify-between items-center mb-6">

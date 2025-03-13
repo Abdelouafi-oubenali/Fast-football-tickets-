@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\StadesController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 
@@ -51,18 +54,35 @@ Route::get('/admin/historique', function () {
 })->name('admin.historique');
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/regster', function () {
-    return view('auth.regster');
-});
+// Route::get('/login', function () {
+//     return view('auth.login');
+// });
+// Route::get('/register', function () {
+//     return view('auth.register');
+// });
+
 // les route de match
 Route::resource('match', MatchsController::class);
 Route::resource('equipe', EquipeController::class);
 Route::resource('stades', StadesController::class);
 Route::resource('tickets', TicketsController::class);
 
+Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+
+// les route pour forget password
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
