@@ -11,7 +11,7 @@ class StoreEquipeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreEquipeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'coach' => 'required|string',
+            'ville' => 'required|string',
+            'founded_year' => 'required|integer',
         ];
     }
 }

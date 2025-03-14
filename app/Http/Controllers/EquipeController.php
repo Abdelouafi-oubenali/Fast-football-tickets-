@@ -2,65 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Equipe;
+use App\Models\FootballTeam;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEquipeRequest;
 use App\Http\Requests\UpdateEquipeRequest;
+use App\Models\Equipe;
+use App\Repositories\FootballEqupeRepositoryInterface;
 
 class EquipeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $teamRepository;
+
+    public function __construct(FootballEqupeRepositoryInterface $teamRepository)
     {
-        // 
+        $this->teamRepository = $teamRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index()
+    {
+        $teams = $this->teamRepository->all();
+        return view('admin.equipe.index', compact('teams'));
+    }
+
     public function create()
     {
         return view('admin.equipe.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEquipeRequest $request)
     {
-        //
+        $data = $request->validated();
+        $this->teamRepository->create($data); 
+
+        return redirect('equipe')->with('success', 'Team created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Equipe $equipe)
+    public function edit($id)
     {
-        //
+        $equipe = $this->teamRepository->find($id);
+        return view('admin.equipe.edit', compact('equipe'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Equipe $equipe)
+    public function update(StoreEquipeRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $this->teamRepository->update($data, $id);
+        return redirect('equipe')->with('success', 'Team created successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEquipeRequest $request, Equipe $equipe)
+    public function destroy($id)
     {
-        //
-    }
+        $this->teamRepository->delete($id);
+        return redirect('equipe')->with('success', 'Team deleted successfully.');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Equipe $equipe)
-    {
-        //
     }
 }
+

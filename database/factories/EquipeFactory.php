@@ -17,7 +17,10 @@ class EquipeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->company, 
+            'ville' => $this->faker->city, 
+            'coach' => $this->faker->word(),
+            'founded_year' => 5, 
         ];
     }
 }

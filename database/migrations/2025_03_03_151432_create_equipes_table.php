@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('equipes', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('coach');
+            $table->string('ville');
+            $table->integer('founded_year');
             $table->timestamps();
         });
     }

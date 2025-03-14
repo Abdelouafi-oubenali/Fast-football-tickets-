@@ -38,7 +38,7 @@ Route::get('/admin/matchs/gestion-des-matchs', function () {
 
 
 Route::get('/admin/equipe/gestion-des-equipes', function () {
-    return view('admin.equipe.gestion-des-equipes');
+    return view('admin.equipe.index');
 })->name('admin.gestion-des-equipes');
 
 Route::get('/admin/stades/gestion-des-stades', function () {

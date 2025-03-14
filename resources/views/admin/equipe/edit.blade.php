@@ -1,20 +1,21 @@
 @extends('layouts.master')
 
-@section('title','Création de Match')
+@section('title','Modification de l\'Équipe')
 
 @section('content')
 
     <div class="mx-auto px-4 sm:px-6 lg:px-8 py-10 w-[76rem]" style="width: 76rem; margin-right:1rem; margin-top:2rem ">
         <!-- En-tête -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Créer une Nouvelle Équipe</h1>
-            <p class="text-gray-600">Remplissez le formulaire ci-dessous pour créer une nouvelle équipe dans le système.</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Modifier l'Équipe</h1>
+            <p class="text-gray-600">Modifiez les informations de l'équipe ci-dessous.</p>
         </div>
 
         <!-- Formulaire principal -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <form method="POST" action="{{ route('equipe.store') }}">
-                @csrf <!-- Ajout du jeton CSRF pour la sécurité -->
+            <form method="POST" action="{{ route('equipe.update', $equipe->id) }}">
+                @csrf
+                @method('PUT') <!-- Ajout de la méthode PUT pour la mise à jour -->
             
                 <!-- Section d'information d'équipe -->
                 <div class="p-6 border-b border-gray-200">
@@ -37,7 +38,7 @@
                             <label for="team-name" class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe *</label>
                             <input type="text" id="name" name="name" required 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('team-name') }}"> <!-- Remplissage automatique avec les anciennes valeurs -->
+                                   value="{{ old('name', $equipe->name) }}">
                         </div>
                         
                         <!-- Département -->
@@ -46,12 +47,12 @@
                             <select id="department" name="department" required 
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Sélectionner un département</option>
-                                <option value="marketing" {{ old('department') == 'marketing' ? 'selected' : '' }}>Marketing</option>
-                                <option value="development" {{ old('department') == 'development' ? 'selected' : '' }}>Développement</option>
-                                <option value="design" {{ old('department') == 'design' ? 'selected' : '' }}>Design</option>
-                                <option value="sales" {{ old('department') == 'sales' ? 'selected' : '' }}>Commercial</option>
-                                <option value="hr" {{ old('department') == 'hr' ? 'selected' : '' }}>Ressources Humaines</option>
-                                <option value="finance" {{ old('department') == 'finance' ? 'selected' : '' }}>Finance</option>
+                                <option value="marketing" {{ old('department', $equipe->department) == 'marketing' ? 'selected' : '' }}>Marketing</option>
+                                <option value="development" {{ old('department', $equipe->department) == 'development' ? 'selected' : '' }}>Développement</option>
+                                <option value="design" {{ old('department', $equipe->department) == 'design' ? 'selected' : '' }}>Design</option>
+                                <option value="sales" {{ old('department', $equipe->department) == 'sales' ? 'selected' : '' }}>Commercial</option>
+                                <option value="hr" {{ old('department', $equipe->department) == 'hr' ? 'selected' : '' }}>Ressources Humaines</option>
+                                <option value="finance" {{ old('department', $equipe->department) == 'finance' ? 'selected' : '' }}>Finance</option>
                             </select>
                         </div>
                         
@@ -59,7 +60,7 @@
                         <div class="md:col-span-2">
                             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description de l'équipe</label>
                             <textarea id="description" name="description" rows="3" 
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('description') }}</textarea>
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('description', $equipe->description) }}</textarea>
                         </div>
                         
                         <!-- Localisation -->
@@ -67,7 +68,7 @@
                             <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Localisation</label>
                             <input type="text" id="location" name="ville" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('location') }}">
+                                   value="{{ old('ville', $equipe->ville) }}">
                         </div>
                         
                         <!-- Budget annuel -->
@@ -75,7 +76,7 @@
                             <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">Budget annuel (€)</label>
                             <input type="number" id="budget" name="founded_year" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('budget') }}">
+                                   value="{{ old('founded_year', $equipe->founded_year) }}">
                         </div>
                     </div>
                 </div>
@@ -91,11 +92,11 @@
                             <select id="team-lead" name="coach" required 
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Sélectionner un employé</option>
-                                <option value="1" {{ old('team-lead') == '1' ? 'selected' : '' }}>Sophie Martin</option>
-                                <option value="2" {{ old('team-lead') == '2' ? 'selected' : '' }}>Thomas Durand</option>
-                                <option value="3" {{ old('team-lead') == '3' ? 'selected' : '' }}>Julie Leroux</option>
-                                <option value="4" {{ old('team-lead') == '4' ? 'selected' : '' }}>Marc Dubois</option>
-                                <option value="5" {{ old('team-lead') == '5' ? 'selected' : '' }}>Émilie Laurent</option>
+                                <option value="1" {{ old('coach', $equipe->coach) == '1' ? 'selected' : '' }}>Sophie Martin</option>
+                                <option value="2" {{ old('coach', $equipe->coach) == '2' ? 'selected' : '' }}>Thomas Durand</option>
+                                <option value="3" {{ old('coach', $equipe->coach) == '3' ? 'selected' : '' }}>Julie Leroux</option>
+                                <option value="4" {{ old('coach', $equipe->coach) == '4' ? 'selected' : '' }}>Marc Dubois</option>
+                                <option value="5" {{ old('coach', $equipe->coach) == '5' ? 'selected' : '' }}>Émilie Laurent</option>
                             </select>
                         </div>
                         
@@ -104,7 +105,7 @@
                             <label for="lead-since" class="block text-sm font-medium text-gray-700 mb-1">Date de début</label>
                             <input type="date" id="lead-since" name="lead-since" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('lead-since') }}">
+                                   value="{{ old('lead-since', $equipe->lead_since) }}">
                         </div>
                     </div>
                     
@@ -113,7 +114,7 @@
                         <label class="flex items-center">
                             <input type="checkbox" name="send_notification" 
                                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                   {{ old('send_notification') ? 'checked' : '' }}>
+                                   {{ old('send_notification', $equipe->send_notification) ? 'checked' : '' }}>
                             <span class="ml-2 text-sm text-gray-600">Envoyer une notification au chef d'équipe</span>
                         </label>
                     </div>
@@ -128,7 +129,7 @@
                         <div>
                             <label for="team-color" class="block text-sm font-medium text-gray-700 mb-1">Couleur de l'équipe</label>
                             <div class="flex items-center">
-                                <input type="color" id="team-color" name="team-color" value="{{ old('team-color', '#3B82F6') }}" 
+                                <input type="color" id="team-color" name="team-color" value="{{ old('team-color', $equipe->team_color) }}" 
                                        class="h-8 w-8 rounded border border-gray-300 mr-2">
                                 <span class="text-sm text-gray-600">Utilisée pour les visualisations et rapports</span>
                             </div>
@@ -141,19 +142,19 @@
                                 <label class="flex items-center">
                                     <input type="radio" name="visibility" value="public" 
                                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" 
-                                           {{ old('visibility', 'public') == 'public' ? 'checked' : '' }}>
+                                           {{ old('visibility', $equipe->visibility) == 'public' ? 'checked' : '' }}>
                                     <span class="ml-2 text-sm text-gray-700">Publique - Visible par tous les employés</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="radio" name="visibility" value="department" 
                                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" 
-                                           {{ old('visibility') == 'department' ? 'checked' : '' }}>
+                                           {{ old('visibility', $equipe->visibility) == 'department' ? 'checked' : '' }}>
                                     <span class="ml-2 text-sm text-gray-700">Département - Visible uniquement dans le département</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="radio" name="visibility" value="private" 
                                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" 
-                                           {{ old('visibility') == 'private' ? 'checked' : '' }}>
+                                           {{ old('visibility', $equipe->visibility) == 'private' ? 'checked' : '' }}>
                                     <span class="ml-2 text-sm text-gray-700">Privée - Visible uniquement par les membres</span>
                                 </label>
                             </div>
@@ -164,7 +165,7 @@
                             <label class="flex items-center">
                                 <input type="checkbox" name="enable_notifications" 
                                        class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                       {{ old('enable_notifications') ? 'checked' : '' }}>
+                                       {{ old('enable_notifications', $equipe->enable_notifications) ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-600">Activer les notifications pour cette équipe</span>
                             </label>
                         </div>
@@ -177,7 +178,7 @@
                         Annuler
                     </button>
                     <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Créer l'équipe
+                        Mettre à jour l'équipe
                     </button>
                 </div>
             </form>
@@ -185,7 +186,7 @@
         
         <!-- Aide et conseils -->
         <div class="mt-8 bg-blue-50 rounded-lg p-5 border border-blue-200">
-            <h3 class="text-lg font-medium text-blue-800 mb-2">Conseils pour créer une équipe efficace</h3>
+            <h3 class="text-lg font-medium text-blue-800 mb-2">Conseils pour une équipe efficace</h3>
             <ul class="list-disc pl-5 space-y-2 text-sm text-blue-700">
                 <li>Définissez clairement les objectifs et les responsabilités de l'équipe.</li>
                 <li>Assurez-vous que les membres ont des compétences complémentaires.</li>
@@ -195,4 +196,4 @@
             </ul>
         </div>
     </div>
-    @endsection
+@endsection
