@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Création de Match')
+@section('title','Création de equipe')
 
 @section('content')
 
