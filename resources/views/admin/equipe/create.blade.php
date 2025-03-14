@@ -14,7 +14,7 @@
         <!-- Formulaire principal -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <form method="POST" action="{{ route('equipe.store') }}">
-                @csrf <!-- Ajout du jeton CSRF pour la sécurité -->
+                @csrf 
             
                 <!-- Section d'information d'équipe -->
                 <div class="p-6 border-b border-gray-200">
