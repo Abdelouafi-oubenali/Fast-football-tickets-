@@ -9,4 +9,5 @@ class Stades extends Model
 {
     /** @use HasFactory<\Database\Factories\StadesFactory> */
     use HasFactory;
+
 }

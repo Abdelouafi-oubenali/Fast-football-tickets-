@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Création de Match')
+@section('title','Création de equipe')
 
 @section('content')
 
@@ -20,20 +20,33 @@
                 <div class="p-6 border-b border-gray-200">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de l'équipe</h2>
                     
-    
+                    <!-- Affichage des erreurs de validation -->
+                    @if ($errors->any())
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <!-- Nom de l'équipe -->
                         <div>
                             <label for="team-name" class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe *</label>
-                            <input type="text" id="name" name="name" required 
+                            <input type="text" id="name" name="name"  
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('team-name') }}"> <!-- Remplissage automatique avec les anciennes valeurs -->
+                                   value="{{ old('name') }}">
+                            @error('name')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Département -->
                         <div>
                             <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Département *</label>
-                            <select id="department" name="department" required 
+                            <select id="department" name="department"  
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Sélectionner un département</option>
                                 <option value="marketing" {{ old('department') == 'marketing' ? 'selected' : '' }}>Marketing</option>
@@ -43,6 +56,9 @@
                                 <option value="hr" {{ old('department') == 'hr' ? 'selected' : '' }}>Ressources Humaines</option>
                                 <option value="finance" {{ old('department') == 'finance' ? 'selected' : '' }}>Finance</option>
                             </select>
+                            @error('department')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Description de l'équipe -->
@@ -50,6 +66,9 @@
                             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description de l'équipe</label>
                             <textarea id="description" name="description" rows="3" 
                                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('description') }}</textarea>
+                            @error('description')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Localisation -->
@@ -57,7 +76,10 @@
                             <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Localisation</label>
                             <input type="text" id="location" name="ville" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('location') }}">
+                                   value="{{ old('ville') }}">
+                            @error('ville')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Budget annuel -->
@@ -65,7 +87,10 @@
                             <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">Budget annuel (€)</label>
                             <input type="number" id="budget" name="founded_year" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                   value="{{ old('budget') }}">
+                                   value="{{ old('founded_year') }}">
+                            @error('founded_year')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -78,15 +103,18 @@
                         <!-- Sélection du chef d'équipe -->
                         <div>
                             <label for="team-lead" class="block text-sm font-medium text-gray-700 mb-1">Sélectionner un chef d'équipe *</label>
-                            <select id="team-lead" name="coach" required 
+                            <select id="team-lead" name="coach"  
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Sélectionner un employé</option>
-                                <option value="1" {{ old('team-lead') == '1' ? 'selected' : '' }}>Sophie Martin</option>
-                                <option value="2" {{ old('team-lead') == '2' ? 'selected' : '' }}>Thomas Durand</option>
-                                <option value="3" {{ old('team-lead') == '3' ? 'selected' : '' }}>Julie Leroux</option>
-                                <option value="4" {{ old('team-lead') == '4' ? 'selected' : '' }}>Marc Dubois</option>
-                                <option value="5" {{ old('team-lead') == '5' ? 'selected' : '' }}>Émilie Laurent</option>
+                                <option value="1" {{ old('coach') == '1' ? 'selected' : '' }}>Sophie Martin</option>
+                                <option value="2" {{ old('coach') == '2' ? 'selected' : '' }}>Thomas Durand</option>
+                                <option value="3" {{ old('coach') == '3' ? 'selected' : '' }}>Julie Leroux</option>
+                                <option value="4" {{ old('coach') == '4' ? 'selected' : '' }}>Marc Dubois</option>
+                                <option value="5" {{ old('coach') == '5' ? 'selected' : '' }}>Émilie Laurent</option>
                             </select>
+                            @error('coach')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Date de début -->
@@ -95,6 +123,9 @@
                             <input type="date" id="lead-since" name="lead-since" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                                    value="{{ old('lead-since') }}">
+                            @error('lead-since')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     
@@ -106,6 +137,9 @@
                                    {{ old('send_notification') ? 'checked' : '' }}>
                             <span class="ml-2 text-sm text-gray-600">Envoyer une notification au chef d'équipe</span>
                         </label>
+                        @error('send_notification')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 
@@ -122,6 +156,9 @@
                                        class="h-8 w-8 rounded border border-gray-300 mr-2">
                                 <span class="text-sm text-gray-600">Utilisée pour les visualisations et rapports</span>
                             </div>
+                            @error('team-color')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Visibilité -->
@@ -147,6 +184,9 @@
                                     <span class="ml-2 text-sm text-gray-700">Privée - Visible uniquement par les membres</span>
                                 </label>
                             </div>
+                            @error('visibility')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         
                         <!-- Activer les notifications -->
@@ -157,6 +197,9 @@
                                        {{ old('enable_notifications') ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-600">Activer les notifications pour cette équipe</span>
                             </label>
+                            @error('enable_notifications')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -185,4 +228,4 @@
             </ul>
         </div>
     </div>
-    @endsection
+@endsection
