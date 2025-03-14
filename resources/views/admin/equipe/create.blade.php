@@ -17,17 +17,6 @@
                 <!-- Section d'information d'équipe -->
                 <div class="p-6 border-b border-gray-200">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de l'équipe</h2>
-                    
-                    <!-- Affichage des erreurs de validation -->
-                    @if ($errors->any())
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
             
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <!-- Nom de l'équipe -->
