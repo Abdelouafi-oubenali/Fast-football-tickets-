@@ -9,4 +9,10 @@ class Equipe extends Model
 {
     /** @use HasFactory<\Database\Factories\EquipeFactory> */
     use HasFactory;
+    protected $fillable = [
+        'name', 
+        'ville', 
+        'founded_year',
+        'coach', 
+    ];
 }
