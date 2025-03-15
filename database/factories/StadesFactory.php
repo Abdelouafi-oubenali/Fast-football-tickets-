@@ -17,7 +17,10 @@ class StadesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->words(1, true),
+            'capacity' => 5,
+            'ville' => $this->faker->city, 
+            'adresse' => $this->faker->streetAddress,
         ];
     }
 }

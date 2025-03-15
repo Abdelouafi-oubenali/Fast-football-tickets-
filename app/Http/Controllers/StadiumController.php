@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreStadesRequest;
 use App\Repositories\StadRepositoryInterface;
 
 class StadiumController extends Controller
@@ -25,46 +26,37 @@ class StadiumController extends Controller
         return view('admin.stades.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreStadesRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'capacity' => 'required|integer',
-            'ville' => 'required|string|max:255',
-            'adresse' => 'required|string|max:255'
-        ]);
-
+        $data = $request->validated();
         $this->stadiumRepository->create($data);
-        return redirect()->route('stadia.index')->with('success', 'Stadium created successfully.');
+        return redirect()->route('stades.index')->with('success', 'Stadium created successfully.');
     }
 
     public function show($id)
     {
         $stadium = $this->stadiumRepository->find($id);
-        return view('stadia.show', compact('stadium'));
+        return view('stades.show', compact('stadium'));
     }
 
     public function edit($id)
     {
         $stadium = $this->stadiumRepository->find($id);
-        return view('stadia.edit', compact('stadium'));
+        return view('admin.stades.edit', compact('stadium'));
     }
 
-    public function update(Request $request, $id)
+        public function update(StoreStadesRequest $request, $id)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'capacity' => 'required|integer',
-            'location' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
+        $this->stadiumRepository->update($data, $id);
 
-        $this->stadiumRepository->update($id, $data);
-        return redirect()->route('stadia.index')->with('success', 'Stadium updated successfully.');
+        return redirect()->route('stades.index')->with('success', 'Stadium updated successfully.');
     }
+    
 
     public function destroy($id)
     {
         $this->stadiumRepository->delete($id);
-        return redirect()->route('stadia.index')->with('success', 'Stadium deleted successfully.');
+        return redirect()->route('stades.index')->with('success', 'Stadium deleted successfully.');
     }
 }

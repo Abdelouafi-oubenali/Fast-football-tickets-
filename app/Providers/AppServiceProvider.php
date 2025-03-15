@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\StadeReposittory;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\FootballEqupeRepositoryInterface;
 use App\Repositories\FootballEqupeRepository;
+use App\Repositories\StadRepositoryInterface;
+use App\Repositories\FootballEqupeRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(FootballEqupeRepositoryInterface::class, FootballEqupeRepository::class);
+        $this->app->bind(StadRepositoryInterface::class, StadeReposittory::class);
+
     }
     /**
      * Bootstrap any application services.

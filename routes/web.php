@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
-use App\Http\Controllers\StadesController;
+use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\TicketsController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 
@@ -41,9 +41,9 @@ Route::get('/admin/equipe/gestion-des-equipes', function () {
     return view('admin.equipe.index');
 })->name('admin.gestion-des-equipes');
 
-Route::get('/admin/stades/gestion-des-stades', function () {
-    return view('admin.stades.gestion-des-stades');
-})->name('admin.gestion-des-stades');
+// Route::get('/admin/stades/gestion-des-stades', function () {
+//     return view('admin.stades.gestion-des-stades');
+// })->name('admin.gestion-des-stades');
 
 Route::get('/admin/tickets/gestion-des-tickets', function () {
     return view('admin.tickets.gestion-des-tickets');
@@ -64,7 +64,7 @@ Route::get('/admin/historique', function () {
 // les route de match
 Route::resource('match', MatchsController::class);
 Route::resource('equipe', EquipeController::class);
-Route::resource('stades', StadesController::class);
+Route::resource('stades', StadiumController::class);
 Route::resource('tickets', TicketsController::class);
 
 Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');

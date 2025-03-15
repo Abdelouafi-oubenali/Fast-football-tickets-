@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Equipe;
+use App\Models\Stades;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,6 @@ class StadesSeeder extends Seeder
      */
     public function run(): void
     {
-        Equipe::factory()->count(10)->create();
+        Stades::factory()->count(10)->create();
     }
 }

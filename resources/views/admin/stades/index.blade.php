@@ -28,7 +28,19 @@
         </div>
     </nav>
 
+
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6" style="margin-left: 17rem; margin-top:3rem">
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Succès ! </strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+                <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" onclick="this.parentElement.style.display='none';">
+                    <span class="text-green-500">&times;</span>
+                </button>
+            </div>
+        @endif
+        
         <div class="md:flex md:items-center md:justify-between mb-6">
             <div class="flex-1 min-w-0">
                 <h2 class="text-2xl font-bold leading-7 text-gray-800 sm:text-3xl sm:truncate">
@@ -146,100 +158,44 @@
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <!-- Stade 1 -->
+            @foreach($stadia as $stad)
             <div class="bg-white rounded-lg shadow transition-all duration-200 stadium-card">
                 <div class="h-48 w-full bg-gray-200 rounded-t-lg relative overflow-hidden">
                     <img src="/api/placeholder/400/200" alt="Stade Municipal" class="w-full h-full object-cover">
                     <div class="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">Disponible</div>
                 </div>
                 <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-800">Stade Municipal</h3>
+                    <h3 class="text-lg font-bold text-gray-800">{{$stad->name}}</h3>
                     <div class="flex items-center text-gray-500 text-sm mt-1">
                         <i class="fas fa-map-marker-alt mr-1"></i>
-                        <span>15 Rue du Sport, Paris</span>
+                        <span>{{ $stad->adresse}}</span>
                     </div>
                     <div class="flex items-center text-gray-500 text-sm mt-1">
                         <i class="fas fa-users mr-1"></i>
-                        <span>Capacité: 15,000</span>
+                        <span>Capacité: {{$stad->capacity}}</span>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <div class="flex justify-between">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm">
+                            <a href="../stades/{{ $stad->id }}/edit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm">
                                 <i class="fas fa-edit mr-1"></i> Modifier
-                            </button>
+                            </a>
                             <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg text-sm">
                                 <i class="fas fa-calendar-plus mr-1"></i> Réserver
                             </button>
-                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-info-circle mr-1"></i> Détails
-                            </button>
+                            <form method="POST" action="{{ route('stades.destroy', $stad->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm">
+                                    <i class="fas fa-info-circle mr-1"></i> Delete
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
 
-            <!-- Stade 2 -->
-            <div class="bg-white rounded-lg shadow transition-all duration-200 stadium-card">
-                <div class="h-48 w-full bg-gray-200 rounded-t-lg relative overflow-hidden">
-                    <img src="/api/placeholder/400/200" alt="Stade Olympique" class="w-full h-full object-cover">
-                    <div class="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Maintenance</div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-800">Stade Olympique</h3>
-                    <div class="flex items-center text-gray-500 text-sm mt-1">
-                        <i class="fas fa-map-marker-alt mr-1"></i>
-                        <span>23 Avenue Olympique, Lyon</span>
-                    </div>
-                    <div class="flex items-center text-gray-500 text-sm mt-1">
-                        <i class="fas fa-users mr-1"></i>
-                        <span>Capacité: 45,000</span>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-200">
-                        <div class="flex justify-between">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-edit mr-1"></i> Modifier
-                            </button>
-                            <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-tools mr-1"></i> Maintenance
-                            </button>
-                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-info-circle mr-1"></i> Détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stade 3 -->
-            <div class="bg-white rounded-lg shadow transition-all duration-200 stadium-card">
-                <div class="h-48 w-full bg-gray-200 rounded-t-lg relative overflow-hidden">
-                    <img src="/api/placeholder/400/200" alt="Arena Sports" class="w-full h-full object-cover">
-                    <div class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs">Réservé</div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-800">Arena Sports</h3>
-                    <div class="flex items-center text-gray-500 text-sm mt-1">
-                        <i class="fas fa-map-marker-alt mr-1"></i>
-                        <span>8 Boulevard Sports, Marseille</span>
-                    </div>
-                    <div class="flex items-center text-gray-500 text-sm mt-1">
-                        <i class="fas fa-users mr-1"></i>
-                        <span>Capacité: 25,000</span>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-200">
-                        <div class="flex justify-between">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-edit mr-1"></i> Modifier
-                            </button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-calendar-times mr-1"></i> Annuler
-                            </button>
-                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm">
-                                <i class="fas fa-info-circle mr-1"></i> Détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       
         </div>
 
        
