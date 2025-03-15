@@ -11,7 +11,7 @@ class StoreStadesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreStadesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'capacity' => 'required|integer',
+            'ville' => 'required|string|max:255',
+            'adresse' => 'required|string|max:255'
         ];
     }
 }
