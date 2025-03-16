@@ -22,7 +22,13 @@ class UpdateMatchsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => 'required|date',
+            'time' => 'required',
+            'stadum' => 'required|string|max:255',
+            'home_team_id' => 'required|exists:teams,id',
+            'away_team_id' => 'required|exists:teams,id',
+            'home_team_score' => 'nullable|integer',
+            'away_team_score' => 'nullable|integer',
         ];
     }
 }
