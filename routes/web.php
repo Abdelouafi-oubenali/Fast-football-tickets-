@@ -32,18 +32,12 @@ Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
 
-// Route::get('/admin/matchs/gestion-des-matchs', function () {
-//     return view('admin.matchs.gestion-des-matchs');
-// })->name('admin.gestion-des-matchs');
 
 
 Route::get('/admin/equipe/gestion-des-equipes', function () {
     return view('admin.equipe.index');
 })->name('admin.gestion-des-equipes');
 
-// Route::get('/admin/stades/gestion-des-stades', function () {
-//     return view('admin.stades.gestion-des-stades');
-// })->name('admin.gestion-des-stades');
 
 Route::get('/admin/tickets/gestion-des-tickets', function () {
     return view('admin.tickets.gestion-des-tickets');
@@ -54,12 +48,6 @@ Route::get('/admin/historique', function () {
 })->name('admin.historique');
 
 
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
-// Route::get('/register', function () {
-//     return view('auth.register');
-// });
 
 // les route de match
 Route::resource('match', MatchsController::class);
