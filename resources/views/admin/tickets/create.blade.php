@@ -47,33 +47,25 @@
 
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <!-- Formulaire pour créer un nouveau ticket -->
-                    <form>
-                        <!-- Informations du match -->
+                    <form method="POST" action="{{route('tickets.store')}}">
+                        @csrf
                         <div class="mb-6">
                             <h3 class="text-lg font-semibold mb-4 border-b pb-2">Informations du Match</h3>
                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                                 <div>
                                     <label for="equipe_domicile" class="block text-gray-700 mb-1">Équipe Domicile</label>
-                                    <select id="equipe_domicile" name="equipe_domicile" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="">-- Sélectionner une équipe --</option>
-                                        <option value="psg">Paris Saint-Germain</option>
-                                        <option value="om">Olympique de Marseille</option>
-                                        <option value="ol">Olympique Lyonnais</option>
-                                        <option value="asm">AS Monaco</option>
-                                        <option value="srfc">Stade Rennais FC</option>
-                                        <option value="losc">LOSC Lille</option>
+                                    <select id="equipe_domicile" name="home_team_id" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        @foreach($equipes as $equipe)
+                                            <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
+                                         @endforeach
                                     </select>
                                 </div>
                                 <div>
                                     <label for="equipe_exterieur" class="block text-gray-700 mb-1">Équipe Extérieur</label>
-                                    <select id="equipe_exterieur" name="equipe_exterieur" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="">-- Sélectionner une équipe --</option>
-                                        <option value="psg">Paris Saint-Germain</option>
-                                        <option value="om">Olympique de Marseille</option>
-                                        <option value="ol">Olympique Lyonnais</option>
-                                        <option value="asm">AS Monaco</option>
-                                        <option value="srfc">Stade Rennais FC</option>
-                                        <option value="losc">LOSC Lille</option>
+                                    <select id="equipe_exterieur" name="away_team_id" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        @foreach($equipes as $equipe)
+                                        <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                                 <div>
@@ -89,7 +81,7 @@
                                 </div>
                                 <div>
                                     <label for="stade" class="block text-gray-700 mb-1">Stade</label>
-                                    <select id="stade" name="stade" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="stade" name="Stadium" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">-- Sélectionner un stade --</option>
                                         <option value="parc">Parc des Princes</option>
                                         <option value="velodrome">Orange Vélodrome</option>
@@ -101,11 +93,11 @@
                                 </div>
                                 <div>
                                     <label for="date_match" class="block text-gray-700 mb-1">Date du Match</label>
-                                    <input type="date" id="date_match" name="date_match" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="date" id="date_match" name="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                                 <div>
                                     <label for="heure_match" class="block text-gray-700 mb-1">Heure du Match</label>
-                                    <input type="time" id="heure_match" name="heure_match" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="time" id="heure_match" name="time" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                             </div>
                         </div>
@@ -242,14 +234,16 @@
                             <h3 class="text-lg font-semibold mb-4 border-b pb-2">Notes Internes</h3>
                             <textarea name="notes_internes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Notes visibles uniquement par l'équipe administrative..."></textarea>
                         </div>
+
+                        <div class="flex justify-end space-x-2">
+                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md">Annuler</button>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Prévisualiser</button>
+                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Créer les tickets</button>
+                        </div>
                     </form>
                 </div>
                 
-                <div class="flex justify-end space-x-2">
-                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md">Annuler</button>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Prévisualiser</button>
-                    <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Créer les tickets</button>
-                </div>
+             
             </div>
         </main>
 
