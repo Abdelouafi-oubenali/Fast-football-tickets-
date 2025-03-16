@@ -41,6 +41,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Match 1 -->
+            @forEach($matches as $match)
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="bg-blue-50 p-4">
                     <div class="flex justify-between items-center mb-2">
@@ -48,15 +49,15 @@
                         <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Places disponibles</span>
                     </div>
                     <div class="text-center space-y-2">
-                        <p class="text-gray-500">15 Février 2025 - 21:00</p>
+                        <p class="text-gray-500">{{$match->date}} {{$match->time}}</p>
                         <div class="flex justify-center items-center gap-4">
                             <div class="text-center">
-                                <p class="font-bold text-xl">PSG</p>
+                                <p class="font-bold text-xl">{{$match->homeTeam->name}}</p>
                                 <img src="/api/placeholder/50/50" alt="PSG" class="mx-auto"/>
                             </div>
                             <div class="text-2xl font-bold">VS</div>
                             <div class="text-center">
-                                <p class="font-bold text-xl">OM</p>
+                                <p class="font-bold text-xl"> {{$match->awayTeam->name}}    </p>
                                 <img src="/api/placeholder/50/50" alt="OM" class="mx-auto"/>
                             </div>
                         </div>
@@ -88,16 +89,21 @@
                         </div>
                     </div>
                     <div class="flex space-x-2">
-                    <a href="#" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 text-center block flex items-center justify-center">
+                    <a href="../tickets/{{ $match->id }}/edit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 text-center block flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
                     </a>
-                    <a href="#" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 text-center block flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </a>
+                    <form action="{{route('tickets.destroy',$match->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE') 
+                        <button type="submit" href="#" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 text-center block flex items-center justify-center w-[5rem]" style="width: 5rem">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </form>
+                   
                     <a href="#" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 text-center block flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -108,9 +114,9 @@
 
                 </div>
             </div>
-
+          @endforeach
             <!-- Match 2 -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            {{-- <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="bg-blue-50 p-4">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-blue-800 font-semibold">Ligue 1</span>
@@ -160,60 +166,7 @@
                         Réserver maintenant
                     </button>
                 </div>
-            </div>
-
-            <!-- Match 3 -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-blue-50 p-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-blue-800 font-semibold">Ligue 1</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Places disponibles</span>
-                    </div>
-                    <div class="text-center space-y-2">
-                        <p class="text-gray-500">25 Février 2025 - 20:00</p>
-                        <div class="flex justify-center items-center gap-4">
-                            <div class="text-center">
-                                <p class="font-bold text-xl">Monaco</p>
-                                <img src="/api/placeholder/50/50" alt="Monaco" class="mx-auto"/>
-                            </div>
-                            <div class="text-2xl font-bold">VS</div>
-                            <div class="text-center">
-                                <p class="font-bold text-xl">Lille</p>
-                                <img src="/api/placeholder/50/50" alt="Lille" class="mx-auto"/>
-                            </div>
-                        </div>
-                        <p class="font-medium">Stade Louis II</p>
-                    </div>
-                </div>
-                <div class="p-4 space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">VIP</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">180 €</p>
-                                <p class="text-sm text-green-600">20 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Tribune</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">50 €</p>
-                                <p class="text-sm text-green-600">100 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Pelouse</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">25 €</p>
-                                <p class="text-sm text-green-600">150 places restantes</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                        Réserver maintenant
-                    </button>
-                </div>
-            </div>
+            </div> --}}
         </div>
     </div>
   </main>

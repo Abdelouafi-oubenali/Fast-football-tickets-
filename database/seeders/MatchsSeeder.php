@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Matchs;
+use App\Models\tickets;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,6 @@ class MatchsSeeder extends Seeder
      */
     public function run(): void
     {
-        Matchs::factory()->count(20)->create();
+        tickets::factory()->count(20)->create();
     }
 }
