@@ -32,9 +32,9 @@ Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
 
-Route::get('/admin/matchs/gestion-des-matchs', function () {
-    return view('admin.matchs.gestion-des-matchs');
-})->name('admin.gestion-des-matchs');
+// Route::get('/admin/matchs/gestion-des-matchs', function () {
+//     return view('admin.matchs.gestion-des-matchs');
+// })->name('admin.gestion-des-matchs');
 
 
 Route::get('/admin/equipe/gestion-des-equipes', function () {
