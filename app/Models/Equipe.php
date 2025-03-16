@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\TicketsController;
 use Hamcrest\Matchers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,11 +20,11 @@ class Equipe extends Model
 
     public function homeMatches()
     {
-        return $this->hasMany(Matchs::class, 'home_team_id');
+        return $this->hasMany(tickets::class, 'home_team_id');
     }
 
     public function awayMatches()
     {
-        return $this->hasMany(Matchs::class, 'away_team_id');
+        return $this->hasMany(tickets::class, 'away_team_id');
     }
 }
