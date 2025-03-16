@@ -2,65 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Matchs;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreMatchsRequest;
-use App\Http\Requests\UpdateMatchsRequest;
+
+use App\Repositories\StadRepositoryInterface;
+use App\Repositories\MatchRepositoryInterface;
+use App\Repositories\FootballEqupeRepositoryInterface;
 
 class MatchsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $matchRepository;
+    protected $stadiumRepository;
+    protected $FootballEqupeRepository;
+
+    public function __construct(MatchRepositoryInterface $matchRepository, StadRepositoryInterface $stadiumRepository, FootballEqupeRepositoryInterface $FootballEqupeRepository) {
+        $this->matchRepository = $matchRepository;
+        $this->stadiumRepository = $stadiumRepository;
+        $this->FootballEqupeRepository = $FootballEqupeRepository;
+    }
+
     public function index()
     {
-        //
+        $matches = $this->matchRepository->all()->load('homeTeam', 'awayTeam');
+        return view('admin.matchs.index', compact('matches'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.matchs.cerate');
+        $stades = $this->stadiumRepository->all();
+        $equipes = $this->FootballEqupeRepository->all();
+        return view('admin.matchs.create',compact('stades','equipes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreMatchsRequest $request)
     {
-        //
+        $data = $request->validated();
+        // dd($data);
+        $this->matchRepository->create($data);
+        return redirect('match')->with('success', 'Le match a été créé avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Matchs $matchs)
+    public function show($id)
     {
-        //
+        $match = $this->matchRepository->find($id);
+        return view('matches.show', compact('match'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Matchs $matchs)
+    public function edit($id)
     {
-        //
+        $match = $this->matchRepository->find($id);
+        $stades = $this->stadiumRepository->all();
+        $equipes = $this->FootballEqupeRepository->all();
+        return view('admin.matchs.edit', compact('match','stades','equipes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMatchsRequest $request, Matchs $matchs)
+    public function update(StoreMatchsRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $this->matchRepository->update($id, $data);
+        return redirect('match')->with('success', 'Le match a été mis à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Matchs $matchs)
+    public function destroy($id)
     {
-        //
+        $this->matchRepository->delete($id);
+        return redirect('match')->with('success', 'Le match a été supprimé avec succès.');
     }
 }
