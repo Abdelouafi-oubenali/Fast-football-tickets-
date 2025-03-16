@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\MatchRepository;
 use App\Repositories\StadeReposittory;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\FootballEqupeRepository;
 use App\Repositories\StadRepositoryInterface;
+use App\Repositories\MatchRepositoryInterface;
 use App\Repositories\FootballEqupeRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(FootballEqupeRepositoryInterface::class, FootballEqupeRepository::class);
         $this->app->bind(StadRepositoryInterface::class, StadeReposittory::class);
+        $this->app->bind(MatchRepositoryInterface::class, MatchRepository::class);
+
 
     }
     /**
