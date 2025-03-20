@@ -54,23 +54,29 @@
                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                                 <div>
                                     <label for="equipe_domicile" class="block text-gray-700 mb-1">Équipe Domicile</label>
-                                    <select id="equipe_domicile" name="home_team_id" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="equipe_domicile" name="home_team_id"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         @foreach($equipes as $equipe)
                                             <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
                                          @endforeach
                                     </select>
+                                    @error('home_team_id')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                                 <div>
                                     <label for="equipe_exterieur" class="block text-gray-700 mb-1">Équipe Extérieur</label>
-                                    <select id="equipe_exterieur" name="away_team_id" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="equipe_exterieur" name="away_team_id"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         @foreach($equipes as $equipe)
                                         <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
                                     @endforeach
                                     </select>
+                                    @error('away_team_id')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                                 <div>
                                     <label for="competition" class="block text-gray-700 mb-1">Compétition</label>
-                                    <select id="competition" name="competition" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="competition" name="competition"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">-- Sélectionner une compétition --</option>
                                         <option value="l1">Ligue 1</option>
                                         <option value="cdf">Coupe de France</option>
@@ -81,7 +87,7 @@
                                 </div>
                                 <div>
                                     <label for="stade" class="block text-gray-700 mb-1">Stade</label>
-                                    <select id="stade" name="Stadium" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="stade" name="Stadium"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">-- Sélectionner un stade --</option>
                                         <option value="parc">Parc des Princes</option>
                                         <option value="velodrome">Orange Vélodrome</option>
@@ -90,14 +96,25 @@
                                         <option value="roazhon">Roazhon Park</option>
                                         <option value="pierre-mauroy">Stade Pierre-Mauroy</option>
                                     </select>
+                                    @error('Stadium')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                                 <div>
                                     <label for="date_match" class="block text-gray-700 mb-1">Date du Match</label>
-                                    <input type="date" id="date_match" name="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="date" id="date_match" name="date"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                                @error('date')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+
                                 </div>
                                 <div>
                                     <label for="heure_match" class="block text-gray-700 mb-1">Heure du Match</label>
-                                    <input type="time" id="heure_match" name="time" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="time" id="heure_match" name="time"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    @error('time')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                             </div>
                         </div>
@@ -108,15 +125,15 @@
                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                                 <div>
                                     <label for="ref_match" class="block text-gray-700 mb-1">Référence du Match</label>
-                                    <input type="text" id="ref_match" name="ref_match" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="text" id="ref_match" name="ref_match"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                                 <div>
                                     <label for="code_billetterie" class="block text-gray-700 mb-1">Code Billetterie</label>
-                                    <input type="text" id="code_billetterie" name="code_billetterie" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="text" id="code_billetterie" name="code_billetterie"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                                 <div>
                                     <label for="date_ouverture" class="block text-gray-700 mb-1">Date d'Ouverture Vente</label>
-                                    <input type="date" id="date_ouverture" name="date_ouverture" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="date" id="date_ouverture" name="date_ouverture"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                             </div>
                         </div>
