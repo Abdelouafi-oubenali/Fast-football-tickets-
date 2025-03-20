@@ -59,6 +59,9 @@
                                             <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
                                          @endforeach
                                     </select>
+                                    @error('home_team_id')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                                 <div>
                                     <label for="equipe_exterieur" class="block text-gray-700 mb-1">Équipe Extérieur</label>
@@ -67,6 +70,9 @@
                                         <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
                                     @endforeach
                                     </select>
+                                    @error('away_team_id')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                                 <div>
                                     <label for="competition" class="block text-gray-700 mb-1">Compétition</label>
@@ -90,14 +96,25 @@
                                         <option value="roazhon">Roazhon Park</option>
                                         <option value="pierre-mauroy">Stade Pierre-Mauroy</option>
                                     </select>
+                                    @error('Stadium')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                                 <div>
                                     <label for="date_match" class="block text-gray-700 mb-1">Date du Match</label>
                                     <input type="date" id="date_match" name="date"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                                @error('date')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+
                                 </div>
                                 <div>
                                     <label for="heure_match" class="block text-gray-700 mb-1">Heure du Match</label>
                                     <input type="time" id="heure_match" name="time"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    @error('time')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 </div>
                             </div>
                         </div>
