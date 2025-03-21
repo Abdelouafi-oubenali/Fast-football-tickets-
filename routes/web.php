@@ -7,6 +7,7 @@ use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\AccountCreatedMailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -77,6 +78,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::post('/send-email-password', [AccountCreatedMailController::class, 'sendResetLink'])->name('sendEmailEtPassword.user');
+// Route::post('/send-email-password', [ForgotPasswordController::class, 'sendEmailEtPassword']);
+
 
 
 // les route pour forget password

@@ -101,38 +101,39 @@
     <div id="userModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-lg p-8 max-w-md w-full">
             <h2 class="text-xl font-semibold mb-4">Ajouter un organisateur</h2>
-            <form>
+            <form method="POST" action="{{ route('sendEmailEtPassword.user') }}">
+                @csrf
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                        Nom
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Nom de l'utilisateur">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nom</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Nom de l'utilisateur" name="name">
                 </div>
+            
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Email
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email de l'utilisateur">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="prenom">Prenom</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="prenom" type="text" placeholder="Prenom de l'utilisateur" name="prenom">
                 </div>
+            
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
-                        Rôle
-                    </label>
-                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="role">
-                        <option value="user">Utilisateur</option>
-                        <option value="editor">Éditeur</option>
-                        <option value="admin">Admin</option>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email de l'utilisateur" name="email">
+                </div>
+            
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="role">Rôle</label>
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="role" name="role">
+                        <option value="organisateur">organisateur</option>
+                        <option value="admin">admin</option>
                     </select>
                 </div>
+            
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
-                        Statut
-                    </label>
-                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="status">Statut</label>
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status" name="status">
                         <option value="active">Actif</option>
                         <option value="inactive">Inactif</option>
                     </select>
                 </div>
+            
                 <div class="flex justify-end">
                     <button type="button" id="cancelBtn" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 mr-2">
                         Annuler
@@ -142,6 +143,7 @@
                     </button>
                 </div>
             </form>
+            
         </div>
     </div>
 
