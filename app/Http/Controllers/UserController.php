@@ -23,5 +23,19 @@ class UserController extends Controller
             return view('admin.users.users.index', compact('users'));
         }
     }
+
+    public function ban_user($user_id)
+    {
+        $user = User::find($user_id); 
+         
+        if (!$user) {
+          
+            return redirect()->back()->with('error', 'Utilisateur introuvable.');
+        }    
+        $user->status = 'banned'; 
+        $user->save();
+        return redirect('/manage-users/1')->with('success', 'Utilisateur banni avec succès.');
+    }
+    
     
 }

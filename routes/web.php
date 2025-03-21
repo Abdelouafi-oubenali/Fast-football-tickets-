@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\StadiumController;
@@ -54,6 +55,15 @@ Route::resource('match', MatchsController::class);
 Route::resource('equipe', EquipeController::class);
 Route::resource('stades', StadiumController::class);
 Route::resource('tickets', TicketsController::class);
+Route::resource('users', UserController::class);
+
+Route::post('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
+Route::post('/users/{id}/ban', [UserController::class, 'ban_user'])->name('users.ban');
+Route::get('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
+
+
+
+
 
 Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
