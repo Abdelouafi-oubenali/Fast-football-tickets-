@@ -13,10 +13,8 @@
         <!-- Main Content -->
         <main class="container mx-auto px-4 py-8" style="width: 76rem">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800">Liste des organisateur</h2>
-                <button id="addUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
-                    Ajouter un organisateur
-                </button>
+                <h2 class="text-2xl font-semibold text-gray-800">Liste des Client</h2>
+
             </div>
 
             <!-- Search and Filter -->
@@ -24,19 +22,7 @@
                 <div class="flex-grow">
                     <input type="text" placeholder="Rechercher un utilisateur..." class="w-full px-4 py-2 border rounded-md">
                 </div>
-                <div class="flex gap-2">
-                    <select class="px-4 py-2 border rounded-md">
-                        <option value="">Tous les rôles</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">Utilisateur</option>
-                        <option value="editor">Éditeur</option>
-                    </select>
-                    <select class="px-4 py-2 border rounded-md">
-                        <option value="">Tous les statuts</option>
-                        <option value="active">Actif</option>
-                        <option value="inactive">Inactif</option>
-                    </select>
-                </div>
+
             </div>
 
             <!-- Users Table -->
@@ -53,19 +39,19 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        @foreach ($organisateurs as $organisateur)
+                        @foreach ($users as $user)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $organisateur->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $organisateur->nom }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $organisateur->email }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $organisateur->role }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->nom }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->role }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                    {{ $organisateur->status }}
+                                    {{ $user->status }}
                                 </span>
                             </td>
                             <td class="px-8 py-6 whitespace-nowrap text-sm text-gray-500 flex space-x-2">
-                                <form action="{{ route('users.ban', $organisateur->id) }}" method="POST" class="inline">
+                                <form action="{{ route('users.ban', $user->id) }}" method="POST" class="inline">
                                     @csrf
                                     <button type="submit" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +61,7 @@
                                     </button>
                                 </form>
                 
-                                <form action="{{ route('manage.users', ['userRequest' => $organisateur->id]) }}" method="POST" class="inline">
+                                <form action="{{ route('manage.users', ['userRequest' => $user->id]) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
@@ -100,7 +86,7 @@
     <!-- Add User Modal -->
     <div id="userModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-lg p-8 max-w-md w-full">
-            <h2 class="text-xl font-semibold mb-4">Ajouter un organisateur</h2>
+            <h2 class="text-xl font-semibold mb-4">Ajouter un Utilisateur</h2>
             <form>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="name">

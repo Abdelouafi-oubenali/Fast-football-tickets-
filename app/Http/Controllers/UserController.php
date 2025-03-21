@@ -19,22 +19,25 @@ class UserController extends Controller
             $organisateurs = User::where('role', 'organisateur')->get();
             return view('admin.users.organisateurs.index', compact('organisateurs'));
         } else {
-            $users = User::where('role', 'client');
-            return view('admin.users.users.index', compact('users'));
+            $users = User::where('role', 'client')->get();
+            return view('admin.users.client.index', compact('users'));
         }
     }
 
     public function ban_user($user_id)
     {
         $user = User::find($user_id); 
-         
         if (!$user) {
           
             return redirect()->back()->with('error', 'Utilisateur introuvable.');
         }    
         $user->status = 'banned'; 
         $user->save();
-        return redirect('/manage-users/1')->with('success', 'Utilisateur banni avec succès.');
+        if($user->role == 'organisateur'){
+            return redirect('/manage-users/1')->with('success', 'Utilisateur banni avec succès.');
+        }else{
+            return redirect('/manage-users/2')->with('success', 'Utilisateur banni avec succès.');
+        }
     }
 
     public function destroy($id)

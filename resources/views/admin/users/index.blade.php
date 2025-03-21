@@ -47,7 +47,7 @@
                 <form action="{{ route('manage.users', ['userRequest' => 1]) }}" method="POST">
                     @csrf
                     <button class="bg-blue-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 transform hover:scale-105" style="width: 100%">
-                        Gérer le compte
+                        Gérer les Organisateur
                     </button>
                 </form>
               </div>
@@ -78,9 +78,12 @@
             
             <div class="mt-6 pt-6 border-t border-gray-300">
               <div class="flex justify-between items-center">
+            <form action="{{ route('manage.users', ['userRequest' => 2]) }}" method="POST">
+                @csrf
                 <button class="bg-blue-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 transform hover:scale-105" style="width: 100%">
-                  Gérer le compte
+                  Gérer les Client
                 </button>
+            </form>
               </div>
             </div>
           </div>
