@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\AccountCreatedMailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -54,6 +56,16 @@ Route::resource('match', MatchsController::class);
 Route::resource('equipe', EquipeController::class);
 Route::resource('stades', StadiumController::class);
 Route::resource('tickets', TicketsController::class);
+Route::resource('users', UserController::class);
+
+Route::post('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
+Route::post('/users/{id}/ban', [UserController::class, 'ban_user'])->name('users.ban');
+Route::delete('/manage-users/{id}', [UserController::class, 'destroy'])->name('manage.users');
+Route::get('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
+
+
+
+
 
 Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -66,6 +78,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::post('/send-email-password', [AccountCreatedMailController::class, 'sendResetLink'])->name('sendEmailEtPassword.user');
+// Route::post('/send-email-password', [ForgotPasswordController::class, 'sendEmailEtPassword']);
+
 
 
 // les route pour forget password
