@@ -59,6 +59,7 @@ Route::resource('users', UserController::class);
 
 Route::post('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
 Route::post('/users/{id}/ban', [UserController::class, 'ban_user'])->name('users.ban');
+Route::delete('/manage-users/{id}', [UserController::class, 'destroy'])->name('manage.users');
 Route::get('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
 
 

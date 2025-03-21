@@ -36,6 +36,19 @@ class UserController extends Controller
         $user->save();
         return redirect('/manage-users/1')->with('success', 'Utilisateur banni avec succès.');
     }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+    
+        if (!$user) {
+            return redirect()->back()->with('error', 'Utilisateur introuvable.');
+        }
+    
+        $user->delete();
+        return redirect('/manage-users/1')->with('success', 'Utilisateur supprimé avec succès.');
+    }
+    
     
     
 }
