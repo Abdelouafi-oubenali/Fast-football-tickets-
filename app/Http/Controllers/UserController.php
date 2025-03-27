@@ -39,6 +39,22 @@ class UserController extends Controller
             return redirect('/manage-users/2')->with('success', 'Utilisateur banni avec succès.');
         }
     }
+    public function activeUser($user_id)
+    {
+        $user = User::find($user_id); 
+        if (!$user) {
+          
+            return redirect()->back()->with('error', 'Utilisateur introuvable.');
+        }    
+        $user->status = 'active'; 
+       
+        $user->save();
+        if($user->role == 'organisateur'){
+            return redirect('/manage-users/1')->with('success', 'Utilisateur banni avec succès.');
+        }else{
+            return redirect('/manage-users/2')->with('success', 'Utilisateur banni avec succès.');
+        }
+    }
 
     public function destroy($id)
     {
