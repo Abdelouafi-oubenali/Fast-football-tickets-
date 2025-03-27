@@ -4,24 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-    public function index ()
+    public function index()
     {
-        return view('admin.users.index');
-      
+        if (Gate::allows('is-admin') || Gate::allowIf('is-organisateur')) {
+            return view('admin.users.index');
+        }
+        abort(403, 'Accès non autorisé');
     }
-
-    public function manage_users($userRequest) 
+    
+    public function manage_users($userRequest)
     {
         if ($userRequest == 1) {
-            $organisateurs = User::where('role', 'organisateur')->get();
-            return view('admin.users.organisateurs.index', compact('organisateurs'));
-        } else {
-            $users = User::where('role', 'client')->get();
-            return view('admin.users.client.index', compact('users'));
+            if (Gate::allows('is-admin')) {
+                    $organisateurs = User::where('role', 'organisateur')->get();
+                    return view('admin.users.organisateurs.index', compact('organisateurs'));
+                }else{
+                    abort(403, 'Unauthorized action.');
+                }
+            }
+        else{
+            if (Gate::allows('is-admin') || Gate::allows('is-organisateur')) {
+
+                $users = User::where('role', 'client')->get();
+                return view('admin.users.client.index', compact('users'));
+            }   
         }
+        
+             
+        abort(403, 'Unauthorized action.');
     }
 
     public function ban_user($user_id)
@@ -67,7 +81,4 @@ class UserController extends Controller
         $user->delete();
         return redirect('/manage-users/1')->with('success', 'Utilisateur supprimé avec succès.');
     }
-    
-    
-    
 }
