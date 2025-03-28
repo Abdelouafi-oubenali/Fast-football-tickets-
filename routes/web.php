@@ -12,7 +12,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,59 +34,31 @@ Route::get('/admin/vente-de-tickets', function () {
 })->name('admin.vente-de-tickets');
 
 
-
-Route::get('/admin/equipe/gestion-des-equipes', function () {
-    return view('admin.equipe.index');
-})->name('admin.gestion-des-equipes');
-
-
-Route::get('/admin/tickets/gestion-des-tickets', function () {
-    return view('admin.tickets.gestion-des-tickets');
-})->name('admin.gestion-des-tickets');
-
-Route::get('/admin/historique', function () {
-    return view('admin.historique');
-})->name('admin.historique');
-
-
-
 // les route de match
-Route::resource('match', MatchsController::class);
-Route::resource('equipe', EquipeController::class);
-Route::resource('stades', StadiumController::class);
-Route::resource('tickets', TicketsController::class);
-Route::resource('users', UserController::class);
-
-Route::post('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
-Route::post('/users/{id}/ban', [UserController::class, 'ban_user'])->name('users.ban');
-Route::post('/users/{id}/active', [UserController::class, 'activeUser'])->name('users.active');
-Route::delete('/manage-users/{id}', [UserController::class, 'destroy'])->name('manage.users');
-Route::get('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
-
-
-
-
+Route::middleware('auth')->group(function () {
+    Route::resource('match', MatchsController::class);
+    Route::resource('equipe', EquipeController::class);
+    Route::resource('stades', StadiumController::class);
+    Route::resource('tickets', TicketsController::class);
+    Route::resource('users', UserController::class);
+    Route::post('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
+    Route::post('/users/{id}/ban', [UserController::class, 'ban_user'])->name('users.ban');
+    Route::post('/users/{id}/active', [UserController::class, 'activeUser'])->name('users.active');
+    Route::delete('/manage-users/{id}', [UserController::class, 'destroy'])->name('manage.users');
+    Route::get('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
-
 Route::post('/send-email-password', [AccountCreatedMailController::class, 'sendResetLink'])->name('sendEmailEtPassword.user');
 // Route::post('/send-email-password', [ForgotPasswordController::class, 'sendEmailEtPassword']);
-
-
 
 // les route pour forget password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
-
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
