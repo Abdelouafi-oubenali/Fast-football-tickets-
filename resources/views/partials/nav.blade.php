@@ -72,14 +72,14 @@
                 Gestion des tickets
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('admin.historique') }}" class="flex items-center text-gray-300 hover:text-white py-2 px-4 rounded hover:bg-green-700 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Historique
             </a>
-        </li>
+        </li> --}}
     </ul>
     
     <div class="absolute bottom-0 left-0 w-full p-4">

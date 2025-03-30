@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Événements</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-  <!-- FontAwesome CDN -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-</head>
 
-<body class="">
     <!-- Sidebar -->
     <header class="fixed top-0 right-0 left-64 bg-white shadow-md z-50">
         <div class="flex justify-between items-center px-8 py-4">
@@ -21,7 +9,7 @@
                 </div>
                 <h1 class="text-xl font-bold">Gestion des Billets</h1>
             </div>
-    
+            
             <!-- Menu central -->
             <nav class="hidden md:flex space-x-6">
                 <a href="#" class="text-gray-600 hover:text-green-600">Accueil</a>
@@ -66,8 +54,3 @@
             </div>
         </div>
     </header>
-    
-   
-
-</body>
-</html>

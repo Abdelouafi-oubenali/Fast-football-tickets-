@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\AccountCreatedMailController;
@@ -56,6 +57,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
 Route::post('/send-email-password', [AccountCreatedMailController::class, 'sendResetLink'])->name('sendEmailEtPassword.user');
 // Route::post('/send-email-password', [ForgotPasswordController::class, 'sendEmailEtPassword']);
+
+// route::resource('profil',ProfileController::class);
+Route::get('/profil/{id}', [ProfileController::class, 'index'])->name('profile.index'); 
+Route::get('/profil/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
 
 // les route pour forget password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
