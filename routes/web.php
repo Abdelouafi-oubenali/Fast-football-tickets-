@@ -8,6 +8,7 @@ use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\AccountCreatedMailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -25,15 +26,18 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-Route::get('/dashboard/admin', function () {
-    return view('admin.dashboard');
-})->name('dashboard.admin'); 
+// Route::get('/dashboard/admin', function () {
+//     return view('admin.dashboard');
+// })->name('dashboard.admin'); 
 
 
 Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
 
+Route::resource('dashboard', DashbordController::class)->names([
+    'index' => 'dashboard.admin'
+]);
 
 // les route de match
 Route::middleware('auth')->group(function () {

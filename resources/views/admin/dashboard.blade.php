@@ -28,7 +28,7 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-gray-500">Tickets totaux</p>
-              <h3 class="text-3xl font-bold">245</h3>
+              <h3 class="text-3xl font-bold">{{$teckts}}</h3>
             </div>
             <div class="bg-blue-100 p-3 rounded-full">
               <i class="fas fa-ticket-alt text-blue-600 text-xl"></i>
@@ -43,8 +43,8 @@
         <div class="bg-white rounded-lg shadow p-6">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-gray-500">En attente</p>
-              <h3 class="text-3xl font-bold">42</h3>
+              <p class="text-gray-500">Match totaux</p>
+              <h3 class="text-3xl font-bold">{{$matchs}}</h3>
             </div>
             <div class="bg-yellow-100 p-3 rounded-full">
               <i class="fas fa-clock text-yellow-600 text-xl"></i>
@@ -59,8 +59,8 @@
         <div class="bg-white rounded-lg shadow p-6">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-gray-500">Résolus</p>
-              <h3 class="text-3xl font-bold">189</h3>
+              <p class="text-gray-500">Stads</p>
+              <h3 class="text-3xl font-bold">{{$Stads}}</h3>
             </div>
             <div class="bg-green-100 p-3 rounded-full">
               <i class="fas fa-check-circle text-green-600 text-xl"></i>
@@ -75,8 +75,8 @@
         <div class="bg-white rounded-lg shadow p-6">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-gray-500">Temps moyen</p>
-              <h3 class="text-3xl font-bold">4.5h</h3>
+              <p class="text-gray-500">Equipes</p>
+              <h3 class="text-3xl font-bold">{{$Equipe}}</h3>
             </div>
             <div class="bg-purple-100 p-3 rounded-full">
               <i class="fas fa-hourglass-half text-purple-600 text-xl"></i>
