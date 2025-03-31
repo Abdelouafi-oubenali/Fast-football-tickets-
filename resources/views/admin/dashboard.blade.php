@@ -89,9 +89,7 @@
         </div>
       </div>
 
-      <!-- Tickets récents --
 
-      <!-- Graphiques -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-lg shadow">
           <div class="p-6 border-b border-gray-200">

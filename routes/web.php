@@ -26,18 +26,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-// Route::get('/dashboard/admin', function () {
-//     return view('admin.dashboard');
-// })->name('dashboard.admin'); 
-
-
 Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
 
-Route::resource('dashboard', DashbordController::class)->names([
-    'index' => 'dashboard.admin'
-]);
+
 
 // les route de match
 Route::middleware('auth')->group(function () {
@@ -52,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/manage-users/{id}', [UserController::class, 'destroy'])->name('manage.users');
     Route::get('/manage-users/{userRequest}', [UserController::class, 'manage_users'])->name('manage.users');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('dashboard', DashbordController::class)->names([
+        'index' => 'dashboard.admin'
+    ]);
 });
 
 Route::get('/register', [AuthController::class, 'ShowRegsterForm'])->name('register');
