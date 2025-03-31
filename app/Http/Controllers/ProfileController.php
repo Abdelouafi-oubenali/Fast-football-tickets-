@@ -16,6 +16,17 @@ class ProfileController extends Controller
         return view('profil.index', compact('user'));
     }
 
+    public function mesInformations($id) 
+    {
+        $user = User::find($id);
+    
+        if (!$user) {
+            return redirect()->route('home')->with('error', 'Utilisateur non trouvé.');
+        }
+    
+        return view('partials.header', ['user' => $user]);
+    }
+    
     public function edit($id)
     {
         $user = User::findOrFail($id);   

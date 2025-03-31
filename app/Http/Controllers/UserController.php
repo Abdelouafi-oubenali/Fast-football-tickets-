@@ -15,7 +15,7 @@ class UserController extends Controller
         }
         abort(403, 'Accès non autorisé');
     }
-    
+
     public function manage_users($userRequest)
     {
         if ($userRequest == 1) {
@@ -28,7 +28,6 @@ class UserController extends Controller
             }
         else{
             if (Gate::allows('is-admin') || Gate::allows('is-organisateur')) {
-
                 $users = User::where('role', 'client')->get();
                 return view('admin.users.client.index', compact('users'));
             }   
