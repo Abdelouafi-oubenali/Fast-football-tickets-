@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipeController;
@@ -20,15 +21,15 @@ Route::get('/', function () {
 
 
 // les route de admin  
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test-dashbord', function () {
+    return view('clent.hellow');
 })->name('welcome');
 
 
 Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
+
 
 
 
@@ -69,3 +70,7 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+// frontand parti
+
+Route::resource('/home', HomController::class);
