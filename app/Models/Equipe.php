@@ -16,6 +16,7 @@ class Equipe extends Model
         'ville', 
         'founded_year',
         'coach', 
+        'logo'
     ];
 
     public function homeMatches()

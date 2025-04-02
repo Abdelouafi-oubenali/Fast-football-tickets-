@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/assets/css/output.css" rel="stylesheet">
 		<link rel="icon" type="image/png" href="/assets/icons/favicon.png">
-		<title>Evently</title>
+		<title>FootTicket</title>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="https://kit.fontawesome.com/029424212f.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -16,7 +16,7 @@
 		<header class="sticky z-52 top-0 left-0 flex items-center justify-between w-full py-2 px-6 shadow-sm bg-white">
 			<div class="flex items-center gap-10">
 				<div class="w-auto">
-					<a href="/" class="text-2xl font-bold font-unbounded text-orange">evently</a>
+					<a href="/" class="text-2xl font-bold font-unbounded text-orange">FootTicket</a>
 				</div>
 				<div class="border border-xs border-[#b2b2b2] rounded-full bg-gray-50 flex items-center gap-2 px-1 py-1">
 					<div class="flex items-center gap-2 w-[300px] pl-0.5">
@@ -250,7 +250,7 @@
             </div>
             <div class="">
               <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 grid-rows-1">
-                <li>
+                {{-- <li>
                   <article class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg h-full">
                     <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1522778526097-ce0a22ceb253?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
                       <div class="flex items-center justify-center gap-4">
@@ -296,14 +296,17 @@
                       <div class="text-green-600 text-sm font-medium">Derniers billets disponibles</div>
                     </div>
                   </article>
-                </li>
+                </li> --}}
+{{-- {{dd($match->id)}} --}}
+            @foreach($matches as $match)
                 <li>
                   <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
+                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1522778526097-ce0a22ceb253?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
                       <div class="flex items-center justify-center gap-4">
                         <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo AS FAR" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">AS FAR</span>
+                    
+                          <img src="{{asset('storage/' .$match->homeTeam->logo)}}" alt="Logo AS FAR" class="w-16 h-16 object-contain"/>
+                          <span class="text-sm font-semibold mt-1">{{$match->homeTeam->name}}</span>
                         </div>
                         
                         <div class="flex items-center">
@@ -311,8 +314,8 @@
                         </div>
                         
                         <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo Renaissance Berkane" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">RSB</span>
+                          <img src="{{asset('storage/' .$match->awayTeam->logo)}}" alt="Logo Renaissance Berkane" class="w-16 h-16 object-contain"/>
+                          <span class="text-sm font-semibold mt-1">{{$match->awayTeam->name}}</span>
                         </div>
                       </div>
                     </div>
@@ -323,7 +326,7 @@
                       </time>
           
                       <a href="#">
-                        <h3 class="text-lg text-gray-900">AS FAR vs RS Berkane</h3>
+                        <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
           
                       <p class="line-clamp-3 text-sm/relaxed text-gray-500">Complexe Sportif Prince Moulay Abdellah, Rabat</p>
@@ -344,7 +347,9 @@
                     </div>
                   </article>
                 </li>
-                <li>
+            @endforeach
+
+                {{-- <li>
                   <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
                     <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
                       <div class="flex items-center justify-center gap-4">
@@ -437,7 +442,7 @@
                       <div class="text-green-600 text-sm font-medium">Nouveau match</div>
                     </div>
                   </article>
-                </li>
+                </li> --}}
               </ul>
             </div>
           </section>
@@ -500,7 +505,7 @@
                       <a href="/ticket">
                         <h3 class="text-lg text-gray-900">Wydad AC vs Raja CA</h3>
                       </a>
-                      
+
                       <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
                       
                       <div class="flex items-center gap-2">
@@ -739,7 +744,7 @@
 			<div>
 				<div class="">
 					<a href="/" class="text-2xl font-bold font-unbounded text-orange">
-						evently
+						FootTicket
 					</a>
 				</div>
 				<p class="mt-3 text-gray-400">Creating memorable events with ease.</p>
@@ -793,7 +798,7 @@
 		</div>
 
 		<div class="text-center text-gray-400 mt-8 border-t border-gray-700 pt-6">
-			© 2025 Evently. All rights reserved.
+			© 2025 FootTicket. All rights reserved.
 		</div>
 	</footer>
 

@@ -53,12 +53,12 @@
                         <div class="flex justify-center items-center gap-4">
                             <div class="text-center">
                                 <p class="font-bold text-xl">{{$match->homeTeam->name}}</p>
-                                <img src="/api/placeholder/50/50" alt="PSG" class="mx-auto"/>
+                                <img src="{{asset('storage/' . $match->homeTeam->logo)}}" alt="PSG" class="mx-auto w-[4rem]"/>
                             </div>
                             <div class="text-2xl font-bold">VS</div>
                             <div class="text-center">
                                 <p class="font-bold text-xl"> {{$match->awayTeam->name}}    </p>
-                                <img src="/api/placeholder/50/50" alt="OM" class="mx-auto"/>
+                                <img src="{{asset('storage/' . $match->awayTeam->logo)}}" alt="OM" class="mx-auto w-[5rem]"/>
                             </div>
                         </div>
                         <p class="font-medium">Parc des Princes</p>

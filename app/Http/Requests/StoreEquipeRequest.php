@@ -26,6 +26,6 @@ class StoreEquipeRequest extends FormRequest
             'coach' => 'required|string',
             'ville' => 'required|string',
             'founded_year' => 'required|integer',
-        ];
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',        ];
     }
 }
