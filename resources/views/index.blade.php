@@ -551,13 +551,14 @@
 			</div>
 			<div class="">
 				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+					@foreach($TopStads as $stad)
 					<li class="group relative bg-gray-300 w-full h-[350px] rounded-3xl shadow-lg overflow-hidden">
 						<a href="">
 							<div class="absolute top-0 left-0 w-full h-full">
-								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover w-full h-full brightness-50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjq8wv0sGtgQxGGeccEThpn3IjZgktOcy10WmWokJnESbZZpA8q_TDGhxEusHPtfOsz5Q&usqp=CAU" alt="">
+								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover w-[full] h-full brightness-50" src="{{asset('storage/' . $stad->photo)}}" alt="">
 							</div>
 							<div class="absolute bottom-6 left-6 flex gap-2 items-center">
-								<span class="text-2xl font-bold text-white">Marrakech</span>
+								<span class="text-2xl font-bold text-white">{{$stad->ville}}</span>
 								<span class="text-2xl font-bold text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-6">
 										<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
@@ -566,51 +567,7 @@
 							</div>
 						</a>
 					</li>
-					<li class="group relative bg-gray-300 w-full h-[350px] rounded-3xl shadow-lg overflow-hidden">
-						<a href="">
-							<div class="absolute top-0 left-0 w-full h-full">
-								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover object-[80%_90%] w-full h-full brightness-50" src="https://finatechsystems.com/wp/wp-content/uploads/2018/05/Stade_de_marrakech_mac.png" alt="">
-							</div>
-							<div class="absolute bottom-6 left-6 flex gap-2 items-center">
-								<span class="text-2xl font-bold text-white">Casablanca</span>
-								<span class="text-2xl font-bold text-white">
-									<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-6">
-										<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
-									</svg>
-								</span>
-							</div>
-						</a>
-					</li>
-					<li class="group relative bg-gray-300 w-full h-[350px] rounded-3xl shadow-lg overflow-hidden">
-						<a href="">
-							<div class="absolute top-0 left-0 w-full h-full">
-								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover object-[80%_70%] w-full h-full brightness-50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbPhWw5lcHwJWWg9egIFDyf_NMVXUNevrL-Q&s" alt="">
-							</div>
-							<div class="absolute bottom-6 left-6 flex gap-2 items-center">
-								<span class="text-2xl font-bold text-white">Rabat</span>
-								<span class="text-2xl font-bold text-white">
-									<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-6">
-										<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
-									</svg>
-								</span>
-							</div>
-						</a>
-					</li>
-					<li class="group relative bg-gray-300 w-full h-[350px] rounded-3xl shadow-lg overflow-hidden">
-						<a href="">
-							<div class="absolute top-0 left-0 w-full h-full">
-								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover object-center w-full h-full brightness-50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOjtwiblSjFsMiXTDqcsSkj_CZciMGdLOpRQ&s" alt="">
-                            </div>
-							<div class="absolute bottom-6 left-6 flex gap-2 items-center">
-								<span class="text-2xl font-bold text-white">Tanger</span>
-								<span class="text-2xl font-bold text-white">
-									<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-6">
-										<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
-									</svg>
-								</span>
-							</div>
-						</a>
-					</li>
+					@endforeach
 				</ul>
 			</div>
 		</section>

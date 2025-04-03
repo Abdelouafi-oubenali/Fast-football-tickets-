@@ -42,7 +42,7 @@
                 <p class="text-sm text-gray-500 mt-1">Modifiez les informations ci-dessous pour mettre à jour les détails du stade.</p>
             </div>
 
-            <form class="p-6" method="POST" action="{{ route('stades.update', $stadium->id) }}">
+            <form class="p-6" method="POST" action="{{ route('stades.update', $stadium->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') 
 
@@ -123,9 +123,11 @@
                                 <div class="flex text-sm text-gray-600">
                                     <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
                                         <span>Télécharger un fichier</span>
-                                        <input id="image" name="image" type="file" class="sr-only">
                                     </label>
-                                    <p class="pl-1">ou glisser-déposer</p>
+                                    <input id="image" name="photo" type="file" class="sr-only">
+                                    @error('photo')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <p class="text-xs text-gray-500">PNG, JPG, GIF jusqu'à 10MB</p>
                             </div>
