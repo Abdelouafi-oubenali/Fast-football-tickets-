@@ -29,6 +29,11 @@ class StadiumController extends Controller
     public function store(StoreStadesRequest $request)
     {
         $data = $request->validated();
+
+        if ($request->hasFile('photo')) {            
+            $logoPath = $request->file('photo')->store('logos', 'public'); 
+            $data['photo'] = $logoPath; 
+        }
         $this->stadiumRepository->create($data);
         return redirect()->route('stades.index')->with('success', 'Stadium created successfully.');
     }

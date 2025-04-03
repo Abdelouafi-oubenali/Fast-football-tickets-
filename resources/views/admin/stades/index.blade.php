@@ -161,7 +161,7 @@
             @foreach($stadia as $stad)
             <div class="bg-white rounded-lg shadow transition-all duration-200 stadium-card">
                 <div class="h-48 w-full bg-gray-200 rounded-t-lg relative overflow-hidden">
-                    <img src="/api/placeholder/400/200" alt="Stade Municipal" class="w-full h-full object-cover">
+                    <img src="{{ asset('storage/' . $stad->photo) }}" alt="Stade Municipal" class="w-full h-full object-cover">
                     <div class="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">Disponible</div>
                 </div>
                 <div class="p-4">
