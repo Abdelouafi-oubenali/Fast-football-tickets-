@@ -14,7 +14,17 @@ class HomController extends Controller
     public function index() 
     {
         $matches = tickets::with(['homeTeam', 'awayTeam'])->take(4)->get();
-        return view('index', compact('matches'));
+        $allMatches = tickets::with(['homeTeam','awayTeam'])->get();
+
+        return view('index', compact('matches','allMatches'));
     }
     
 }
+
+
+
+
+
+
+
+

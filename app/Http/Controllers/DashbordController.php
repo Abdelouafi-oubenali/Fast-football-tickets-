@@ -20,7 +20,7 @@ class DashbordController extends Controller
 
     }
 
-    public function index()
+    public function show()
     {
         $teckts = $this->totalTicketsController->TotalTickts(); 
         $matchs = $this->totalTicketsController->TotalMatchs(); 
