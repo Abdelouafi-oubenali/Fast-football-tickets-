@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreStadesRequest;
 use App\Repositories\StadRepositoryInterface;
 
@@ -50,13 +52,22 @@ class StadiumController extends Controller
         return view('admin.stades.edit', compact('stadium'));
     }
 
-        public function update(StoreStadesRequest $request, $id)
+    public function update(StoreStadesRequest $request, $id)
     {
-        $data = $request->validated();
-        $this->stadiumRepository->update($data, $id);
-
+        $data = $request->validated();    
+        $stadium = Stades::findOrFail($id);
+        if ($request->hasFile('photo')) {
+            if ($stadium->photo) {
+                Storage::disk('public')->delete($stadium->photo);
+            }    
+            $photoPath = $request->file('photo')->store('stades', 'public');
+            $data['photo'] = $photoPath;
+        }
+        $this->stadiumRepository->update($data, $stadium->id);
+    
         return redirect()->route('stades.index')->with('success', 'Stadium updated successfully.');
     }
+    
     
 
     public function destroy($id)
