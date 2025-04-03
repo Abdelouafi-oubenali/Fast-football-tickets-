@@ -24,7 +24,7 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
       <!-- Carte Organisateur -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl" style="width: 29rem; margin-left: 11rem;">
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl" style="width: 29rem; margin-left: -2rem;">
         <div class="p-6">
           <div class="flex items-center mb-6">
             <div class="p-2 bg-purple-600 rounded-lg mr-3">
@@ -46,7 +46,7 @@
               <div class="flex justify-between items-center">
                 <form action="{{ route('manage.users', ['userRequest' => 1]) }}" method="POST">
                     @csrf
-                    <button class="bg-blue-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 transform hover:scale-105" style="width: 100%">
+                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 transform hover:scale-105" style="width: 100%">
                         Gérer les Organisateur
                     </button>
                 </form>
@@ -80,7 +80,7 @@
               <div class="flex justify-between items-center">
             <form action="{{ route('manage.users', ['userRequest' => 2]) }}" method="POST">
                 @csrf
-                <button class="bg-blue-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 transform hover:scale-105" style="width: 100%">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 transform hover:scale-105" style="width: 100%">
                   Gérer les Client
                 </button>
             </form>
