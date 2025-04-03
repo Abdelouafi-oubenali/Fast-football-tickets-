@@ -14,7 +14,7 @@
         <h1 class="text-3xl font-bold text-green-800">Éditer le Match</h1>
     </div>
     
-    <form action="{{ route('match.update', $match->id) }}" method="POST" class="space-y-8">
+    <form action="{{ route('match.update', $match->id) }}" method="POST" class="space-y-8" enctype="multipart/form-data">
         @csrf
         @method('PUT') <!-- Simuler une requête PUT -->
         

@@ -32,8 +32,12 @@ class EquipeController extends Controller
     public function store(StoreEquipeRequest $request)
     {
         $data = $request->validated();
-        $this->teamRepository->create($data); 
 
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public'); 
+            $data['logo'] = $logoPath; 
+        }
+        $this->teamRepository->create($data); 
         return redirect('equipe')->with('success', 'Team created successfully.');
     }
 

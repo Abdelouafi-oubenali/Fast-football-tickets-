@@ -80,12 +80,17 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-full mr-3 flex items-center justify-center">
-                                        <span class="text-blue-600 font-bold">{{ substr($team->name, 0, 1) }}</span>
-                                    </div>
+                                    @if($team->logo)
+                                        <img src="{{ asset('storage/' . $team->logo) }}" alt="Logo de {{ $team->name }}" class="w-10 h-10 rounded-full mr-3">
+                                    @else
+                                        <div class="w-10 h-10 bg-blue-100 rounded-full mr-3 flex items-center justify-center">
+                                            <span class="text-blue-600 font-bold">{{ substr($team->name, 0, 1) }}</span>
+                                        </div>
+                                    @endif
                                     <div class="text-sm font-medium text-gray-900">{{ $team->name }}</div>
                                 </div>
                             </td>
+                            
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $team->city }}
                             </td>

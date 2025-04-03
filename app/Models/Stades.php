@@ -13,6 +13,7 @@ class Stades extends Model
         'name',
         'capacity',
         'ville',
-        'adresse'
+        'adresse',
+        'photo'
     ];
 }

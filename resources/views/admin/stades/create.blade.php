@@ -42,7 +42,7 @@
                 <p class="text-sm text-gray-500 mt-1">Remplissez les informations ci-dessous pour ajouter un nouveau stade à votre liste.</p>
             </div>
 
-            <form class="p-6" method="POST" action= "{{ route('stades.store')}}">
+            <form class="p-6" method="POST" action= "{{ route('stades.store')}}" enctype="multipart/form-data">
 
                 @csrf
                 
@@ -143,16 +143,20 @@
                             <div class="space-y-1 text-center">
                                 <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-3"></i>
                                 <div class="flex text-sm text-gray-600">
-                                    <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
+                                    <label for="photo" class="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
                                         <span>Télécharger un fichier</span>
-                                        <input id="image" name="image" type="file" class="sr-only">
+                                        <input id="photo" name="photo" type="file" class="sr-only" accept="image/*">
                                     </label>
-                                    <p class="pl-1">ou glisser-déposer</p>
                                 </div>
+                                <p class="pl-1">ou glisser-déposer</p>
                                 <p class="text-xs text-gray-500">PNG, JPG, GIF jusqu'à 10MB</p>
+                                @error('photo')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
+                    
 
                     <!-- Description -->
                     <div class="md:col-span-2">
