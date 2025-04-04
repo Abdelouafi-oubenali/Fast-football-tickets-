@@ -13,6 +13,7 @@ use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\AccountCreatedMailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ReservationController;
 
 
 Route::get('/', function () {
@@ -22,7 +23,7 @@ Route::get('/', function () {
 
 // les route de admin  
 Route::get('/test-dashbord', function () {
-    return view('clent.hellow');
+    return view('client.index');
 })->name('welcome');
 
 
@@ -74,3 +75,5 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 // frontand parti
 
 Route::resource('/home', HomController::class);
+
+Route::resource('reservation', ReservationController::class);
