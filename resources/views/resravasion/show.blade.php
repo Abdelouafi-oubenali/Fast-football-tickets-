@@ -90,28 +90,7 @@
                 <p class="text-gray-700">Places disponibles: <span id="availability" class="font-semibold text-green-600">--</span></p>
             </div>
             
-            <!-- Services supplémentaires -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-gray-700 mb-2">Services supplémentaires:</h3>
-                <div class="space-y-2">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="drink" class="mr-2 extra-service" data-price="5">
-                        <label for="drink">Boisson (+5€)</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="snack" class="mr-2 extra-service" data-price="8">
-                        <label for="snack">Snack (+8€)</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="programme" class="mr-2 extra-service" data-price="3">
-                        <label for="programme">Programme du match (+3€)</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="scarf" class="mr-2 extra-service" data-price="15">
-                        <label for="scarf">Écharpe souvenir (+15€)</label>
-                    </div>
-                </div>
-            </div>
+
             
             <!-- Total -->
             <div class="mb-6 p-3 bg-gray-100 rounded-lg">
@@ -119,7 +98,7 @@
             </div>
             
             <!-- Bouton de confirmation -->
-            <button id="confirmButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
+            <button id="confirmButton" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
                 Ajouter au panier
             </button>
         </div>

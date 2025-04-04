@@ -77,3 +77,4 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 Route::resource('/home', HomController::class);
 
 Route::resource('reservation', ReservationController::class);
+Route::get('/resravasion/panier', [ReservationController::class, 'Panier'])->name('Panier.index'); 

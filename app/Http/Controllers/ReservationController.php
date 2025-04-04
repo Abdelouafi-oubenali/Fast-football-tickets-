@@ -14,5 +14,11 @@ class ReservationController extends Controller
     public function show ()
     {
         return view('resravasion.show');
+
+    }
+
+    public function Panier () 
+    {
+        return view('resravasion.panier ');
     }
 }

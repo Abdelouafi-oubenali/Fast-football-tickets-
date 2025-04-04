@@ -1,4 +1,4 @@
-@extends('layouts.man')
+@extends('layouts.main')
 
 @section('title', 'foot tecketr')
 
