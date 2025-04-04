@@ -10,4 +10,9 @@ class ReservationController extends Controller
     {
         return view('resravasion.index');
     }
+
+    public function show ()
+    {
+        return view('resravasion.show');
+    }
 }
