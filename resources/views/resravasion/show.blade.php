@@ -10,7 +10,6 @@
         <h2 class="text-lg font-semibold mb-4">Récapitulatif des tickets</h2>
         <div id="ticketSummary" class="space-y-3">
             <p id="emptyTicketMessage" class="text-gray-500 italic">Aucun ticket sélectionné pour le moment.</p>
-            <!-- Les tickets sélectionnés seront ajoutés ici dynamiquement -->
         </div>
         
         <div id="totalSummary" class="mt-4 pt-3 border-t border-gray-200 hidden">

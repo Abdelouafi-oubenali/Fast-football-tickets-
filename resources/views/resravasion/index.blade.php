@@ -12,18 +12,20 @@
             <div class="flex justify-center items-center space-x-8">
                 <div class="text-center">
                     <img src="https://images.seeklogo.com/logo-png/25/2/raja-club-athletic-rca-logo-png_seeklogo-256064.png" alt="Logo Équipe 1" class="mx-auto mb-2 rounded-full bg-white p-2 w-28">
-                    <h2 class="text-xl font-bold">PSG</h2>
+                    <h2 class="text-xl font-bold">{{$match->awayTeam->name}}</h2>
                 </div>
                 <div class="text-center">
                     <div class="text-2xl font-bold px-6 py-3 rounded-lg">
                         VS
                     </div>
-                    <p class="mt-2">20:45</p>
-                    <p>15 Avril 2025</p>
+                    <p class="mt-2">{{$match->time}}</p>
+                    <p>{{ $match->date}}</p>
+                    {{-- <p>15 Avril 2025</p> --}}
+
                 </div>
                 <div class="text-center">
                     <img src="https://images.seeklogo.com/logo-png/25/2/raja-club-athletic-rca-logo-png_seeklogo-256064.png" alt="Logo Équipe 2" class="mx-auto mb-2 rounded-full bg-white p-2 w-[100px]">
-                    <h2 class="text-xl font-bold">Marseille</h2>
+                    <h2 class="text-xl font-bold">{{$match->homeTeam->name}}</h2>
                 </div>
             </div>
         </div>
@@ -34,7 +36,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="rounded-lg shadow-lg overflow-hidden">
-                    <img src="https://casainvest.ma/sites/default/files/2022-04/Complexe_Sportif_Mohammed%201.jpg" alt="Terrain de football" class="w-[50rem] h-[20rem] object-cover">
+                    <img src="{{asset('storage/' .$match->photo )}}" alt="Terrain de football" class="w-[50rem] h-[20rem] object-cover">
                  
                 </div>
                 
@@ -47,15 +49,15 @@
                         </li>
                         <li class="flex justify-between">
                             <span class="font-medium">Stade:</span>
-                            <span>Parc des Princes, Paris</span>
+                            <span>{{$match->Stadium}}</span>
                         </li>
                         <li class="flex justify-between">
                             <span class="font-medium">Date:</span>
-                            <span>15 Avril 2025</span>
+                            <span>{{$match->date}}</span>
                         </li>
                         <li class="flex justify-between">
                             <span class="font-medium">Heure:</span>
-                            <span>20:45</span>
+                            <span>{{$match->time}}</span>
                         </li>
                         <li class="flex justify-between">
                             <span class="font-medium">Journée:</span>

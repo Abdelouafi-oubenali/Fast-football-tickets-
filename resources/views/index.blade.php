@@ -1,10 +1,9 @@
-@extends('layouts.man')
+@extends('layouts.main')
 
 @section('title', 'foot tecketr')
 
 @section('content')
 
-{{-- heder --}}
 	<main class="w-11/12 mx-auto pt-4 pb-12 flex flex-col gap-10">
 		<section class="bg-gray-900 rounded-3xl">
             <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-24 lg:px-12">
@@ -141,28 +140,23 @@
                     <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1522778526097-ce0a22ceb253?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
                       <div class="flex items-center justify-center gap-4">
                         <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                    
                           <img src="{{asset('storage/' .$match->homeTeam->logo)}}" alt="Logo AS FAR" class="w-16 h-16 object-contain"/>
                           <span class="text-sm font-semibold mt-1">{{$match->homeTeam->name}}</span>
                         </div>
-                        
                         <div class="flex items-center">
                           <span class="text-2xl font-bold text-white">VS</span>
                         </div>
-                        
                         <div class="flex flex-col items-center bg-white p-2 rounded-lg">
                           <img src="{{asset('storage/' .$match->awayTeam->logo)}}" alt="Logo Renaissance Berkane" class="w-16 h-16 object-contain"/>
                           <span class="text-sm font-semibold mt-1">{{$match->awayTeam->name}}</span>
                         </div>
                       </div>
                     </div>
-          
                     <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
                       <time datetime="2022-10-10" class="block text-xs text-gray-500">
                         5 Novembre, 2023
                       </time>
-          
-                      <a href="#">
+                      <a href="reservation/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
           
@@ -176,7 +170,7 @@
                         </span>
           
                         <span class="text-green-500 font-medium">
-                          120 DH
+                           120 DH
                         </span>
                       </div>
           
@@ -185,101 +179,6 @@
                   </article>
                 </li>
             @endforeach
-
-                {{-- <li>
-                  <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
-                      <div class="flex items-center justify-center gap-4">
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo Olympique de Safi" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">OCS</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                          <span class="text-2xl font-bold text-white">VS</span>
-                        </div>
-                        
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo FUS Rabat" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">FUS</span>
-                        </div>
-                      </div>
-                    </div>
-          
-                    <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
-                      <time datetime="2022-10-10" class="block text-xs text-gray-500">
-                        12 Décembre, 2023
-                      </time>
-          
-                      <a href="#">
-                        <h3 class="text-lg text-gray-900">OC Safi vs FUS Rabat</h3>
-                      </a>
-          
-                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade El Massira, Safi</p>
-          
-                      <div class="flex items-center gap-2">
-                        <span class="text-green-500 font-medium">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/>
-                          </svg>
-                        </span>
-          
-                        <span class="text-green-500 font-medium">
-                          80 DH
-                        </span>
-                      </div>
-          
-                      <div class="text-green-600 text-sm font-medium">En promotion</div>
-                    </div>
-                  </article>
-                </li>
-                <li>
-                  <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
-                      <div class="flex items-center justify-center gap-4">
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo MAS Fès" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">MAS</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                          <span class="text-2xl font-bold text-white">VS</span>
-                        </div>
-                        
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo Moghreb Tétouan" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">MAT</span>
-                        </div>
-                      </div>
-                    </div>
-          
-                    <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
-                      <time datetime="2022-10-10" class="block text-xs text-gray-500">
-                        20 Janvier, 2024
-                      </time>
-          
-                      <a href="#">
-                        <h3 class="text-lg text-gray-900">MAS Fès vs Moghreb Tétouan</h3>
-                      </a>
-          
-                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Hassan II, Fès</p>
-          
-                      <div class="flex items-center gap-2">
-                        <span class="text-green-500 font-medium">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/>
-                          </svg>
-                        </span>
-          
-                        <span class="text-green-500 font-medium">
-                          90 DH
-                        </span>
-                      </div>
-          
-                      <div class="text-green-600 text-sm font-medium">Nouveau match</div>
-                    </div>
-                  </article>
-                </li> --}}
               </ul>
             </div>
           </section>

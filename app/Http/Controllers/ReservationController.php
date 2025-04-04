@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stades;
+use App\Models\tickets;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    public function index () 
+    public function index ($id) 
     {
-        return view('resravasion.index');
+        $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($id);
+        $stades = Stades::where('name', $match->Stadium)->get();
+        dd($match->Stadium);
+        $stade = $match->Stadium;
+        
+        return view('resravasion.index',compact('match'));
     }
 
     public function show ()

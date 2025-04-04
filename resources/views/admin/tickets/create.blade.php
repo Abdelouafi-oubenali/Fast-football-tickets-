@@ -89,12 +89,10 @@
                                     <label for="stade" class="block text-gray-700 mb-1">Stade</label>
                                     <select id="stade" name="Stadium"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">-- Sélectionner un stade --</option>
-                                        <option value="parc">Parc des Princes</option>
-                                        <option value="velodrome">Orange Vélodrome</option>
-                                        <option value="groupama">Groupama Stadium</option>
-                                        <option value="louis2">Stade Louis-II</option>
-                                        <option value="roazhon">Roazhon Park</option>
-                                        <option value="pierre-mauroy">Stade Pierre-Mauroy</option>
+
+                                        @forEach($stades as $stad)
+                                        <option value="{{$stad->name}}">{{$stad->name}}</option>
+                                    @endforeach
                                     </select>
                                     @error('Stadium')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
