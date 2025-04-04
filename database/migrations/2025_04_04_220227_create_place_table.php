@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('VIP')->default(300); 
             $table->timestamps(); 
     
-            $table->foreign('match_id')->references('id')->on('tickets')->onDelete('cascade'); 
+            $table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade'); 
         });
     }
     
