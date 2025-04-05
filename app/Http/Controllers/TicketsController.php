@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMatchsRequest;
 
 use App\Http\Requests\StoreticketsRequest;
+use App\Models\Matchs;
+use App\Models\Place;
+use App\Models\tickets;
 use App\Repositories\StadRepositoryInterface;
 use App\Repositories\MatchRepositoryInterface;
 use App\Repositories\TicketsRepositryIntirface;
@@ -39,9 +42,28 @@ class TicketsController extends Controller
     public function store(StoreticketsRequest $request)
     {
         $data = $request->validated();
-        // dd($data);
-        $this->matchRepository->create($data);
-        return redirect('tickets')->with('success', 'Le match a été créé avec succès.');
+        
+        // Créer le match
+        $match = tickets::create([
+            'date' => $data['date'],
+            'time' => $data['time'],
+            'Stadium' => $data['Stadium'],
+            'home_team_id' => $data['home_team_id'],
+            'away_team_id' => $data['away_team_id'],
+            'home_team_score' => $data['home_team_score'] ?? null,
+            'away_team_score' => $data['away_team_score'] ?? null,
+        ]);
+          
+        // Créer les catégories pour ce match
+        foreach ($data['categories'] as $categoryData) {
+            $match->categories()->create([
+                'nom' => $categoryData['nom'],
+                'prix' => $categoryData['prix'],
+                'actif' => $categoryData['actif'] ?? true,
+            ]);
+        }
+        
+        return redirect('tickets')->with('success', 'Match et billets créés avec succès.');
     }
 
     public function show($id)
