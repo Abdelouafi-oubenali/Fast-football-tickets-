@@ -36,7 +36,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="rounded-lg shadow-lg overflow-hidden">
-                    <img src="{{asset('storage/' .$match->photo )}}" alt="Terrain de football" class="w-[50rem] h-[20rem] object-cover">
+                    <img src="{{asset('storage/' .$tiran )}}" alt="Terrain de football" class="w-[50rem] h-[20rem] object-cover">
                  
                 </div>
                 
