@@ -239,9 +239,9 @@
 						20 Octobre, 2023
 					  </time>
 					  
-					  <a href="/ticket">
-						<h3 class="text-lg text-gray-900">Wydad AC vs Raja CA</h3>
-					  </a>
+					  <a href="reservation/{{$match->id}}">
+                        <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
+                      </a>
 			
 					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
 					  
