@@ -156,7 +156,7 @@
                       <time datetime="2022-10-10" class="block text-xs text-gray-500">
                         5 Novembre, 2023
                       </time>
-                      <a href="reservation/{{$match->id}}">
+                      <a href="reservation/info/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
           
@@ -239,7 +239,7 @@
 						20 Octobre, 2023
 					  </time>
 					  
-					  <a href="reservation/{{$match->id}}">
+					  <a href="reservation/info/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
 			

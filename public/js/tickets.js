@@ -1,261 +1,178 @@
-// Données des tribunes
-const tribuneData = {
-    nord: {
-        name: "Tribune Nord",
-        categories: [
-            {name: "Catégorie 1", price: 70, available: 125},
-            {name: "Catégorie 2", price: 45, available: 243},
-            {name: "Catégorie 3", price: 25, available: 178}
-        ]
-    },
-    sud: {
-        name: "Tribune Sud",
-        categories: [
-            {name: "Catégorie 1", price: 65, available: 98},
-            {name: "Catégorie 2", price: 40, available: 156},
-            {name: "Catégorie 3", price: 20, available: 215}
-        ]
-    },
-    est: {
-        name: "Tribune Est",
-        categories: [
-            {name: "VIP", price: 150, available: 45},
-            {name: "Catégorie 1", price: 80, available: 112},
-            {name: "Catégorie 2", price: 50, available: 184}
-        ]
-    },
-    ouest: {
-        name: "Tribune Ouest",
-        categories: [
-            {name: "VIP", price: 180, available: 32},
-            {name: "Catégorie 1", price: 90, available: 86},
-            {name: "Catégorie 2", price: 55, available: 147}
-        ]
-    }
-};
-
-let currentTribuneId = '';
-
-let selectedTickets = [];
-
-function selectTribune(tribuneId) {
-    const tribune = tribuneData[tribuneId];
-    if (!tribune) return;
-    
-    currentTribuneId = tribuneId;
-    
-    document.getElementById('ticketInfo').classList.remove('hidden');
-    
-    document.getElementById('tribuneTitle').textContent = tribune.name;
-    
-    const categorySelect = document.getElementById('categorySelect');
-    categorySelect.innerHTML = '<option value="">Sélectionnez une catégorie</option>';
-    
-    tribune.categories.forEach((category, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = `${category.name} - ${category.price}€`;
-        categorySelect.appendChild(option);
-    });
-    
-    document.getElementById('unitPrice').textContent = '--';
-    document.getElementById('availability').textContent = '--';
-    document.getElementById('totalPrice').textContent = '--';
-    document.getElementById('quantityInput').value = 1;
-    
-    const extraServices = document.querySelectorAll('.extra-service');
-    extraServices.forEach(service => {
-        service.checked = false;
-    });
-    
-    categorySelect.onchange = function() {
-        updateTicketInfo(tribuneId);
-    };
-    
-    extraServices.forEach(service => {
-        service.onchange = function() {
-            updateTotalPrice(tribuneId);
-        };
-    });
-}
-
-function updateTicketInfo(tribuneId) {
-    const categoryIndex = document.getElementById('categorySelect').value;
-    if (categoryIndex === '') return;
-    
-    const category = tribuneData[tribuneId].categories[categoryIndex];
-    
-    document.getElementById('unitPrice').textContent = `${category.price}€`;
-    
-    const availabilityEl = document.getElementById('availability');
-    availabilityEl.textContent = `${category.available} places`;
-    
-    if (category.available < 50) {
-        availabilityEl.className = 'font-semibold text-red-600';
-    } else if (category.available < 100) {
-        availabilityEl.className = 'font-semibold text-orange-600';
-    } else {
-        availabilityEl.className = 'font-semibold text-green-600';
-    }
-    
-    updateTotalPrice(tribuneId);
-}
-
-
-function updateTotalPrice(tribuneId) {
-    const categoryIndex = document.getElementById('categorySelect').value;
-    if (categoryIndex === '') return;
-    
-    const category = tribuneData[tribuneId].categories[categoryIndex];
-    const quantity = parseInt(document.getElementById('quantityInput').value);
-    
-    let subtotal = category.price * quantity;
-    
-    let extras = [];
-    const extraServices = document.querySelectorAll('.extra-service:checked');
-    extraServices.forEach(service => {
-        const price = parseInt(service.dataset.price);
-        subtotal += price * quantity;
-        extras.push({
-            name: service.nextElementSibling.textContent.split('(+')[0].trim(),
-            price: price
-        });
-    });
-    
-    document.getElementById('totalPrice').textContent = `${subtotal}€`;
-    
-    return {
-        tribuneId: tribuneId,
-        tribuneName: tribuneData[tribuneId].name,
-        categoryIndex: categoryIndex,
-        categoryName: category.name,
-        unitPrice: category.price,
-        quantity: quantity,
-        extras: extras,
-        subtotal: subtotal
-    };
-}
-
-function addTicketToSummary(ticketDetails) {
-    const ticketId = Date.now();
-    selectedTickets.push({
-        id: ticketId,
-        ...ticketDetails
-    });
-    
-    document.getElementById('emptyTicketMessage').classList.add('hidden');
-    
-    document.getElementById('totalSummary').classList.remove('hidden');
-    
-    const ticketElement = document.createElement('div');
-    ticketElement.id = `ticket-${ticketId}`;
-    ticketElement.className = 'bg-gray-50 p-3 rounded-lg border border-gray-200';
-    
-    let extrasHtml = '';
-    if (ticketDetails.extras.length > 0) {
-        extrasHtml = '<div class="mt-2 pl-4 text-sm text-gray-600"><p>Services additionnels:</p><ul class="list-disc pl-4">';
-        ticketDetails.extras.forEach(extra => {
-            extrasHtml += `<li>${extra.name} (${extra.price}€)</li>`;
-        });
-        extrasHtml += '</ul></div>';
-    }
-    
-    ticketElement.innerHTML = `
-        <div class="flex justify-between items-start">
-            <div>
-                <h3 class="font-semibold">${ticketDetails.tribuneName}</h3>
-                <p>${ticketDetails.categoryName} - ${ticketDetails.unitPrice}€ x ${ticketDetails.quantity}</p>
-                ${extrasHtml}
-            </div>
-            <div class="flex flex-col items-end">
-                <p class="font-bold">${ticketDetails.subtotal}€</p>
-                <button class="text-red-600 hover:text-red-800 text-sm mt-2" onclick="removeTicket(${ticketId})">
-                    Supprimer
-                </button>
-            </div>
-        </div>
-    `;
-    
-    document.getElementById('ticketSummary').appendChild(ticketElement);
-    
-    updateGrandTotal();
-    
-    tribuneData[ticketDetails.tribuneId].categories[ticketDetails.categoryIndex].available -= ticketDetails.quantity;
-}
-
-function removeTicket(ticketId) {
-    const ticketIndex = selectedTickets.findIndex(ticket => ticket.id === ticketId);
-    if (ticketIndex === -1) return;
-    
-    const ticket = selectedTickets[ticketIndex];
-    
-    tribuneData[ticket.tribuneId].categories[ticket.categoryIndex].available += ticket.quantity;
-    
-    selectedTickets.splice(ticketIndex, 1);
-    
-    document.getElementById(`ticket-${ticketId}`).remove();
-    
-    if (selectedTickets.length === 0) {
-        document.getElementById('emptyTicketMessage').classList.remove('hidden');
-        document.getElementById('totalSummary').classList.add('hidden');
-    }
-    
-    updateGrandTotal();
-}
-
-function updateGrandTotal() {
-    let grandTotal = 0;
-    selectedTickets.forEach(ticket => {
-        grandTotal += ticket.subtotal;
-    });
-    document.getElementById('grandTotal').textContent = `${grandTotal}€`;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('decreaseQuantity').addEventListener('click', function() {
-        const quantityInput = document.getElementById('quantityInput');
-        const currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) {
-            quantityInput.value = currentValue - 1;
-            updateTotalPrice(currentTribuneId);
+    // gestion des pop informasionb
+    const infoPopup = document.getElementById('infoPopup');
+    const openPopupBtn = document.getElementById('openPopup');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const closePopup = document.getElementById('closePopup');
+    
+    openPopupBtn.addEventListener('click', function() {
+        infoPopup.classList.remove('hidden');
+    });
+    
+    closePopupBtn.addEventListener('click', function() {
+        infoPopup.classList.add('hidden');
+    });
+    
+    closePopup.addEventListener('click', function() {
+        infoPopup.classList.add('hidden');
+    });
+    
+    infoPopup.addEventListener('click', function(e) {
+        if (e.target === infoPopup) {
+            infoPopup.classList.add('hidden');
         }
     });
-
+    
+    const tribuneData = window.tribuneData || {};
+    
+    window.selectTribune = function(tribune) {
+        const ticketInfo = document.getElementById('ticketInfo');
+        const tribuneTitle = document.getElementById('tribuneTitle');
+        const categorySelect = document.getElementById('categorySelect');
+        const availability = document.getElementById('availability');
+        
+        ticketInfo.classList.remove('hidden');
+        
+        const data = tribuneData[tribune];
+        if (!data) {
+            console.error('Tribune non trouvée:', tribune);
+            return;
+        }
+        
+        tribuneTitle.textContent = data.name;
+        availability.textContent = data.available;
+        
+        categorySelect.innerHTML = '<option value="">Sélectionnez une catégorie</option>';
+        data.categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.price;
+            option.textContent = `${category.name} - ${category.price}€`;
+            option.setAttribute('data-name', category.name);
+            categorySelect.appendChild(option);
+        });
+        
+        updateUnitPrice();
+    };
+    
+    function updateUnitPrice() {
+        const categorySelect = document.getElementById('categorySelect');
+        const unitPrice = document.getElementById('unitPrice');
+        const quantityInput = document.getElementById('quantityInput');
+        const totalPrice = document.getElementById('totalPrice');
+        
+        const price = parseFloat(categorySelect.value) || 0;
+        const quantity = parseInt(quantityInput.value) || 0;
+        
+        unitPrice.textContent = price ? `${price}€` : '--';
+        totalPrice.textContent = price ? `${(price * quantity).toFixed(2)}€` : '--';
+    }
+    
+    document.getElementById('categorySelect').addEventListener('change', updateUnitPrice);
+    
+    document.getElementById('decreaseQuantity').addEventListener('click', function() {
+        const quantityInput = document.getElementById('quantityInput');
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
+            updateUnitPrice();
+        }
+    });
+    
     document.getElementById('increaseQuantity').addEventListener('click', function() {
         const quantityInput = document.getElementById('quantityInput');
-        const currentValue = parseInt(quantityInput.value);
-        if (currentValue < 10) {
-            quantityInput.value = currentValue + 1;
-            updateTotalPrice(currentTribuneId);
+        let quantity = parseInt(quantityInput.value);
+        if (quantity < 10) {
+            quantityInput.value = quantity + 1;
+            updateUnitPrice();
         }
     });
 
     document.getElementById('confirmButton').addEventListener('click', function() {
-        const categoryIndex = document.getElementById('categorySelect').value;
-        if (categoryIndex === '') {
-            alert('Veuillez sélectionner une catégorie de place.');
+        const categorySelect = document.getElementById('categorySelect');
+        const quantityInput = document.getElementById('quantityInput');
+        const tribuneTitle = document.getElementById('tribuneTitle');
+        
+        if (!categorySelect.value) {
+            alert('Veuillez sélectionner une catégorie');
             return;
         }
         
-        const ticketDetails = updateTotalPrice(currentTribuneId);
+        const ticketData = {
+            tribune: tribuneTitle.textContent,
+            category: categorySelect.options[categorySelect.selectedIndex].getAttribute('data-name'),
+            price: parseFloat(categorySelect.value),
+            quantity: parseInt(quantityInput.value),
+            total: parseFloat(categorySelect.value) * parseInt(quantityInput.value)
+        };
+        
+        console.log('Ticket à ajouter:', ticketData);
+        alert(`${ticketData.quantity} place(s) ${ticketData.category} pour ${ticketData.tribune} ajoutée(s) au panier!`);
         
 
-        addTicketToSummary(ticketDetails);
+        addTicketToCart(ticketData);
         
-        document.getElementById('categorySelect').value = '';
-        document.getElementById('unitPrice').textContent = '--';
-        document.getElementById('availability').textContent = '--';
-        document.getElementById('totalPrice').textContent = '--';
-        document.getElementById('quantityInput').value = 1;
+        document.getElementById('ticketInfo').classList.add('hidden');
+    });
+    
+
+    function addTicketToCart(ticketData) {
+        const ticketSummary = document.getElementById('ticketSummary');
+        const emptyTicketMessage = document.getElementById('emptyTicketMessage');
+        const totalSummary = document.getElementById('totalSummary');
+        const grandTotal = document.getElementById('grandTotal');
         
-        const extraServices = document.querySelectorAll('.extra-service');
-        extraServices.forEach(service => {
-            service.checked = false;
+
+        emptyTicketMessage.classList.add('hidden');
+    
+        const ticketElement = document.createElement('div');
+        ticketElement.className = 'bg-gray-100 p-3 rounded flex justify-between items-center';
+        ticketElement.innerHTML = `
+            <div>
+                <p class="font-semibold">${ticketData.tribune} - ${ticketData.category}</p>
+                <p class="text-sm text-gray-600">${ticketData.quantity} x ${ticketData.price}€</p>
+            </div>
+            <div class="flex items-center">
+                <p class="font-bold text-blue-600 mr-3">${ticketData.total.toFixed(2)}€</p>
+                <button class="text-red-500 hover:text-red-700 remove-ticket">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        `;
+        
+        ticketSummary.appendChild(ticketElement);
+        
+        updateGrandTotal();
+        
+        totalSummary.classList.remove('hidden');
+        
+        const removeButton = ticketElement.querySelector('.remove-ticket');
+        removeButton.addEventListener('click', function() {
+            ticketElement.remove();
+            updateGrandTotal();
+            
+            if (ticketSummary.children.length === 1) { 
+                emptyTicketMessage.classList.remove('hidden');
+                totalSummary.classList.add('hidden');
+            }
+        });
+    }
+    
+    function updateGrandTotal() {
+        const grandTotal = document.getElementById('grandTotal');
+        const ticketElements = document.querySelectorAll('#ticketSummary > div:not(#emptyTicketMessage)');
+        
+        let total = 0;
+        ticketElements.forEach(element => {
+            const priceText = element.querySelector('.font-bold.text-blue-600').textContent;
+            const price = parseFloat(priceText.replace('€', ''));
+            total += price;
         });
         
-        alert('Billets ajoutés au panier !');
-    });
-
+        grandTotal.textContent = `${total.toFixed(2)}€`;
+    }
+    
     document.getElementById('checkoutButton').addEventListener('click', function() {
         alert('Redirection vers la page de paiement...');
     });

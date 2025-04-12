@@ -23,9 +23,7 @@
         </div>
     </div>
 
-    <!-- Plan du stade -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Visualisation stade -->
         <div class="md:col-span-2 bg-white rounded-lg shadow p-6">
             <h2 class="text-lg font-semibold mb-4">Plan du stade</h2>
             <div class="border-2 border-gray-300 p-4 rounded-lg h-96 relative">
@@ -48,16 +46,17 @@
                 
                 <div class="absolute top-1/4 left-1/4 right-1/4 bottom-1/4 bg-green-500 rounded-lg flex items-center justify-center text-white">
                     Terrain
+                    <div class="absolute inset-x-1/4 inset-y-1/4 bg-gold border-2 border-yellow-600 rounded-lg flex items-center justify-center text-black font-bold cursor-pointer hover:bg-yellow-400 transition-colors" style="background-color: #FFD700;" onclick="selectTribune('vip')">
+                        Zone VIP
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Informations de billetterie -->
         <div id="ticketInfo" class="bg-white rounded-lg shadow p-6 hidden">
             <h2 class="text-xl font-bold mb-4">Informations billetterie</h2>
             <div id="tribuneTitle" class="text-lg font-semibold mb-3 text-blue-600"></div>
             
-            <!-- Catégories de places -->
             <div class="mb-4">
                 <label for="categorySelect" class="block text-gray-700 mb-2">Catégorie de place:</label>
                 <select id="categorySelect" class="w-full px-4 py-2 border rounded-lg">
@@ -65,12 +64,10 @@
                 </select>
             </div>
             
-            <!-- Prix unitaire -->
             <div class="mb-4">
                 <p class="text-gray-700">Prix unitaire: <span id="unitPrice" class="font-semibold">--</span></p>
             </div>
             
-            <!-- Nombre de places avec boutons + et - -->
             <div class="mb-4">
                 <label for="quantityInput" class="block text-gray-700 mb-2">Nombre de places:</label>
                 <div class="flex items-center">
@@ -84,27 +81,83 @@
                 </div>
             </div>
             
-            <!-- Disponibilité -->
             <div class="mb-4">
                 <p class="text-gray-700">Places disponibles: <span id="availability" class="font-semibold text-green-600">--</span></p>
             </div>
             
-
-            
-            <!-- Total -->
             <div class="mb-6 p-3 bg-gray-100 rounded-lg">
                 <p class="text-lg font-bold">Total: <span id="totalPrice" class="text-blue-600">--</span></p>
             </div>
             
-            <!-- Bouton de confirmation -->
             <button id="confirmButton" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
                 Ajouter au panier
             </button>
         </div>
     </div>
+
+    <!-- Popup d'information sur les tribunes -->
+    <div id="infoPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Informations sur les tribunes</h3>
+                <button id="closePopup" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                @foreach($tribunes as $code => $tribune)
+                <div class="border-b pb-4">
+                    <h4 class="font-semibold text-blue-600">{{ $tribune['name'] }}</h4>
+                    <ul class="mt-2 space-y-1 text-sm">
+                        @foreach($tribune['categories'] as $category)
+                        <li>- {{ $category['name'] }}: {{ $category['price'] }}€</li>
+                        @endforeach
+                        <li>- Capacité: {{ number_format($tribune['capacity'], 0, ',', ' ') }} places</li>
+                        @if(!empty($tribune['advantages']))
+                            @foreach($tribune['advantages'] as $advantage)
+                            <li>- {{ $advantage }}</li>
+                            @endforeach
+                        @endif
+                    </ul>
+                </div>
+                @endforeach
+            </div>
+            
+            <button id="closePopupBtn" class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
+                Fermer
+            </button>
+        </div>
+    </div>
+
+    <!-- Bouton pour ouvrir la popup -->
+    <div class="fixed bottom-4 right-4">
+        <button id="openPopup" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition duration-200 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+            </svg>
+            Infos Tribunes
+        </button>
+    </div>
 </main>
 
-{{-- <script src="{{asset('js/tickets.js')}}"></script> --}}
+<style>
+    .writing-mode-vertical {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+    }
+
+    .max-h-80vh {
+        max-height: 80vh;
+    }
+</style>
+
+<script>
+    window.tribuneData = @json($tribunes);
+</script>
 
 <script src="{{ asset('js/tickets.js') }}"></script>
 

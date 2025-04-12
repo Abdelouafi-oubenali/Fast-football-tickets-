@@ -141,7 +141,7 @@
                     </h2>
                 
                     <div class="mt-4 md:mt-8">
-                        <a href="#" class="inline-block rounded-sm border border-white bg-white px-12 py-3 text-sm font-medium text-green-500 transition hover:bg-transparent hover:text-white focus:ring-3 focus:ring-yellow-400 focus:outline-hidden">
+                        <a href="/reservation/{{$match->id}}" class="inline-block rounded-sm border border-white bg-white px-12 py-3 text-sm font-medium text-green-500 transition hover:bg-transparent hover:text-white focus:ring-3 focus:ring-yellow-400 focus:outline-hidden">
                             Réservez votre place
                         </a>
                     </div>
@@ -157,12 +157,11 @@
 
 <script>
 function selectTribune(tribune) {
-    // Reset previous selections
+
     document.querySelectorAll('.hover\\:bg-green-200, .hover\\:bg-green-200, .hover\\:bg-yellow-200, .hover\\:bg-purple-200').forEach(el => {
         el.classList.remove('ring-2', 'ring-offset-2', 'ring-green-500');
     });
     
-    // Add selection style
     const elements = {
         'nord': document.querySelector('.hover\\:bg-green-200'),
         'sud': document.querySelector('.hover\\:bg-green-200'),
@@ -173,8 +172,6 @@ function selectTribune(tribune) {
     if (elements[tribune]) {
         elements[tribune].classList.add('ring-2', 'ring-offset-2', 'ring-green-500');
     }
-    
-    // Update selection in summary
     const tribuneNames = {
         'nord': 'Tribune Nord',
         'sud': 'Tribune Sud',
