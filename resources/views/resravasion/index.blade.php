@@ -11,7 +11,7 @@
             <h1 class="text-3xl font-bold text-center mb-6">Match de Football</h1>
             <div class="flex justify-center items-center space-x-8">
                 <div class="text-center">
-                    <img src="https://images.seeklogo.com/logo-png/25/2/raja-club-athletic-rca-logo-png_seeklogo-256064.png" alt="Logo Équipe 1" class="mx-auto mb-2 rounded-full bg-white p-2 w-28">
+                    <img src="{{asset('storage/' . $match->awayTeam->logo)}}" alt="Logo Équipe 1" class="mx-auto mb-2 rounded-full bg-white p-2 w-28">
                     <h2 class="text-xl font-bold">{{$match->awayTeam->name}}</h2>
                 </div>
                 <div class="text-center">
@@ -24,7 +24,7 @@
 
                 </div>
                 <div class="text-center">
-                    <img src="https://images.seeklogo.com/logo-png/25/2/raja-club-athletic-rca-logo-png_seeklogo-256064.png" alt="Logo Équipe 2" class="mx-auto mb-2 rounded-full bg-white p-2 w-[100px]">
+                    <img src="{{asset('storage/' . $match->homeTeam->logo)}}" alt="Logo Équipe 2" class="mx-auto mb-2 rounded-full bg-white p-2 w-[100px]">
                     <h2 class="text-xl font-bold">{{$match->homeTeam->name}}</h2>
                 </div>
             </div>
@@ -36,7 +36,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="rounded-lg shadow-lg overflow-hidden">
-                    <img src="{{asset('storage/' .$tiran )}}" alt="Terrain de football" class="w-[50rem] h-[20rem] object-cover">
+                    <img src="{{asset('storage/' .$stade_image )}}" alt="Terrain de football" class="w-[50rem] h-[20rem] object-cover">
                  
                 </div>
                 
@@ -106,58 +106,29 @@
                 </div>
                 
                 <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div class="flex items-center gap-2 p-2 rounded-lg border border-green-200 bg-green-50">
-                    <div class="w-3 h-3 bg-green-100 border border-green-300 rounded-sm"></div>
-                    <span class="text-sm">Tribune Nord</span>
-                    <span class="ml-auto text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">120 places</span>
-                  </div>
-                  <div class="flex items-center gap-2 p-2 rounded-lg border border-green-200 bg-green-50">
-                    <div class="w-3 h-3 bg-green-100 border border-green-300 rounded-sm"></div>
-                    <span class="text-sm">Tribune Sud</span>
-                    <span class="ml-auto text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">150 places</span>
-                  </div>
-                  <div class="flex items-center gap-2 p-2 rounded-lg border border-yellow-200 bg-yellow-50">
-                    <div class="w-3 h-3 bg-yellow-100 border border-yellow-300 rounded-sm"></div>
-                    <span class="text-sm">Tribune Est</span>
-                    <span class="ml-auto text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">85 places</span>
-                  </div>
-                  <div class="flex items-center gap-2 p-2 rounded-lg border border-purple-200 bg-purple-50">
-                    <div class="w-3 h-3 bg-purple-100 border border-purple-300 rounded-sm"></div>
-                    <span class="text-sm">Tribune Ouest</span>
-                    <span class="ml-auto text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded">95 places</span>
-                  </div>
+                    @foreach ($categories as $category)
+                        <div class="flex items-center gap-2 p-2 rounded-lg border border-green-200 bg-green-50">
+                            <div class="w-3 h-3 bg-green-100 border border-green-300 rounded-sm"></div>
+                            <span class="text-sm">{{ $category->nom }}</span>
+                            <span class="ml-auto text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">{{ $category->nombre_place }} places</span>
+                        </div>
+                    @endforeach
                 </div>
+                
               </div>
-      
+           {{-- Tarifs --}}
               <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
                 <h4 class="font-bold mb-2">Tarifs:</h4>
                 <div class="grid grid-cols-1 gap-10">
-                  <div class="flex justify-between p-1 border-b border-gray-200">
-                    <p>Tribune Nord:</p>
-                    <p class="font-medium">45 €</p>
-                  </div>
-                  <div class="flex justify-between p-1 border-b border-gray-200">
-                    <p>Tribune Sud:</p>
-                    <p class="font-medium">40 €</p>
-                  </div>
-                  <div class="flex justify-between p-1 border-b border-gray-200">
-                    <p>Tribune Est:</p>
-                    <p class="font-medium">55 €</p>
-                  </div>
-                  <div class="flex justify-between p-1 border-b border-gray-200">
-                    <p>Tribune Ouest:</p>
-                    <p class="font-medium">60 €</p>
-                  </div>
-                  <div class="flex justify-between p-1 border-b border-gray-200">
-                    <p>Catégorie VIP:</p>
-                    <p class="font-medium">120 €</p>
-                  </div>
-                  <div class="flex justify-between p-1 border-b border-gray-200">
-                    <p>Parking:</p>
-                    <p class="font-medium">15 €</p>
-                  </div>
+                    @foreach ($categories as $category)
+                        <div class="flex justify-between p-1 border-b border-gray-200">
+                            <p>{{ $category->nom }}</p>
+                            <p class="font-medium">{{ $category->prix }} €</p>
+                        </div>
+                    @endforeach
                 </div>
-              </div>
+            </div>
+            
             </div>
             
             <div class="mt-8 grid grid-cols-1 md:grid-cols-1 gap-6">
@@ -170,7 +141,7 @@
                     </h2>
                 
                     <div class="mt-4 md:mt-8">
-                        <a href="/register" class="inline-block rounded-sm border border-white bg-white px-12 py-3 text-sm font-medium text-green-500 transition hover:bg-transparent hover:text-white focus:ring-3 focus:ring-yellow-400 focus:outline-hidden">
+                        <a href="#" class="inline-block rounded-sm border border-white bg-white px-12 py-3 text-sm font-medium text-green-500 transition hover:bg-transparent hover:text-white focus:ring-3 focus:ring-yellow-400 focus:outline-hidden">
                             Réservez votre place
                         </a>
                     </div>
