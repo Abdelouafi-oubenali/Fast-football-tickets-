@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['nom', 'prix', 'prix_abonne', 'actif'];
+    protected $fillable = ['nom', 'prix', 'prix_abonne', 'actif','nombre_place'];
 
     public function match()
     {
