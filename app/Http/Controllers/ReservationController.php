@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Stades;
 use App\Models\tickets;
 use App\Models\Category;
+use App\Models\Enrollment;
+use App\Models\enrollments;
 use App\Models\TicketsInfo;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReservationStore;
-
 
 class ReservationController extends Controller
 {
@@ -103,7 +104,6 @@ class ReservationController extends Controller
         $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($request->match_id);
         $stades = Stades::where('name', $match->Stadium)->first();
 
-        // dd($match);
 
         TicketsInfo::create([
             'user_id' => Auth::id() ?? 22, 
@@ -114,12 +114,18 @@ class ReservationController extends Controller
             'totla_price' => $request->total,
 
         ]);
+        
+        // $enrollment = Enrollment::create([
+        //      'payment_id' => '123456789'
+        // ]);
+        $enrollment = TicketsInfo::where('match_id',$request->match_id)->first();
+  
         $category = $request->tribune;
         $quantity = $request->quantity;
-        $totla_price = $request->total;
+        $total_price = $request->total;
         $price = $request->price;
 
-        return view('resravasion.panier',compact('match','stades','category','quantity','totla_price','price'));
+        return view('resravasion.panier',compact('match','stades','category','quantity','total_price','price','enrollment'));
         
     }
 
