@@ -29,6 +29,12 @@ class StoreticketsRequest extends FormRequest
             'away_team_id' => 'required|exists:equipes,id',
             'home_team_score' => 'nullable|integer',
             'away_team_score' => 'nullable|integer',
+            'categories' => ['required', 'array'],
+            'categories.*.nom' => ['required', 'string'],
+            'categories.*.prix' => ['required', 'numeric', 'min:0'],
+            'categories.*.prix_abonne' => ['required', 'numeric', 'min:0'],
+            'categories.*.places' => ['required', 'integer', 'min:0'],
+            'categories.*.actif' => ['nullable', 'boolean'],
         ];
     }
 }

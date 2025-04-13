@@ -28,4 +28,10 @@ class tickets extends Model
     {
         return $this->belongsTo(Equipe::class, 'away_team_id');
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'match_id');
+    }
+
 }

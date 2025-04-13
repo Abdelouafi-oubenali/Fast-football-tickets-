@@ -89,12 +89,10 @@
                                     <label for="stade" class="block text-gray-700 mb-1">Stade</label>
                                     <select id="stade" name="Stadium"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">-- Sélectionner un stade --</option>
-                                        <option value="parc">Parc des Princes</option>
-                                        <option value="velodrome">Orange Vélodrome</option>
-                                        <option value="groupama">Groupama Stadium</option>
-                                        <option value="louis2">Stade Louis-II</option>
-                                        <option value="roazhon">Roazhon Park</option>
-                                        <option value="pierre-mauroy">Stade Pierre-Mauroy</option>
+
+                                        @forEach($stades as $stad)
+                                        <option value="{{$stad->name}}">{{$stad->name}}</option>
+                                    @endforeach
                                     </select>
                                     @error('Stadium')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -139,87 +137,57 @@
                         </div>
                         
                         <!-- Tarifs par catégorie -->
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold mb-4 border-b pb-2">Tarifs par Catégorie</h3>
-                            
-                            <div class="overflow-x-auto">
-                                <table class="w-full border-collapse">
-                                    <thead>
-                                        <tr class="bg-gray-100">
-                                            <th class="border px-4 py-2 text-left">Catégorie</th>
-                                            <th class="border px-4 py-2 text-left">Prix Standard (€)</th>
-                                            <th class="border px-4 py-2 text-left">Prix Abonné (€)</th>
-                                            <th class="border px-4 py-2 text-left">Places Disponibles</th>
-                                            <th class="border px-4 py-2 text-left">Actif</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="border px-4 py-2">Catégorie 1 (Premium)</td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_cat1" value="120" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_abo_cat1" value="90" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="places_cat1" value="1500" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2 text-center">
-                                                <input type="checkbox" name="actif_cat1" checked class="h-4 w-4 text-blue-600">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Catégorie 2</td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_cat2" value="90" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_abo_cat2" value="70" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="places_cat2" value="2500" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2 text-center">
-                                                <input type="checkbox" name="actif_cat2" checked class="h-4 w-4 text-blue-600">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Catégorie 3</td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_cat3" value="60" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_abo_cat3" value="45" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="places_cat3" value="5000" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2 text-center">
-                                                <input type="checkbox" name="actif_cat3" checked class="h-4 w-4 text-blue-600">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Catégorie 4</td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_cat4" value="30" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="prix_abo_cat4" value="20" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <input type="number" name="places_cat4" value="8000" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                            </td>
-                                            <td class="border px-4 py-2 text-center">
-                                                <input type="checkbox" name="actif_cat4" checked class="h-4 w-4 text-blue-600">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    
                         
-     
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold mb-4 border-b pb-2">Tarifs par Catégorie</h3>
+                        
+                                <div class="overflow-x-auto">
+                                    <table class="w-full border-collapse">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="border px-4 py-2 text-left">Catégorie</th>
+                                                <th class="border px-4 py-2 text-left">Prix Standard (€)</th>
+                                                <th class="border px-4 py-2 text-left">Prix Abonné (€)</th>
+                                                <th class="border px-4 py-2 text-left">Places Disponibles</th>
+                                                <th class="border px-4 py-2 text-left">Actif</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $categories = [
+                                                    ['label' => 'Tribune Nord', 'id' => 1, 'prix' => 120, 'abo' => 90, 'places' => 1500],
+                                                    ['label' => 'Tribune Sud', 'id' => 2, 'prix' => 90, 'abo' => 70, 'places' => 2500],
+                                                    ['label' => 'Tribune Est', 'id' => 3, 'prix' => 60, 'abo' => 45, 'places' => 5000],
+                                                    ['label' => 'Tribune Ouest', 'id' => 4, 'prix' => 30, 'abo' => 20, 'places' => 8000],
+                                                    ['label' => 'Catégorie VIP', 'id' => 5, 'prix' => 200, 'abo' => 150, 'places' => 200],
+                                                ];
+                                            @endphp
+                        
+                                            @foreach ($categories as $cat)
+                                                <tr>
+                                                    <td class="border px-4 py-2">
+                                                        {{ $cat['label'] }}
+                                                        <input type="hidden" name="categories[{{ $loop->index }}][nom]" value="{{ $cat['label'] }}">
+                                                    </td>
+                                                    <td class="border px-4 py-2">
+                                                        <input type="number" name="categories[{{ $loop->index }}][prix]" value="{{ $cat['prix'] }}" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
+                                                    </td>
+                                                    <td class="border px-4 py-2">
+                                                        <input type="number" name="categories[{{ $loop->index }}][prix_abonne]" value="{{ $cat['abo'] }}" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
+                                                    </td>
+                                                    <td class="border px-4 py-2">
+                                                        <input type="number" name="categories[{{ $loop->index }}][places]" value="{{ $cat['places'] }}" min="0" class="w-full px-2 py-1 border border-gray-300 rounded-md">
+                                                    </td>
+                                                    <td class="border px-4 py-2 text-center">
+                                                        <input type="checkbox" name="categories[{{ $loop->index }}][actif]" value="1" checked class="h-4 w-4 text-blue-600">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         
                         <!-- Paramètres supplémentaires -->
                         <div class="mb-6">

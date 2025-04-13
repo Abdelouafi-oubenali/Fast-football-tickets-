@@ -6,10 +6,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\DashbordController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AccountCreatedMailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -22,7 +24,7 @@ Route::get('/', function () {
 
 // les route de admin  
 Route::get('/test-dashbord', function () {
-    return view('clent.hellow');
+    return view('client.index');
 })->name('welcome');
 
 
@@ -73,4 +75,23 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 
 // frontand parti
 
-Route::resource('/home', HomController::class);
+Route::get('/', [HomController::class, 'index'])->name('home');
+
+
+Route::get('/reservation/info/{id}', [ReservationController::class, 'index']);
+Route::get('/resravasion/panier', [ReservationController::class, 'Panier'])->name('Panier.index'); 
+Route::get('reservation/{id}', [ReservationController::class, 'show'])->name('reservation.show');
+Route::post('reservation/create', [ReservationController::class, 'store'])->name('reservation.store');
+
+Route::get('/mes-teckts', [ReservationController::class, 'Panier'])->name('reservation.Panier');
+
+
+
+// Paiement
+Route::post('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+Route::get('/payment/success/{ticket_info_id}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/cancel/{ticket_info_id}', [PaymentController::class, 'cancel'])->name('payment.cancel');
+
+// pdf Telecharger
+
+Route::get('/tickets/download/{ticketInfoId}', [PaymentController::class, 'downloadTicketPdf'])->name('tickets.download');

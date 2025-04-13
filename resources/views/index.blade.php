@@ -1,141 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="/assets/css/output.css" rel="stylesheet">
-		<link rel="icon" type="image/png" href="/assets/icons/favicon.png">
-		<title>FootTicket</title>
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script src="https://kit.fontawesome.com/029424212f.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+@extends('layouts.main')
 
-		<style>
-			.scrollbar-hide::-webkit-scrollbar {
-			  display: none;
-			}
-			
-			.scrollbar-hide {
-			  -ms-overflow-style: none;
-			  scrollbar-width: none;
-			}
-			
-			html {
-			  scroll-behavior: smooth;
-			}
-		  </style>
+@section('title', 'foot tecketr')
 
-	</head>
-	<body>
-		<header class="sticky z-52 top-0 left-0 flex items-center justify-between w-full py-2 px-6 shadow-sm bg-white">
-			<div class="flex items-center gap-10">
-				<div class="w-auto">
-					<a href="/" class="text-2xl font-bold font-unbounded text-orange">FootTicket</a>
-				</div>
-				<div class="border border-xs border-[#b2b2b2] rounded-full bg-gray-50 flex items-center gap-2 px-1 py-1">
-					<div class="flex items-center gap-2 w-[300px] pl-0.5">
-						<span class="">
-							<svg x="0" y="0" viewbox="0 0 24 24" xml:space="preserve" width="25px" class="fill-gray-600">
-								<path d="M10 14c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm3.5.9c-1 .7-2.2 1.1-3.5 1.1-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6c0 1.3-.4 2.5-1.1 3.4l5.1 5.1-1.5 1.5-5-5.1z"></path>
-							</svg>
-						</span>
-						<div class="w-full">
-							<input type="text" placeholder="Search for events" class="h-[35px] w-full outline-none border-none text-sm/12">
-						</div>
-					</div>
-					<div class="w-[1px] h-[38px] bg-[#B2B2B2]"></div>
-					<div class="flex items-center gap-2 w-[300px]">
-						<span class="">
-							<svg x="0" y="0" viewbox="0 0 24 24" xml:space="preserve" width="25px" class="fill-gray-600">
-								<path d="M11.6 11.6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-7.6C8.5 4 6 6.5 6 9.6 6 13.8 11.6 20 11.6 20s5.6-6.2 5.6-10.4c0-3.1-2.5-5.6-5.6-5.6z"></path>
-							</svg>
-						</span>
-						<div class="w-full">
-							<input type="text" placeholder="Search for events" class="h-[35px] w-full outline-none border-none text-sm/12">
-						</div>
-						<div class="">
-							<button class="w-[38px] h-[38px] bg-green-600 rounded-full flex justify-center items-center cursor-pointer hover:bg-[#d63621]">
-								<svg x="0" y="0" viewbox="0 0 24 24" xml:space="preserve" width="25px" class="fill-white">
-									<path d="M10 14c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm3.5.9c-1 .7-2.2 1.1-3.5 1.1-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6c0 1.3-.4 2.5-1.1 3.4l5.1 5.1-1.5 1.5-5-5.1z"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<nav class="flex justify-end">
-				<ul class="flex gap-7 items-center">
-					<li class="group">
-						<a href="/organizer/create" class="flex flex-col items-center">
-							<span class="group-hover:text-orange text-darkblue">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-								</svg>
-							</span>
-						</a>
-					</li>
-					<li class="group">
-						<a href="/organizer/create" class="flex flex-col items-center">
-							<span class="group-hover:text-orange text-darkblue">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"/>
-								</svg>
-							</span>
-						</a>
-					</li>
-					<li class="group">
-						<a href="/organizer/create" class="flex flex-col items-center">
-							<span class="group-hover:text-orange text-orange">
-								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-7">
-									<path d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z"/>
-									<path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 0 0 5.25 9v.75a8.217 8.217 0 0 1-2.119 5.52.75.75 0 0 0 .298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 1 0 7.48 0 24.583 24.583 0 0 0 4.83-1.244.75.75 0 0 0 .298-1.205 8.217 8.217 0 0 1-2.118-5.52V9A6.75 6.75 0 0 0 12 2.25ZM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 0 0 4.496 0l.002.1a2.25 2.25 0 1 1-4.5 0Z" clip-rule="evenodd"/>
-								</svg>
-							</span>
-						</a>
-					</li>
-
-					<li>
-						<button class="circl_nv flex justify-center items-center w-[42px] h-[42px] bg-gray-200 hover:bg-gray-300 text-orange rounded-full cursor-pointer overflow-hidden">
-							<img class="w-full h-full object-cover" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
-						</button>
-					</li>
-				</ul>
-
-				<div class="menu_nv absolute right-0 top-full bg-white border border-1 border-gray-300 hidden">
-					<ul class="w-60 flex flex-col">
-						<a href="/account/profile">
-							<li class="flex flex-col w-full py-3 px-4 hover:bg-gray-100">
-								<span>John Doe</span>
-								<span>john.doe@example.com</span>
-							</li>
-						</a>
-						<div class="w-full h-[1.7px] bg-gray-200"></div>
-						<a href="/organizer/manage-events">
-							<li class="w-full py-3 px-4 hover:bg-gray-100">
-								<span>Manage events</span>
-							</li>
-						</a>
-						<a href="/organizer/tickets">
-							<li class="w-full py-3 px-4 hover:bg-gray-100">
-								<span>Tickets (3)</span>
-							</li>
-						</a>
-						<div class="w-full h-[1.7px] bg-gray-200"></div>
-						<a href="/setting/profile">
-							<li class="w-full py-3 px-4 hover:bg-gray-100">
-								<span>Settings</span>
-							</li>
-						</a>
-						<a href="/logout">
-							<li class="w-full py-3 px-4 hover:bg-gray-100">
-								<span>Log out</span>
-							</li>
-						</a>
-					</ul>
-				</div>
-			</nav>
-		</header>
+@section('content')
 
 	<main class="w-11/12 mx-auto pt-4 pb-12 flex flex-col gap-10">
 		<section class="bg-gray-900 rounded-3xl">
@@ -265,82 +132,31 @@
             </div>
             <div class="">
               <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 grid-rows-1">
-                {{-- <li>
-                  <article class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg h-full">
-                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1522778526097-ce0a22ceb253?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
-                      <div class="flex items-center justify-center gap-4">
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/b/be/Raja_Casablanca_Logo.png" alt="Logo Wydad AC" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">WAC</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                          <span class="text-2xl font-bold text-white">VS</span>
-                        </div>
-                        
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png" alt="Logo Raja CA" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">RCA</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
-                      <time datetime="2023-10-20" class="block text-xs text-gray-500">
-                        20 Octobre, 2023
-                      </time>
-                      
-                      <a href="/ticket">
-                        <h3 class="text-lg text-gray-900">Wydad AC vs Raja CA</h3>
-                      </a>
-                      
-                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
-                      
-                      <div class="flex items-center gap-2">
-                        <span class="text-green-500 font-medium">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/>
-                          </svg>
-                        </span>
-                        
-                        <span class="text-green-500 font-medium">
-                          100 DH
-                        </span>
-                      </div>
-                      
-                      <div class="text-green-600 text-sm font-medium">Derniers billets disponibles</div>
-                    </div>
-                  </article>
-                </li> --}}
-{{-- {{dd($match->id)}} --}}
+
+
             @foreach($matches as $match)
                 <li>
                   <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
                     <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1522778526097-ce0a22ceb253?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
                       <div class="flex items-center justify-center gap-4">
                         <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                    
                           <img src="{{asset('storage/' .$match->homeTeam->logo)}}" alt="Logo AS FAR" class="w-16 h-16 object-contain"/>
                           <span class="text-sm font-semibold mt-1">{{$match->homeTeam->name}}</span>
                         </div>
-                        
                         <div class="flex items-center">
                           <span class="text-2xl font-bold text-white">VS</span>
                         </div>
-                        
                         <div class="flex flex-col items-center bg-white p-2 rounded-lg">
                           <img src="{{asset('storage/' .$match->awayTeam->logo)}}" alt="Logo Renaissance Berkane" class="w-16 h-16 object-contain"/>
                           <span class="text-sm font-semibold mt-1">{{$match->awayTeam->name}}</span>
                         </div>
                       </div>
                     </div>
-          
                     <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
                       <time datetime="2022-10-10" class="block text-xs text-gray-500">
                         5 Novembre, 2023
                       </time>
-          
-                      <a href="#">
+                      <a href="reservation/info/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
           
@@ -354,7 +170,7 @@
                         </span>
           
                         <span class="text-green-500 font-medium">
-                          120 DH
+                           120 DH
                         </span>
                       </div>
           
@@ -363,101 +179,6 @@
                   </article>
                 </li>
             @endforeach
-
-                {{-- <li>
-                  <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
-                      <div class="flex items-center justify-center gap-4">
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo Olympique de Safi" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">OCS</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                          <span class="text-2xl font-bold text-white">VS</span>
-                        </div>
-                        
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo FUS Rabat" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">FUS</span>
-                        </div>
-                      </div>
-                    </div>
-          
-                    <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
-                      <time datetime="2022-10-10" class="block text-xs text-gray-500">
-                        12 Décembre, 2023
-                      </time>
-          
-                      <a href="#">
-                        <h3 class="text-lg text-gray-900">OC Safi vs FUS Rabat</h3>
-                      </a>
-          
-                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade El Massira, Safi</p>
-          
-                      <div class="flex items-center gap-2">
-                        <span class="text-green-500 font-medium">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/>
-                          </svg>
-                        </span>
-          
-                        <span class="text-green-500 font-medium">
-                          80 DH
-                        </span>
-                      </div>
-          
-                      <div class="text-green-600 text-sm font-medium">En promotion</div>
-                    </div>
-                  </article>
-                </li>
-                <li>
-                  <article class="h-full overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                    <div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
-                      <div class="flex items-center justify-center gap-4">
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo MAS Fès" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">MAS</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                          <span class="text-2xl font-bold text-white">VS</span>
-                        </div>
-                        
-                        <div class="flex flex-col items-center bg-white p-2 rounded-lg">
-                          <img src="/api/placeholder/100/100" alt="Logo Moghreb Tétouan" class="w-16 h-16 object-contain"/>
-                          <span class="text-sm font-semibold mt-1">MAT</span>
-                        </div>
-                      </div>
-                    </div>
-          
-                    <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
-                      <time datetime="2022-10-10" class="block text-xs text-gray-500">
-                        20 Janvier, 2024
-                      </time>
-          
-                      <a href="#">
-                        <h3 class="text-lg text-gray-900">MAS Fès vs Moghreb Tétouan</h3>
-                      </a>
-          
-                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Hassan II, Fès</p>
-          
-                      <div class="flex items-center gap-2">
-                        <span class="text-green-500 font-medium">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/>
-                          </svg>
-                        </span>
-          
-                        <span class="text-green-500 font-medium">
-                          90 DH
-                        </span>
-                      </div>
-          
-                      <div class="text-green-600 text-sm font-medium">Nouveau match</div>
-                    </div>
-                  </article>
-                </li> --}}
               </ul>
             </div>
           </section>
@@ -518,9 +239,9 @@
 						20 Octobre, 2023
 					  </time>
 					  
-					  <a href="/ticket">
-						<h3 class="text-lg text-gray-900">Wydad AC vs Raja CA</h3>
-					  </a>
+					  <a href="reservation/info/{{$match->id}}">
+                        <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
+                      </a>
 			
 					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
 					  
@@ -573,75 +294,8 @@
 		</section>
 	</main>
 
-	<footer class="bg-gray-900 text-white py-10 pb-[24px]">
-		<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-			<div>
-				<div class="">
-					<a href="/" class="text-2xl font-bold font-unbounded text-orange">
-						FootTicket
-					</a>
-				</div>
-				<p class="mt-3 text-gray-400">Creating memorable events with ease.</p>
-			</div>
+	{{-- footer --}}
 
-			<div>
-				<h3 class="text-lg font-semibold">Quick Links</h3>
-				<ul class="mt-3 space-y-2 text-gray-400">
-					<li>
-						<a href="/" class="hover:text-[#d63621]">Home</a>
-					</li>
-					<li>
-						<a href="/events" class="hover:text-[#d63621]">Events</a>
-					</li>
-					<li>
-						<a href="/faqs" class="hover:text-[#d63621]">FAQs</a>
-					</li>
-					<li>
-						<a href="/help/support" class="hover:text-[#d63621]">Support</a>
-					</li>
-				</ul>
-			</div>
+@endsection
 
-			<div>
-				<h3 class="text-lg font-semibold">Follow Us</h3>
-				<div class="flex space-x-4 mt-3">
-					<a href="#" class="text-gray-400 hover:text-[#d63621]">
-						<i class="fab fa-facebook-f"></i>
-					</a>
-					<a href="#" class="text-gray-400 hover:text-[#d63621]">
-						<i class="fab fa-twitter"></i>
-					</a>
-					<a href="#" class="text-gray-400 hover:text-[#d63621]">
-						<i class="fab fa-instagram"></i>
-					</a>
-					<a href="#" class="text-gray-400 hover:text-[#d63621]">
-						<i class="fab fa-linkedin"></i>
-					</a>
-				</div>
-			</div>
 
-			<div>
-				<h3 class="text-lg font-semibold">Newsletter</h3>
-				<form class="mt-3">
-					<input type="email" placeholder="Your email" class="w-full p-2 rounded text-white bg-gray-700 outline-none">
-					<button class="mt-3 w-full bg-green-600 text-white py-2 rounded hover:bg-[#b32a19]">
-						Subscribe
-					</button>
-				</form>
-			</div>
-		</div>
-
-		<div class="text-center text-gray-400 mt-8 border-t border-gray-700 pt-6">
-			© 2025 FootTicket. All rights reserved.
-		</div>
-	</footer>
-
-	<script>
-		// Simple JavaScript to toggle the dropdown menu
-		document.querySelector('.circl_nv').addEventListener('click', function() {
-			const menu = document.querySelector('.menu_nv');
-			menu.classList.toggle('hidden');
-		});
-	</script>
-</body>
-</html>
