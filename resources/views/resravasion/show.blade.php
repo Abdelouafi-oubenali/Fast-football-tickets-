@@ -5,7 +5,12 @@
 @section('content')
 
 <main class="pt-20 p-8">
+    <form action="{{route('reservation.store')}}" method="POST">
+        @csrf
+
+        <input name="match_id" type="hidden" value="{{$id}}">
     <!-- Récapitulatif des tickets sélectionnés -->
+
     <div class="bg-white rounded-lg shadow p-6 mb-6">
         <h2 class="text-lg font-semibold mb-4">Récapitulatif des tickets</h2>
         <div id="ticketSummary" class="space-y-3">
@@ -23,7 +28,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div id="tran-info" class="grid grid-cols-1 md:grid-cols-3 gap-6" >
         <div class="md:col-span-2 bg-white rounded-lg shadow p-6">
             <h2 class="text-lg font-semibold mb-4">Plan du stade</h2>
             <div class="border-2 border-gray-300 p-4 rounded-lg h-96 relative">
@@ -89,14 +94,16 @@
                 <p class="text-lg font-bold">Total: <span id="totalPrice" class="text-blue-600">--</span></p>
             </div>
             
-            <button id="confirmButton" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
+            <button type="submit" id="confirmButton" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
                 Ajouter au panier
             </button>
+
+        </form>
         </div>
     </div>
 
     <!-- Popup d'information sur les tribunes -->
-    <div id="infoPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div id="infoPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ">
         <div class="bg-white rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold">Informations sur les tribunes</h3>
@@ -162,3 +169,15 @@
 <script src="{{ asset('js/tickets.js') }}"></script>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
