@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Stades;
 use App\Models\tickets;
+use App\Models\Category;
+use App\Models\TicketsInfo;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ReservationStore;
 
 
 class ReservationController extends Controller
@@ -14,7 +17,6 @@ class ReservationController extends Controller
         $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($id);
         $stades = Stades::where('name', $match->Stadium)->first();
         $categories = Category::where('match_id', $id)->get();
-        
         $stade = $match->Stadium;
         $stade_image = '';
 
@@ -41,7 +43,7 @@ class ReservationController extends Controller
             'nord' => [
                 'name' => 'Tribune Nord',
                 'categories' => [
-                    ['name' => 'prix', 'price' => $prices['nord'] ], 
+                    ['name' => 'Tribune Nord', 'price' => $prices['nord'] ], 
                 ],
                 'capacity' => $stades->capacity,
                 'available' => 1200,
@@ -50,7 +52,7 @@ class ReservationController extends Controller
             'sud' => [
                 'name' => 'Tribune Sud',
                 'categories' => [
-                    ['name' => 'price', 'price' => $prices['sud'] ],
+                    ['name' => 'Tribune Sud', 'price' => $prices['sud'] ],
                 ],
                 'capacity' => $stades->capacity,
                 'available' => 850,
@@ -59,7 +61,7 @@ class ReservationController extends Controller
             'est' => [
                 'name' => 'Tribune Est',
                 'categories' => [
-                    ['name' => 'price', 'price' => $prices['est']],
+                    ['name' => 'Tribune Est', 'price' => $prices['est']],
                 ],
                 'capacity' => $stades->capacity,
                 'available' => 1500,
@@ -68,7 +70,7 @@ class ReservationController extends Controller
             'ouest' => [
                 'name' => 'Tribune Ouest',
                 'categories' => [
-                    ['name' => 'Standard', 'price' => $prices['ouest'] ],
+                    ['name' => 'Tribune Ouest', 'price' => $prices['ouest'] ],
                 ],
                 'capacity' => $stades->capacity,
                 'available' => 2000,
@@ -77,7 +79,7 @@ class ReservationController extends Controller
             'vip' => [
                 'name' => 'Zone VIP',
                 'categories' => [
-                    ['name' => 'VIP price', 'price' => $prices['vip'] ],
+                    ['name' => 'Zone VIP', 'price' => $prices['vip'] ],
                 ],
                 'capacity' => $stades->capacity,
                 'available' => 50,
@@ -89,15 +91,40 @@ class ReservationController extends Controller
                 ]
             ]
         ];
-    
-        // Retourner la vue avec les données
-        return view('resravasion.show', compact('tribunes'));
+        
+        return view('resravasion.show', compact('tribunes', 'id'));
     }
     
 
+    
+    public function store (ReservationStore $request)
+    {
+
+        $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($request->match_id);
+        $stades = Stades::where('name', $match->Stadium)->first();
+
+        // dd($match);
+
+        TicketsInfo::create([
+            'user_id' => Auth::id() ?? 22, 
+            'match_id' => $request->match_id,
+            'category' => $request->tribune,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'totla_price' => $request->total,
+
+        ]);
+        $category = $request->tribune;
+        $quantity = $request->quantity;
+        $totla_price = $request->total;
+        $price = $request->price;
+
+        return view('resravasion.panier',compact('match','stades','category','quantity','totla_price','price'));
+        
+    }
 
     public function Panier()
     {
-        return view('reservation.panier'); 
+        return view('resravasion.panier'); 
     }
 }

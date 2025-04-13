@@ -129,6 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
         ticketElement.innerHTML = `
             <div>
                 <p class="font-semibold">${ticketData.tribune} - ${ticketData.category}</p>
+                <input name="tribune" type="hidden" value="${ticketData.tribune}">
+                <input name="category" type="hidden" value="${ticketData.category}">
+                <input name="quantity" type="hidden" value="${ticketData.quantity}">
+                <input name="price" type="hidden" value="${ticketData.price}">
+                <input name="total" type="hidden" value="${ticketData.total.toFixed(2)}">
                 <p class="text-sm text-gray-600">${ticketData.quantity} x ${ticketData.price}€</p>
             </div>
             <div class="flex items-center">
