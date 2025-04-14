@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Stripe\Stripe;
 use App\Models\tickets;
+use App\Models\Category;
 use App\Models\TicketsInfo;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Barryvdh\DomPDF\Facade\Pdf; 
-use Illuminate\Support\Facades\Log;
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -19,6 +20,25 @@ class PaymentController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
     }
 
+    public function minice_places($matchId, $quantity, $category)
+    {
+     
+        $categoryInfo = Category::where('match_id', $matchId)
+            ->where('nom', $category)
+            ->first();
+            // dd($categoryInfo->nombre_place);
+            
+            if ($categoryInfo) {
+                $categoryInfo->update([
+                    'nombre_place' => max(0, $categoryInfo->nombre_place - $quantity)
+                ]);
+                
+          
+        } else {    
+            Log::error("Catégorie non trouvée pour match_id: $matchId et catégorie: $category");
+        }
+    }
+    
     public function checkout(Request $request)
     {
         $validated = $request->validate([
@@ -83,10 +103,13 @@ class PaymentController extends Controller
                 'match' => $ticketInfo->match,
                 'ticketInfo' => $ticketInfo
             ]);
-            
             $pdfPath = storage_path('app/public/ticket-' . $ticketInfo->id . '.pdf');
             $pdf->save($pdfPath);
 
+        // updqte les plqce de match
+          $this->minice_places($ticketInfo->match_id, $ticketInfo->quantity, $ticketInfo->category);
+
+        // Envoiyer email
             $mail = new PHPMailer(true);
 
             try {
