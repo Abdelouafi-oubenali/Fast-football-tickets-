@@ -24,7 +24,6 @@ class ReservationController extends Controller
         if ($stade === ($stades->name ?? '')) {
             $stade_image = $stades->photo;
         }
-
         return view('resravasion.index', compact('match', 'stade_image', 'categories')); 
     }
 
@@ -98,36 +97,38 @@ class ReservationController extends Controller
     
 
     
-    public function store (ReservationStore $request)
+    public function store(ReservationStore $request)
     {
-
         $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($request->match_id);
         $stades = Stades::where('name', $match->Stadium)->first();
+    
+        $existingReservation = TicketsInfo::where('user_id', Auth::id())
+        ->where('match_id', $request->match_id)
+        ->first();
+    
+    if ($existingReservation) {
+        return redirect()->back()->with('error', 'Vous avez déjà réservé pour ce match.');
+    }
 
-
-        TicketsInfo::create([
-            'user_id' => Auth::id() ?? 22, 
-            'match_id' => $request->match_id,
-            'category' => $request->tribune,
-            'quantity' => $request->quantity,
-            'price' => $request->price,
-            'totla_price' => $request->total,
-
-        ]);
-        
-        // $enrollment = Enrollment::create([
-        //      'payment_id' => '123456789'
-        // ]);
-        $enrollment = TicketsInfo::where('match_id',$request->match_id)->first();
-  
+    TicketsInfo::create([
+        'user_id' => Auth::id() ?? 22, 
+        'match_id' => $request->match_id,
+        'category' => $request->tribune,
+        'quantity' => $request->quantity,
+        'price' => $request->price,
+        'totla_price' => $request->total,
+    ]);
+    
+        $enrollment = TicketsInfo::where('match_id', $request->match_id)->first();
+    
         $category = $request->tribune;
         $quantity = $request->quantity;
         $total_price = $request->total;
         $price = $request->price;
-
-        return view('resravasion.panier',compact('match','stades','category','quantity','total_price','price','enrollment'));
-        
+    
+        return view('resravasion.panier', compact('match', 'stades', 'category', 'quantity', 'total_price', 'price', 'enrollment'));
     }
+    
 
     public function Panier()
     {

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Stripe\Stripe;
 use App\Models\tickets;
+use App\Models\Category;
 use App\Models\TicketsInfo;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Barryvdh\DomPDF\Facade\Pdf; 
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
@@ -17,6 +20,25 @@ class PaymentController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
     }
 
+    public function minice_places($matchId, $quantity, $category)
+    {
+     
+        $categoryInfo = Category::where('match_id', $matchId)
+            ->where('nom', $category)
+            ->first();
+            // dd($categoryInfo->nombre_place);
+            
+            if ($categoryInfo) {
+                $categoryInfo->update([
+                    'nombre_place' => max(0, $categoryInfo->nombre_place - $quantity)
+                ]);
+                
+          
+        } else {    
+            Log::error("Catégorie non trouvée pour match_id: $matchId et catégorie: $category");
+        }
+    }
+    
     public function checkout(Request $request)
     {
         $validated = $request->validate([
@@ -61,14 +83,12 @@ class PaymentController extends Controller
                 'user_id' => auth()->id()
             ]);
            
-            dd("hellow");
             return back()
                 ->with('error', 'Erreur lors du traitement du paiement: ' . $e->getMessage())
                 ->withInput();
         }
     }
 
-  
     public function success(Request $request, $ticket_info_id)
     {
         try {
@@ -78,24 +98,66 @@ class PaymentController extends Controller
                 'status' => 'paid',
                 'paid_at' => now()
             ]);
-    
+
+            $pdf = Pdf::loadView('payment.PDF', [
+                'match' => $ticketInfo->match,
+                'ticketInfo' => $ticketInfo
+            ]);
+            $pdfPath = storage_path('app/public/ticket-' . $ticketInfo->id . '.pdf');
+            $pdf->save($pdfPath);
+
+        // updqte les plqce de match
+          $this->minice_places($ticketInfo->match_id, $ticketInfo->quantity, $ticketInfo->category);
+
+        // Envoiyer email
+            $mail = new PHPMailer(true);
+
+            try {
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'abdelouafirca@gmail.com'; 
+                $mail->Password   = 'jabp eblt lhin mecm';   
+                $mail->SMTPSecure = 'tls';
+                $mail->Port       = 587;
+
+                $mail->setFrom('tonemail@gmail.com', 'Support MECA_DIAGNOSTICS');
+                $mail->addAddress(auth()->user()->email);
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Votre billet est prêt !';
+                $mail->Body    = '
+                    <h1>Merci pour votre achat </h1>
+                    <p>Match: <strong>' . $ticketInfo->match->homeTeam->name . ' vs ' . $ticketInfo->match->awayTeam->name . '</strong></p>
+                    <p>Catégorie: ' . ucfirst($ticketInfo->category) . '</p>
+                    <p>Date du match: ' . $ticketInfo->match->date . '</p>
+                    <p>Votre billet est en pièce jointe 📎.</p>
+                ';
+
+                // Ajout du PDF 
+                $mail->addAttachment($pdfPath, 'ticket-' . $ticketInfo->id . '.pdf');
+
+                $mail->send();
+            } catch (Exception $e) {
+                Log::error('Erreur PHPMailer: ' . $mail->ErrorInfo);
+            }
+
             return view('payment.success', [
                 'ticketInfo' => $ticketInfo,
                 'match' => $ticketInfo->match
             ]);
-    
+
         } catch (\Exception $e) {
             Log::error('Payment Success Error', [
                 'error' => $e->getMessage(),
                 'ticket_info_id' => $ticket_info_id
             ]);
-            dd("hellow");
+
             return redirect()
                 ->route('home')
                 ->with('error', 'Paiement confirmé mais erreur lors de la mise à jour');
         }
     }
-
 
     public function cancel($ticket_info_id)
     {
@@ -113,8 +175,6 @@ class PaymentController extends Controller
                 'ticket_info_id' => $ticket_info_id
             ]);
 
-           
-
             return redirect()
                 ->route('home')
                 ->with('error', 'Erreur lors du traitement de l\'annulation');
@@ -126,7 +186,6 @@ class PaymentController extends Controller
         $ticketInfo = TicketsInfo::findOrFail($ticketInfoId);
         $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($ticketInfo->match_id);
 
-        
         $pdf = Pdf::loadView('payment.PDF', [
             'match' => $match,
             'ticketInfo' => $ticketInfo
@@ -134,5 +193,4 @@ class PaymentController extends Controller
         
         return $pdf->download('ticket-' . $ticketInfoId . '.pdf');
     }
-
 }
