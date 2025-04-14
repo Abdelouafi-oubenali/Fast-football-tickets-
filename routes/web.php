@@ -81,7 +81,7 @@ Route::get('/', [HomController::class, 'index'])->name('home');
 Route::get('/reservation/info/{id}', [ReservationController::class, 'index']);
 Route::get('/resravasion/panier', [ReservationController::class, 'Panier'])->name('Panier.index'); 
 Route::get('reservation/{id}', [ReservationController::class, 'show'])->name('reservation.show');
-Route::post('reservation/create', [ReservationController::class, 'store'])->name('reservation.store');
+Route::post('/reservation/create', [ReservationController::class, 'store'])->name('reservation.store');
 
 Route::get('/mes-teckts', [ReservationController::class, 'Panier'])->name('reservation.Panier');
 
