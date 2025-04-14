@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\tickets;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
+use App\Models\TicketsInfo;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -65,4 +68,17 @@ class ProfileController extends Controller
         return redirect()->route('profile.index', $user->id)
            ->with('success', 'Profil mis à jour avec succès!');
     }
+
+
+    public function historique()
+    {
+        $user = Auth::user(); 
+    
+        $tickets = TicketsInfo::with('match')
+                    ->where('user_id', $user->id)  
+                    ->get();    
+        // dd($tickets);
+        return view('profile.historique', compact('tickets'));
+    }
+    
 }
