@@ -65,6 +65,8 @@ Route::post('/send-email-password', [AccountCreatedMailController::class, 'sendR
 Route::get('/profil/{id}', [ProfileController::class, 'index'])->name('profile.index'); 
 Route::get('/profil/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/{id}', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/historique', [ProfileController::class, 'historique'])->name('profile.historique');
+
 
 
 // les route pour forget password
@@ -95,3 +97,4 @@ Route::get('/payment/cancel/{ticket_info_id}', [PaymentController::class, 'cance
 // pdf Telecharger
 
 Route::get('/tickets/download/{ticketInfoId}', [PaymentController::class, 'downloadTicketPdf'])->name('tickets.download');
+
