@@ -46,11 +46,9 @@
                 showPassword: false,
                 showConfirmPassword: false
              }">
-            <!-- Éléments visuels thématiques -->
             <div class="absolute top-5 right-5 w-24 h-8 border-2 border-dashed border-indigo-200 rounded-full opacity-50"></div>
             <div class="absolute bottom-5 left-5 w-16 h-16 border-2 border-dotted border-purple-200 rounded-full opacity-40"></div>
             
-            <!-- Notifications -->
             @if(session('success'))
                 <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded">
                     {{ session('success') }}
@@ -71,7 +69,6 @@
                 @csrf
                 @method('PUT')
                 
-                <!-- Section Photo -->
                 <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-gray-200">
                     <div class="relative group">
                         <div class="h-28 w-28 rounded-full overflow-hidden ring-4 ring-indigo-100 shadow-md">
@@ -97,37 +94,31 @@
                     </div>
                 </div>
                 
-                <!-- Section Informations -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <!-- Nom complet -->
                     <div>
                         <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom complet*</label>
                         <input type="text" id="nom" name="nom" value="{{ old('nom', $user->nom) }}" required
                             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white bg-opacity-90">
                     </div>
                     
-                    <!-- Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email*</label>
                         <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required
                             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white bg-opacity-90">
                     </div>
                     
-                    <!-- Téléphone -->
                     <div>
                         <label for="number_phone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
                         <input type="tel" id="number_phone" name="number_phone" value="{{ old('number_phone', $user->number_phone) }}"
                             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white bg-opacity-90">
                     </div>
                     
-                    <!-- Adresse -->
                     <div>
                         <label for="adresse" class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
                         <input type="text" id="adresse" name="adresse" value="{{ old('adresse', $user->adresse) }}"
                             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white bg-opacity-90">
                     </div>
 
-                    <!-- À propos -->
                     <div class="sm:col-span-2">
                         <label for="About" class="block text-sm font-medium text-gray-700 mb-1">À propos de moi</label>
                         <textarea id="About" name="About" rows="3"
@@ -135,7 +126,6 @@
                     </div>               
                 </div>
                 
-                <!-- Boutons d'action -->
                 <div class="flex justify-between pt-6">
                     <div>
                         <p class="text-xs text-gray-500">* Champs obligatoires</p>
@@ -153,7 +143,6 @@
             </form>
         </div>
         
-        <!-- Élément visuel ticket -->
         <div class="max-w-xs mx-auto mt-8 flex justify-center opacity-70">
             <div class="h-4 w-16 border-2 border-dashed border-indigo-300 rounded-full"></div>
         </div>
