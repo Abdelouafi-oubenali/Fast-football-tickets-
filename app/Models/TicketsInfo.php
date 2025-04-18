@@ -13,6 +13,7 @@ class TicketsInfo extends Model
         'match_id',
         'category',
         'quantity',
+        'status',
         'price',
         'totla_price',
         'paid_at' 
