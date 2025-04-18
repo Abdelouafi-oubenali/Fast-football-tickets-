@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreStadesRequest;
 use App\Repositories\StadRepositoryInterface;
@@ -14,6 +15,11 @@ class StadiumController extends Controller
 
     public function __construct(StadRepositoryInterface $stadiumRepository)
     {
+        $user = Auth::user(); 
+        $chek = $this->checkRoleAdmin($user->role);
+        if($chek){
+            abort(403);
+        }
         $this->stadiumRepository = $stadiumRepository;
     }
 

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreEquipeRequest;
 use App\Http\Requests\UpdateEquipeRequest;
 use App\Models\Equipe;
 use App\Repositories\FootballEqupeRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class EquipeController extends Controller
 {
@@ -15,11 +16,19 @@ class EquipeController extends Controller
 
     public function __construct(FootballEqupeRepositoryInterface $teamRepository)
     {
+        $user = Auth::user(); 
+
+        $chek = $this->checkRoleAdmin($user->role);
+        if($chek){
+            abort(403);
+        }
+        
         $this->teamRepository = $teamRepository;
     }
 
     public function index()
     {
+       
         $teams = $this->teamRepository->all();
         return view('admin.equipe.index', compact('teams'));
     }

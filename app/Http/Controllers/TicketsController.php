@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreMatchsRequest;
-
-use App\Http\Requests\StoreticketsRequest;
-use App\Models\Matchs;
 use App\Models\Place;
+use App\Models\Matchs;
+
 use App\Models\tickets;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreMatchsRequest;
+use App\Http\Requests\StoreticketsRequest;
 use App\Repositories\StadRepositoryInterface;
 use App\Repositories\MatchRepositoryInterface;
 use App\Repositories\TicketsRepositryIntirface;
@@ -21,6 +22,12 @@ class TicketsController extends Controller
     protected $FootballEqupeRepository;
 
     public function __construct(TicketsRepositryIntirface $matchRepository, StadRepositoryInterface $stadiumRepository, FootballEqupeRepositoryInterface $FootballEqupeRepository) {
+
+        $user = Auth::user(); 
+        $chek = $this->checkRoleAdminOrganisater($user->role);
+        if($chek){
+            abort(403);
+        }
         $this->matchRepository = $matchRepository;
         $this->stadiumRepository = $stadiumRepository;
         $this->FootballEqupeRepository = $FootballEqupeRepository;
