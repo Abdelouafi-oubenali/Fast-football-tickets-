@@ -49,9 +49,8 @@ Route::get('/admin/vente-de-tickets', function () {
 Route::middleware('auth')->group(function () {
 
     // Dashboard
-    Route::resource('dashboard', DashbordController::class)->names([
-        'index' => 'dashboard.admin'
-    ]);
+    Route::get('dashboard', [DashbordController::class, 'index'])->name('dashboard.admin');
+
 
     // CRUD 
     Route::resource('match', MatchsController::class);
