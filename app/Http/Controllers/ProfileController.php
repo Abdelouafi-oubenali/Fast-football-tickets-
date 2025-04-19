@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index($id) 
     {
         $user = User::findOrFail($id);    
-        return view('profil.index', compact('user'));
+        return view('profile.index', compact('user'));
     }
 
     public function mesInformations($id) 
@@ -33,7 +33,7 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);   
-        return view('profil.edit', compact('user'));
+        return view('profile.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
