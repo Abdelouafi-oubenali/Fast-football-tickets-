@@ -35,7 +35,8 @@ class TicketsController extends Controller
 
     public function index()
     {
-        $matches = $this->matchRepository->all()->load('homeTeam', 'awayTeam');
+        $matches = $this->matchRepository->all()->load('homeTeam', 'awayTeam','categories');
+        // dd($matches);
         return view('admin.tickets.index', compact('matches'));
     }
 

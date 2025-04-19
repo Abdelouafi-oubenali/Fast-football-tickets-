@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tickets;
 use App\Models\TicketsInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\statiwticControler;
@@ -14,15 +15,41 @@ class VenteController extends Controller
     {
         $this->totalTeckts = new statiwticControler();
     }
-    public function index () 
+    public function index(Request $request)
     {
         $TotalResrvasion = $this->totalTeckts->TotalResrvasion();
         $TotalResrvasionPaid = $this->totalTeckts->TotalResrvasionPaid();
         $TotalResrvasionPending = $this->totalTeckts->TotalResrvasionPending();
         $TotalTickts = $this->totalTeckts->TotalTickts();
-
-       $ventes = TicketsInfo::with('match','user')
-       ->get();    
-       return view('admin.vente-de-tickets', compact('ventes','TotalResrvasion','TotalResrvasionPaid','TotalResrvasionPending','TotalTickts'));
+    
+ 
+        $query = TicketsInfo::with('match', 'user');
+    
+        if ($request->filled('match_id') && $request->match_id !== 'all') {
+            $query->where('match_id', $request->match_id);
+        }
+    
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category', $request->category);
+        }
+    
+        if ($request->filled('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+    
+    
+        $ventes = $query->latest()->get();
+    
+        $matches = tickets::with(['homeTeam','awayTeam'])->get();
+    
+        return view('admin.vente-de-tickets', compact(
+            'ventes',
+            'TotalResrvasion',
+            'TotalResrvasionPaid',
+            'TotalResrvasionPending',
+            'TotalTickts',
+            'matches'
+        ));
     }
+    
 }

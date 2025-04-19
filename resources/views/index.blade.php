@@ -5,6 +5,95 @@
 @section('content')
 
 	<main class="w-11/12 mx-auto pt-4 pb-12 flex flex-col gap-10">
+
+		@if(request('search'))
+		<section>
+			<div class="mb-6">
+			  <h2 class="text-gray-800 font-bold font-unbounded text-3xl">Reslte Recherch</h2>
+			</div>
+			<div class="overflow-x-auto scrollbar-hide"> 
+			  <ul class="flex gap-4 pb-4 snap-x snap-mandatory"> 
+				@foreach($allMatchesSearch as $match)
+				<li class="flex-shrink-0 snap-start" style="width: 300px;"> 
+				  <article class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg h-full">
+					<div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
+					  <div class="flex items-center justify-center gap-4">
+						<div class="flex flex-col items-center bg-white p-2 rounded-lg">
+						  <img src="{{asset('storage/' .$match->homeTeam->logo)}}" alt="Logo Wydad AC" class="w-16 h-16 object-contain"/>
+						  <span class="text-sm font-semibold mt-1">{{$match->homeTeam->name}}</span>
+						</div>
+						
+						<div class="flex items-center">
+						  <span class="text-2xl font-bold text-white">VS</span>
+						</div>
+						
+						<div class="flex flex-col items-center bg-white p-2 rounded-lg">
+						  <img src="{{asset('storage/' .$match->awayTeam->logo)}}"  alt="Logo Raja CA" class="w-16 h-16 object-contain"/>
+						  <span class="text-sm font-semibold mt-1">{{$match->awayTeam->name}}</span>
+						</div>
+					  </div>
+					</div>
+					
+					<div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
+					  <time datetime="2023-10-20" class="block text-xs text-gray-500">
+						20 Octobre, 2023
+					  </time>
+					  
+					  <a href="reservation/info/{{$match->id}}">
+                        <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
+                      </a>
+			
+					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
+					  
+					  <div class="flex items-center gap-2">
+						<span class="text-green-500 font-medium">
+						  <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-4">
+							<path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/>
+						  </svg>
+						</span>
+						
+						<span class="text-green-500 font-medium">
+						  100 DH
+						</span>
+					  </div>
+					  
+					  <div class="text-green-600 text-sm font-medium">Derniers billets disponibles</div>
+					</div>
+				  </article>
+				</li>
+				@endforeach
+			  </ul>
+			</div>
+		  </section>
+		  
+		
+			<div class="mb-6">
+				<h2 class="text-gray-800 font-bold font-unbounded text-3xl">Top stads</h2>
+			</div>
+			<div class="">
+				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+					@foreach($TopStads as $stad)
+					<li class="group relative bg-gray-300 w-full h-[350px] rounded-3xl shadow-lg overflow-hidden">
+						<a href="">
+							<div class="absolute top-0 left-0 w-full h-full">
+								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover w-[full] h-full brightness-50" src="{{asset('storage/' . $stad->photo)}}" alt="">
+							</div>
+							<div class="absolute bottom-6 left-6 flex gap-2 items-center">
+								<span class="text-2xl font-bold text-white">{{$stad->ville}}</span>
+								<span class="text-2xl font-bold text-white">
+									<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-6">
+										<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
+									</svg>
+								</span>
+							</div>
+						</a>
+					</li>
+					@endforeach
+				</ul>
+			</div>
+		</section>
+		</section>
+	@endif
 		<section class="bg-gray-900 rounded-3xl">
             <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-24 lg:px-12">
               <a href="/tickets" class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm bg-gray-800 text-white hover:bg-gray-700 rounded-full" role="alert">

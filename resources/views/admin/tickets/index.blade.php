@@ -1,5 +1,3 @@
-
-
 @extends('layouts.master')
 
 @section('title','Gestion des tickets')
@@ -10,24 +8,7 @@
     <div class="container mx-auto px-4 py-6">
         
         <div class="bg-white rounded-lg shadow p-4 flex flex-wrap gap-4">
-            <select class="border p-2 rounded-md w-full md:w-auto">
-                <option>Tous les mois</option>
-                <option>Janvier 2025</option>
-                <option>Février 2025</option>
-                <option>Mars 2025</option>
-            </select>
-            <select class="border p-2 rounded-md w-full md:w-auto">
-                <option>Toutes équipes</option>
-                <option>PSG</option>
-                <option>OM</option>
-                <option>Lyon</option>
-            </select>
-            <select class="border p-2 rounded-md w-full md:w-auto">
-                <option>Prix croissant</option>
-                <option>Prix décroissant</option>
-                <option>Date</option>
-            </select>
-            <a href="/tickets/create" class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg transition-colors duration-200 flex items-center gap-2 w-full md:w-auto justify-center">
+        <a href="/tickets/create" class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg transition-colors duration-200 flex items-center gap-2 w-full md:w-auto justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -65,29 +46,17 @@
                     </div>
                 </div>
                 <div class="p-4 space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">VIP</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">250 €</p>
-                                <p class="text-sm text-green-600">12 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Tribune</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">80 €</p>
-                                <p class="text-sm text-amber-600">45 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Pelouse</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">40 €</p>
-                                <p class="text-sm text-red-600">Complet</p>
-                            </div>
-                        </div>
+                     @foreach($match->categories as $category) 
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">{{ $category->nom }}</span> 
+                    <div class="text-right">
+                        <p class="font-bold text-lg">{{ $category->prix }} DH</p> 
+                        <p class="text-sm {{ $category->nombre_place > 0 ? 'text-green-600' : 'text-red-600' }}">
+                            {{ $category->nombre_place > 0 ? $category->nombre_place . ' places restantes' : 'Complet' }}
+                        </p>
                     </div>
+                </div>
+            @endforeach
                     <div class="flex space-x-2">
                     <a href="../tickets/{{ $match->id }}/edit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 text-center block flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,58 +84,6 @@
                 </div>
             </div>
           @endforeach
-            <!-- Match 2 -->
-            {{-- <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-blue-50 p-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-blue-800 font-semibold">Ligue 1</span>
-                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Presque complet</span>
-                    </div>
-                    <div class="text-center space-y-2">
-                        <p class="text-gray-500">20 Février 2025 - 19:00</p>
-                        <div class="flex justify-center items-center gap-4">
-                            <div class="text-center">
-                                <p class="font-bold text-xl">Lyon</p>
-                                <img src="/api/placeholder/50/50" alt="Lyon" class="mx-auto"/>
-                            </div>
-                            <div class="text-2xl font-bold">VS</div>
-                            <div class="text-center">
-                                <p class="font-bold text-xl">Nice</p>
-                                <img src="/api/placeholder/50/50" alt="Nice" class="mx-auto"/>
-                            </div>
-                        </div>
-                        <p class="font-medium">Groupama Stadium</p>
-                    </div>
-                </div>
-                <div class="p-4 space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">VIP</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">200 €</p>
-                                <p class="text-sm text-amber-600">5 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Tribune</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">60 €</p>
-                                <p class="text-sm text-red-600">Complet</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Pelouse</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">30 €</p>
-                                <p class="text-sm text-red-600">Complet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                        Réserver maintenant
-                    </button>
-                </div>
-            </div> --}}
         </div>
     </div>
   </main>

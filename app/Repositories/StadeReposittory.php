@@ -12,6 +12,14 @@ class StadeReposittory implements StadRepositoryInterface
         $this->model = $model;
     }
 
+    public function search($keyword)
+    {
+        return Stades::where('name', 'like', "%{$keyword}%")
+                    ->orWhere('adresse', 'like', "%{$keyword}%")
+                    ->get();
+    }
+
+
     public function all()
     {
         return $this->model->all();

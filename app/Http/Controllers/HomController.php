@@ -12,14 +12,26 @@ class HomController extends Controller
     {
 
     }
-    public function index() 
+    public function index(Request $request)
     {
-        $matches = tickets::with(['homeTeam', 'awayTeam'])->take(4)->get();
-        $allMatches = tickets::with(['homeTeam','awayTeam'])->get();
+        $search = $request->input('search');
+    
+        $query = tickets::with(['homeTeam', 'awayTeam']);
+    
+        if ($search) {
+            $query->whereHas('homeTeam', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            })->orWhereHas('awayTeam', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+        $matches = $query->take(4)->get();
+        $allMatchesSearch = $query->get();
         $TopStads = Stades::limit(4)->get();
-
-        return view('index', compact('matches','allMatches','TopStads'));
+        $allMatches = tickets::with(['homeTeam','awayTeam'])->get();    
+        return view('index', compact('matches', 'allMatchesSearch', 'TopStads','allMatches','search'));
     }
+    
     
 }
 
