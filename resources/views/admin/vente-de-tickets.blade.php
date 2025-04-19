@@ -64,26 +64,27 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
+                    @forEach($ventes as $teckt)
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4">
-                            <div class="font-medium">PSG vs OM</div>
+                            <div class="font-medium">{{$teckt->match->homeTeam->name}} vs {{$teckt->match->awayTeam->name}}</div>
                             <div class="text-sm text-gray-500">Parc des Princes</div>
                         </td>
                         <td class="px-6 py-4">
-                            <div>15 Fév 2025</div>
-                            <div class="text-sm text-gray-500">21:00</div>
+                            <div>{{$teckt->match->date}}</div>
+                            <div class="text-sm text-gray-500">{{$teckt->match->time}}</div>
                         </td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">VIP</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">{{$teckt->category}}</span>
                         </td>
                         <td class="px-6 py-4">
-                            <div>Jean Dupont</div>
-                            <div class="text-sm text-gray-500">jean@email.com</div>
+                            <div>{{$teckt->user->nom}}</div>
+                            <div class="text-sm text-gray-500">{{$teckt->user->email}}</div>
                         </td>
-                        <td class="px-6 py-4">2</td>
-                        <td class="px-6 py-4 font-medium">250 €</td>
+                        <td class="px-6 py-4">{{$teckt->quantity}}</td>
+                        <td class="px-6 py-4 font-medium">{{$teckt->totla_price}} DH</td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Payé</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">{{$teckt->status}}</span>
                         </td>
                         <td class="px-6 py-4">
                             <button class="bg-indigo-500 text-white px-3 py-1 rounded mr-2 hover:bg-indigo-600 text-sm">
@@ -94,7 +95,8 @@
                             </button>
                         </td>
                     </tr>
-                    <tr class="hover:bg-gray-50">
+                    @endforeach
+                    {{-- <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4">
                             <div class="font-medium">Lyon vs Nice</div>
                             <div class="text-sm text-gray-500">Groupama Stadium</div>
@@ -123,7 +125,7 @@
                                 Annuler
                             </button>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>
