@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VenteController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MatchsController;
 use App\Http\Controllers\PaymentController;
@@ -44,6 +45,8 @@ Route::get('/test-dashbord', function () {
 Route::get('/admin/vente-de-tickets', function () {
     return view('admin.vente-de-tickets');
 })->name('admin.vente-de-tickets');
+
+Route::get('/vente-de-tickets', [VenteController::class, 'index'])->name('vente.teckts');
 
 // ==================== Authre Routes ====================
 Route::middleware('auth')->group(function () {
