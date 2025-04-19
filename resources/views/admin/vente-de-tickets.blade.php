@@ -84,7 +84,23 @@
                         <td class="px-6 py-4">{{$teckt->quantity}}</td>
                         <td class="px-6 py-4 font-medium">{{$teckt->totla_price}} DH</td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">{{$teckt->status}}</span>
+                                @php
+                                $status = $teckt->status;
+                                $bgColor = 'bg-gray-200';
+                                $textColor = 'text-gray-800';
+                            
+                                if ($status === 'paid') {
+                                    $bgColor = 'bg-green-100';
+                                    $textColor = 'text-green-800';
+                                } elseif ($status === 'pending') {
+                                    $bgColor = 'bg-yellow-100';
+                                    $textColor = 'text-yellow-800';
+                                }
+                            @endphp
+                            
+                            <span class="px-3 py-1 {{ $bgColor }} {{ $textColor }} rounded-full text-sm">
+                                {{ $status }}
+                            </span>
                         </td>
                         <td class="px-6 py-4">
                             <button class="bg-indigo-500 text-white px-3 py-1 rounded mr-2 hover:bg-indigo-600 text-sm">

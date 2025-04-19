@@ -12,6 +12,5 @@ class VenteController extends Controller
        $ventes = TicketsInfo::with('match','user')
        ->get();    
        return view('admin.vente-de-tickets', compact('ventes'));
-
     }
 }
