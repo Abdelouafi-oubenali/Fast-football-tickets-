@@ -23,11 +23,19 @@ class StadiumController extends Controller
         $this->stadiumRepository = $stadiumRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $stadia = $this->stadiumRepository->all();
+        $search = $request->input('search');
+    
+        if ($search) {
+            $stadia = $this->stadiumRepository->search($search);
+        } else {
+            $stadia = $this->stadiumRepository->all();
+        }
+    
         return view('admin.stades.index', compact('stadia'));
     }
+    
 
     public function create()
     {

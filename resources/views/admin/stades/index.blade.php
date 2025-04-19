@@ -48,11 +48,19 @@
                 </h2>
             </div>
             <div class="mt-4 flex md:mt-0 md:ml-4">
-                <div class="relative">
-                    <input type="text" placeholder="Rechercher un stade..." 
-                        class="px-4 py-2 border border-gray-300 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
-                </div>
+                <form method="GET" action="{{ route('stades.index') }}" class="relative">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Rechercher un stade..." 
+                        class="px-4 py-2 border border-gray-300 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-green-500" 
+                        value="{{ request('search') }}"
+                    >
+                    <button type="submit" class="absolute right-3 top-2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
                 <div class="ml-4">
                     <a href="/stades/create" class="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded-lg mr-2" style="background: green">
                         <i class="fas fa-plus mr-1"></i> Nouveau Stade
@@ -61,100 +69,7 @@
             </div>
         </div>
 
-        <div class="bg-white shadow overflow-hidden rounded-lg mb-6">
-          
-            <div class="px-4 py-5 sm:p-6">
-                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="px-4 py-5 sm:p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
-                                    <i class="fas fa-futbol text-green-600 text-xl"></i>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">
-                                            Total des stades
-                                        </dt>
-                                        <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">
-                                                12
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="px-4 py-5 sm:p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
-                                    <i class="fas fa-check-circle text-blue-600 text-xl"></i>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">
-                                            Stades disponibles
-                                        </dt>
-                                        <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">
-                                                8
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="px-4 py-5 sm:p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-yellow-100 rounded-md p-3">
-                                    <i class="fas fa-tools text-yellow-600 text-xl"></i>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">
-                                            En maintenance
-                                        </dt>
-                                        <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">
-                                                2
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="px-4 py-5 sm:p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
-                                    <i class="fas fa-calendar-alt text-red-600 text-xl"></i>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">
-                                            Réservations actives
-                                        </dt>
-                                        <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">
-                                                4
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <!-- Stade 1 -->
