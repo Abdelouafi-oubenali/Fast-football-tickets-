@@ -28,25 +28,36 @@
         
         <!-- Filtres -->
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <select class="p-2 border rounded-lg">
-                    <option>Tous les matchs</option>
-                    <option>PSG vs OM</option>
-                    <option>Lyon vs Nice</option>
-                    <option>Monaco vs Lille</option>
-                </select>
-                <select class="p-2 border rounded-lg">
-                    <option>Toutes catégories</option>
-                    <option>VIP</option>
-                    <option>Tribune</option>
-                    <option>Pelouse</option>
-                </select>
-                <input type="date" class="p-2 border rounded-lg">
-                <input type="date" class="p-2 border rounded-lg">
-                <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
-                    Filtrer
-                </button>
-            </div>
+            <form action="{{ route('vente.teckts') }}" method="GET">                
+                <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                    <select name="match_id" class="p-2 border rounded-lg">
+                        <option value="all">Tous les matchs</option>
+                        @foreach($matches as $match)
+                            <option value="{{ $match->id }}" {{ request('match_id') == $match->id ? 'selected' : '' }}>
+                                {{ $match->awayTeam->name }} vs {{ $match->homeTeam->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    
+                    <select name="category" class="p-2 border rounded-lg">
+                        <option value="all">Toutes catégories</option>
+                        <option value="VIP" {{ request('category') == 'VIP' ? 'selected' : '' }}>VIP</option>
+                        <option value="Tribune Nord" {{ request('category') == 'Tribune Nord' ? 'selected' : '' }}>Tribune Nord</option>
+                        <option value="Tribune Est" {{ request('category') == 'Tribune Est' ? 'selected' : '' }}>Tribune Est</option>
+                        <option value="Tribune Est" {{ request('category') == 'Tribune Est' ? 'selected' : '' }}>Tribune Est</option>
+                    </select>
+                    
+                    <select name="status" class="p-2 border rounded-lg">
+                        <option value="all">Tous statuts</option>
+                        <option value="Paid" {{ request('status') == 'Paid' ? 'selected' : '' }}>Payé</option>
+                        <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>En attente</option>
+                    </select>
+                    
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                        Filtrer
+                    </button>
+                </div>
+            </form>
         </div>
 
         <!-- Table -->
