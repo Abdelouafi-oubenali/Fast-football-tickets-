@@ -32,7 +32,6 @@ class StadiumController extends Controller
         } else {
             $stadia = $this->stadiumRepository->all();
         }
-    
         return view('admin.stades.index', compact('stadia'));
     }
     
