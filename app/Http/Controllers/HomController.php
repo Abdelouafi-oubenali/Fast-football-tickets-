@@ -25,12 +25,11 @@ class HomController extends Controller
                 $q->where('name', 'like', '%' . $search . '%');
             });
         }
-    
         $matches = $query->take(4)->get();
-        $allMatches = $query->get();
+        $allMatchesSearch = $query->get();
         $TopStads = Stades::limit(4)->get();
-    
-        return view('index', compact('matches', 'allMatches', 'TopStads', 'search'));
+        $allMatches = tickets::with(['homeTeam','awayTeam'])->get();    
+        return view('index', compact('matches', 'allMatchesSearch', 'TopStads','allMatches','search'));
     }
     
     

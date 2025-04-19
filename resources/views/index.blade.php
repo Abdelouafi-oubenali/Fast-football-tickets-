@@ -13,7 +13,7 @@
 			</div>
 			<div class="overflow-x-auto scrollbar-hide"> 
 			  <ul class="flex gap-4 pb-4 snap-x snap-mandatory"> 
-				@foreach($allMatches as $match)
+				@foreach($allMatchesSearch as $match)
 				<li class="flex-shrink-0 snap-start" style="width: 300px;"> 
 				  <article class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg h-full">
 					<div class="h-44 w-full bg-cover bg-center flex justify-center items-center" style="background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
