@@ -4,6 +4,20 @@
 
 @section('content')
   <main class="ml-64 pt-20 p-8">
+    <!-- Filtres -->
+    <div class="container mx-auto px-4 py-6">
+        
+        <div class="bg-white rounded-lg shadow p-4 flex flex-wrap gap-4">
+        <a href="/tickets/create" class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg transition-colors duration-200 flex items-center gap-2 w-full md:w-auto justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Ajouter un tickets
+        </a>
+        </div>
+    
+    </div>
+
     <!-- Liste des matchs -->
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -32,29 +46,17 @@
                     </div>
                 </div>
                 <div class="p-4 space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">VIP</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">250 €</p>
-                                <p class="text-sm text-green-600">12 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Tribune</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">80 €</p>
-                                <p class="text-sm text-amber-600">45 places restantes</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Pelouse</span>
-                            <div class="text-right">
-                                <p class="font-bold text-lg">40 €</p>
-                                <p class="text-sm text-red-600">Complet</p>
-                            </div>
-                        </div>
+                     @foreach($match->categories as $category) 
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">{{ $category->nom }}</span> 
+                    <div class="text-right">
+                        <p class="font-bold text-lg">{{ $category->prix }} DH</p> 
+                        <p class="text-sm {{ $category->nombre_place > 0 ? 'text-green-600' : 'text-red-600' }}">
+                            {{ $category->nombre_place > 0 ? $category->nombre_place . ' places restantes' : 'Complet' }}
+                        </p>
                     </div>
+                </div>
+            @endforeach
                     <div class="flex space-x-2">
                     <a href="../tickets/{{ $match->id }}/edit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 text-center block flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
