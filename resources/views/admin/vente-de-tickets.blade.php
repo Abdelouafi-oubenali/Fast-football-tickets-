@@ -7,21 +7,22 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-indigo-500">
-                <h3 class="text-indigo-900 font-semibold mb-2">Tickets Vendus Aujourd'hui</h3>
-                <p class="text-3xl font-bold">145</p>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-lg p-6 text-white">
+                <h3 class="text-blue-100 font-semibold mb-2">Total des Réservations</h3>
+                <p class="text-4xl font-bold">{{$TotalResrvasion}}</p>
             </div>
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-emerald-500">
-                <h3 class="text-emerald-900 font-semibold mb-2">Recette du Jour</h3>
-                <p class="text-3xl font-bold">3,625 €</p>
+            <div class="bg-gradient-to-br from-green-500 to-green-700 rounded-xl shadow-lg p-6 text-white">
+                <h3 class="text-green-100 font-semibold mb-2">Réservations Payées</h3>
+                <p class="text-4xl font-bold">{{$TotalResrvasionPaid}}</p>
             </div>
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-amber-500">
-                <h3 class="text-amber-900 font-semibold mb-2">Places Restantes</h3>
-                <p class="text-3xl font-bold">856</p>
+            <div class="bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-xl shadow-lg p-6 text-white">
+                <h3 class="text-yellow-100 font-semibold mb-2">Réservations en Attente</h3>
+                <p class="text-4xl font-bold">{{$TotalResrvasionPending}}</p>
             </div>
-            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-rose-500">
-                <h3 class="text-rose-900 font-semibold mb-2">Taux de Remplissage</h3>
-                <p class="text-3xl font-bold">78%</p>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl shadow-lg p-6 text-white">
+                <h3 class="text-purple-100 font-semibold mb-2">Total des Matchs</h3>
+                <p class="text-4xl font-bold">{{$TotalTickts}}</p>
+                <div class="mt-2 text-purple-100 text-sm">+5% cette semaine</div>
             </div>
         </div>
         
