@@ -60,7 +60,6 @@
                         <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
                         <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                         <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
-                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -84,7 +83,7 @@
                         <td class="px-6 py-4">{{$teckt->quantity}}</td>
                         <td class="px-6 py-4 font-medium">{{$teckt->totla_price}} DH</td>
                         <td class="px-6 py-4">
-                                @php
+                             @php
                                 $status = $teckt->status;
                                 $bgColor = 'bg-gray-200';
                                 $textColor = 'text-gray-800';
@@ -96,20 +95,12 @@
                                     $bgColor = 'bg-yellow-100';
                                     $textColor = 'text-yellow-800';
                                 }
-                            @endphp
-                            
-                            <span class="px-3 py-1 {{ $bgColor }} {{ $textColor }} rounded-full text-sm">
-                                {{ $status }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <button class="bg-indigo-500 text-white px-3 py-1 rounded mr-2 hover:bg-indigo-600 text-sm">
-                                Éditer
-                            </button>
-                            <button class="bg-rose-500 text-white px-3 py-1 rounded hover:bg-rose-600 text-sm">
-                                Annuler
-                            </button>
-                        </td>
+                                @endphp
+                                
+                                <span class="px-3 py-1 {{ $bgColor }} {{ $textColor }} rounded-full text-sm">
+                                    {{ $status }}
+                                </span>
+                            </td>
                     </tr>
                     @endforeach
                     {{-- <tr class="hover:bg-gray-50">
