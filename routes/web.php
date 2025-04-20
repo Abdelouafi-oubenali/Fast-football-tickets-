@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Profile
-    Route::get('/profil/{id}', [ProfileController::class, 'index'])->name('profile.index'); 
+    Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index'); 
     Route::get('/profil/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/historique', [ProfileController::class, 'historique'])->name('profile.historique');
