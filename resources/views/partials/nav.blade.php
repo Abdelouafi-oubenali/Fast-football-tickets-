@@ -74,24 +74,25 @@
         </div>
     
     <div class="absolute bottom-0 left-0 w-full p-6">
-        <div class="flex items-center space-x-3 mb-6 px-4">
-            @if(Auth::check())
-                <div class="flex-shrink-0">
-                    @if(Auth::user()->photo)
-                        <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Photo de profil" class="w-10 h-10 rounded-full border-2 border-green-400">
-                    @else
-                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold">
-                            {{ substr(Auth::user()->nom, 0, 1) }}
-                        </div>
-                    @endif
-                </div>
-                <div>
-                    <div class="text-sm font-medium text-white">{{ Auth::user()->nom }}</div>
-                    <div class="text-xs text-green-300">{{ Auth::user()->role }}</div>
-                </div>
-            @endif
-        </div>
-        
+        <a href="{{ route('profile.index', ['id' => Auth::user()->id]) }}" class="block">
+            <div class="flex items-center space-x-3 mb-6 px-4 hover:bg-green-700 rounded-lg transition">
+                @if(Auth::check())
+                    <div class="flex-shrink-0">
+                        @if(Auth::user()->photo)
+                            <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Photo de profil" class="w-10 h-10 rounded-full border-2 border-green-400">
+                        @else
+                            <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold">
+                                {{ substr(Auth::user()->nom, 0, 1) }}
+                            </div>
+                        @endif
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-white">{{ Auth::user()->nom }}</div>
+                        <div class="text-xs text-green-300">{{ Auth::user()->role }}</div>
+                    </div>
+                @endif
+            </div>
+        </a>
         <a href="#" 
            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
            class="flex items-center justify-center w-full text-white py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-all duration-200">

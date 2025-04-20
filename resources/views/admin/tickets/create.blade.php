@@ -1,41 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Création de Tickets de Football</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-100 font-sans">
-    <div class="min-h-screen flex flex-col">
-        <!-- Header avec navigation -->
-        <header class="bg-blue-800 text-white shadow-md">
-            <div class="container mx-auto px-4 py-3">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                        <h1 class="text-xl font-bold">FootTicket Admin</h1>
-                    </div>
-                    <nav class="hidden md:flex space-x-6">
-                        <a href="#" class="py-2 hover:text-blue-200">Tableau de bord</a>
-                        <a href="#" class="py-2 border-b-2 border-white font-medium">Tickets</a>
-                        <a href="#" class="py-2 hover:text-blue-200">Matchs</a>
-                        <a href="#" class="py-2 hover:text-blue-200">Stades</a>
-                        <a href="#" class="py-2 hover:text-blue-200">Statistiques</a>
-                    </nav>
-                    <div class="flex items-center space-x-3">
-                        <span>Admin</span>
-                        <button class="p-1 rounded-full bg-blue-700 hover:bg-blue-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
+@extends('layouts.master')
 
+@section('title','Création de teckts')
+
+@section('content')
         <!-- Contenu principal -->
-        <main class="flex-grow">
+        <main class="flex-grow w-[75rem] ml-[18rem]">
             <div class="container mx-auto px-4 py-8">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-gray-800">Création de Nouveaux Tickets</h2>
@@ -250,11 +219,10 @@
     <style>
         .toggle-checkbox:checked {
             right: 0;
-            border-color: #3B82F6;
+            border-color: #79f63b;
         }
         .toggle-checkbox:checked + .toggle-label {
             background-color: #3B82F6;
         }
     </style>
-</body>
-</html>
+@endsection

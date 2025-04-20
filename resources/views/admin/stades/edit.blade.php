@@ -1,42 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier un Stade</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body class="bg-gray-100 min-h-screen">
-    <nav class="bg-green-800 text-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <i class="fas fa-futbol text-2xl mr-2"></i>
-                    <span class="font-bold text-xl">StadiumPro</span>
-                </div>
-                <div class="flex items-center">
-                    <div class="relative ml-3">
-                        <div>
-                            <button class="flex text-sm rounded-full focus:outline-none">
-                                <img class="h-8 w-8 rounded-full" src="/api/placeholder/32/32" alt="Avatar">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+@extends('layouts.master')
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex items-center mb-6">
+@section('title','Création de stads')
+
+@section('content')
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ml-[20rem]">
+    <div class="flex items-center mb-6">
             <a href="#" class="text-green-600 hover:text-green-800 mr-2">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h1 class="text-2xl font-bold text-gray-800">Modifier un Stade</h1>
         </div>
 
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden w-[70rem]">
             <div class="px-6 py-4 bg-green-50 border-b border-gray-200">
                 <h2 class="text-lg font-medium text-gray-800">Informations du Stade</h2>
                 <p class="text-sm text-gray-500 mt-1">Modifiez les informations ci-dessous pour mettre à jour les détails du stade.</p>
@@ -142,37 +118,6 @@
                     </div>
                 </div>
 
-                {{-- <div class="mt-8 border-t border-gray-200 pt-5">
-                    <h3 class="text-lg font-medium text-gray-800 mb-4">Équipements et Installations</h3>
-                    
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-                        <div class="flex items-center">
-                            <input id="parking" name="installations[]" value="parking" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" {{ in_array('parking', $stadium->installations) ? 'checked' : '' }}>
-                            <label for="parking" class="ml-2 block text-sm text-gray-700">Parking</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="vestiaires" name="installations[]" value="vestiaires" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" {{ in_array('vestiaires', $stadium->installations) ? 'checked' : '' }}>
-                            <label for="vestiaires" class="ml-2 block text-sm text-gray-700">Vestiaires</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="eclairage" name="installations[]" value="eclairage" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" {{ in_array('eclairage', $stadium->installations) ? 'checked' : '' }}>
-                            <label for="eclairage" class="ml-2 block text-sm text-gray-700">Éclairage</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="restauration" name="installations[]" value="restauration" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" {{ in_array('restauration', $stadium->installations) ? 'checked' : '' }}>
-                            <label for="restauration" class="ml-2 block text-sm text-gray-700">Restauration</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="wifi" name="installations[]" value="wifi" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" {{ in_array('wifi', $stadium->installations) ? 'checked' : '' }}>
-                            <label for="wifi" class="ml-2 block text-sm text-gray-700">Wi-Fi</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="handicap" name="installations[]" value="handicap" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" {{ in_array('handicap', $stadium->installations) ? 'checked' : '' }}>
-                            <label for="handicap" class="ml-2 block text-sm text-gray-700">Accès handicapé</label>
-                        </div>
-                    </div>
-                </div> --}}
-
                 <div class="mt-8 border-t border-gray-200 pt-5">
                     <h3 class="text-lg font-medium text-gray-800 mb-4">Contact et Responsable</h3>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -205,5 +150,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+@endsection

@@ -4,7 +4,7 @@
     <div class="container mx-auto p-4 md:p-8 ml-[40rem] w-[80rem]" style="margin-left: 15rem">
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="relative">
-                <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+                <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-600 ml[1rem]" style="margin-left:1rem"></div>
                     <div class="absolute bottom-0 left-8 transform translate-y-1/2">
                     <img class="rounded-full border-4 border-white w-24 h-24 object-cover" src="{{ asset('storage/' . $user->photo) }}" alt="User Profile Picture">
                 </div>
