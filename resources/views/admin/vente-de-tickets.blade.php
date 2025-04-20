@@ -76,6 +76,10 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forEach($ventes as $teckt)
+
+                    @if(!$teckt->match)
+                       @continue
+                    @endif
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4">
                             <div class="font-medium">{{$teckt->match->homeTeam->name}} vs {{$teckt->match->awayTeam->name}}</div>
