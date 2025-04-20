@@ -42,8 +42,16 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard/admin'); 
+        
+            $user = Auth::user();
+        
+            if ($user->role == 'admin' || $user->role == 'organisateur') {
+                return redirect()->intended('/dashboard');
+            } else {
+                return redirect()->intended('/');
+            }
         }
+        
 
         return back()->withErrors([
             'email' => 'Les identifiants ne correspondent pas.',
