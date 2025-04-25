@@ -25,11 +25,7 @@
         <div class="relative mb-6">
             <div class="absolute -top-4 -left-4 w-16 h-16 bg-yellow-400 rounded-full opacity-20"></div>
             <div class="absolute -bottom-2 -right-2 w-24 h-24 bg-purple-500 rounded-full opacity-20"></div>
-            <h1 class="text-3xl font-bold text-center text-gray-800 relative z-10">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-                    Système de Réservation de Tickets
-                </span>
-            </h1>
+        
         </div>
         
         <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-t-lg p-6 shadow-lg relative overflow-hidden">
