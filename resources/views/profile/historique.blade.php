@@ -7,6 +7,11 @@
     <div class="container mx-auto">
         <h1 class="text-3xl font-bold text-center mb-8 text-blue-900">Vos billets</h1>
         @foreach($tickets as $match)
+
+        @if(!$match->match)
+           @continue
+        @endif
+        
         <div class="bg-white p-4 rounded-lg shadow mb-6 max-w-3xl mx-auto"> 
             <h2 class="text-xl font-semibold text-gray-800">Date de réservation: <span class="text-blue-700">{{$match->paid_at}}</span>   — total tickets réservés <span class="text-blue-700">{{$match->quantity}}</span> </h2>
         </div>

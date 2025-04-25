@@ -32,13 +32,14 @@ class ReservationController extends Controller
         $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($id);
         $stades = Stades::where('name', $match->Stadium)->first();
         $categories = Category::where('match_id', $id)->get();
-    
+        
         $prices = [];
         foreach ($categories as $category) {
             $prices[strtolower(explode(' ', $category->nom)[1])] = $category->prix;
         }
     
         // tribunes
+
         $tribunes = [
             'nord' => [
                 'name' => 'Tribune Nord',

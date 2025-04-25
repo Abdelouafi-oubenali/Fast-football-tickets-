@@ -32,7 +32,6 @@ class StoreticketsRequest extends FormRequest
             'categories' => ['required', 'array'],
             'categories.*.nom' => ['required', 'string'],
             'categories.*.prix' => ['required', 'numeric', 'min:0'],
-            'categories.*.prix_abonne' => ['required', 'numeric', 'min:0'],
             'categories.*.places' => ['required', 'integer', 'min:0'],
             'categories.*.actif' => ['nullable', 'boolean'],
         ];
