@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMatchsRequest;
 use App\Http\Requests\StoreticketsRequest;
+use App\Http\Requests\UpdateticketsRequest;
 use App\Repositories\StadRepositoryInterface;
 use App\Repositories\MatchRepositoryInterface;
 use App\Repositories\TicketsRepositryIntirface;
@@ -89,13 +90,49 @@ class TicketsController extends Controller
         return view('admin.tickets.edit', compact('ticket','stades','equipes'));
     }
 
-    public function update(StoreticketsRequest $request, $id)
+    public function update(StoreticketsRequest $request, tickets $ticket)
     {
         $data = $request->validated();
-        $this->matchRepository->update($id, $data);
-        return redirect('match')->with('success', 'Le match a été mis à jour avec succès.');
+    
+        $ticket->update([
+            'date' => $data['date'],
+            'time' => $data['time'],
+            'Stadium' => $data['Stadium'],
+            'home_team_id' => $data['home_team_id'],
+            'away_team_id' => $data['away_team_id'],
+         
+        ]);
+    
+        $incomingIds = [];
+    
+        if (isset($data['categories'])) {
+            foreach ($data['categories'] as $categoryData) {
+                if (isset($categoryData['id'])) {
+                    $category = $ticket->categories()->find($categoryData['id']);
+                    if ($category) {
+                        $category->update([
+                            'prix' => $categoryData['prix'],
+                            'nombre_place' => $categoryData['places'],
+                            'actif' => $categoryData['actif'] ?? false,
+                        ]);
+                        $incomingIds[] = $category->id;
+                    }
+                } else {
+                    $newCategory = $ticket->categories()->create([
+                        'nom' => $categoryData['nom'],
+                        'prix' => $categoryData['prix'],
+                        'nombre_place' => $categoryData['places'],
+                        'actif' => $categoryData['actif'] ?? false,
+                    ]);
+                    $incomingIds[] = $newCategory->id;
+                }
+            }
+        }
+        $ticket->categories()->whereNotIn('id', $incomingIds)->delete();
+    
+        return redirect()->route('tickets.index')->with('success', 'Le ticket a été mis à jour avec succès.');
     }
-
+    
     public function destroy($id)
     {
         $this->matchRepository->delete($id);
