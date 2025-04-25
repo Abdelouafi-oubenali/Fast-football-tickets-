@@ -67,6 +67,7 @@ class TicketsController extends Controller
             $match->categories()->create([
                 'nom' => $categoryData['nom'],
                 'prix' => $categoryData['prix'],
+                'nombre_place' => $categoryData['places'],
                 'actif' => $categoryData['actif'] ?? true,
             ]);
         }
