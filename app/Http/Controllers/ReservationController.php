@@ -13,6 +13,21 @@ use App\Http\Requests\ReservationStore;
 
 class ReservationController extends Controller
 {
+    public function checkNamberTeckts ($matchId,$quantity , $category ) 
+    {
+        $categoryInfo = Category::where('match_id', $matchId)
+        ->where('nom', $category)
+        ->first();
+
+        if($categoryInfo) {
+            // dd($categoryInfo->nombre_place - $quantity);
+            if($categoryInfo->nombre_place - $quantity < 0)
+            {
+                return true;
+                // return redirect('/reservation/'. $matchId)->with('error', 'Les places ne sont pas disponibles.');
+            }
+        }
+    }
     public function index($id)
     {
         $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($id);
@@ -111,6 +126,13 @@ class ReservationController extends Controller
         return redirect()->back()->with('error', 'Vous avez déjà réservé pour ce match.');
     }
 
+    // function de check number de plass
+    if( $this->checkNamberTeckts($request->match_id,$request->quantity,$request->tribune)){
+        return redirect()->back()->with('error', 'Les places ne sont pas disponibles.');
+    }
+
+
+    // dd("helow");
     TicketsInfo::create([
         'user_id' => Auth::id() ?? 22, 
         'match_id' => $request->match_id,
