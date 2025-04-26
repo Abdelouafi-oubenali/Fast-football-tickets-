@@ -9,7 +9,7 @@
 		@if(request('search'))
 		<section>
 			<div class="mb-6">
-			  <h2 class="text-gray-800 font-bold font-unbounded text-3xl">Reslte Recherch</h2>
+			  <h2 class="text-gray-800 font-bold font-unbounded text-3xl">Résultats de recherche</h2>
 			</div>
 			<div class="overflow-x-auto scrollbar-hide"> 
 			  <ul class="flex gap-4 pb-4 snap-x snap-mandatory"> 
