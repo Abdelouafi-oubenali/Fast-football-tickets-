@@ -23,8 +23,11 @@ class ReservationController extends Controller
             // dd($categoryInfo->nombre_place - $quantity);
             if($categoryInfo->nombre_place - $quantity < 0)
             {
+                // dd()
                 return true;
                 // return redirect('/reservation/'. $matchId)->with('error', 'Les places ne sont pas disponibles.');
+            }else {
+                return false;
             }
         }
     }

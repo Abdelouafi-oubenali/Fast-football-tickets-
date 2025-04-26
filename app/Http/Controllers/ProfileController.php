@@ -15,8 +15,12 @@ class ProfileController extends Controller
 {
     public function index($id) 
     {
-        $user = User::findOrFail($id);    
-        return view('profile.index', compact('user'));
+        $user = User::findOrFail($id);  
+        if(Auth::user()->id == $user->id)  {
+            return view('profile.index', compact('user'));
+        }else{
+            abort(403);
+        }
     }
 
     public function mesInformations($id) 
