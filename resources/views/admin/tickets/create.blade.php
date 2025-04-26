@@ -114,7 +114,7 @@
                                                     ['label' => 'Tribune Sud', 'id' => 2, 'prix' => 90, 'abo' => 70, 'places' => 2500],
                                                     ['label' => 'Tribune Est', 'id' => 3, 'prix' => 60, 'abo' => 45, 'places' => 5000],
                                                     ['label' => 'Tribune Ouest', 'id' => 4, 'prix' => 30, 'abo' => 20, 'places' => 8000],
-                                                    ['label' => 'Catégorie VIP', 'id' => 5, 'prix' => 200, 'abo' => 150, 'places' => 200],
+                                                    ['label' => 'Zone VIP', 'id' => 5, 'prix' => 200, 'abo' => 150, 'places' => 200],
                                                 ];
                                             @endphp
                         
