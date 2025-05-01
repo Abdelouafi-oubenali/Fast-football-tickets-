@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stades;
-use App\Models\tickets;
+use App\Models\Matches;
 use Illuminate\Http\Request;
 
 class HomController extends Controller
@@ -16,7 +16,7 @@ class HomController extends Controller
     {
         $search = $request->input('search');
     
-        $query = tickets::with(['homeTeam', 'awayTeam']);
+        $query = Matches::with(['homeTeam', 'awayTeam']);
     
         if ($search) {
             $query->whereHas('homeTeam', function ($q) use ($search) {
@@ -28,7 +28,7 @@ class HomController extends Controller
         $matches = $query->take(4)->get();
         $allMatchesSearch = $query->get();
         $TopStads = Stades::limit(4)->get();
-        $allMatches = tickets::with(['homeTeam','awayTeam'])->get();    
+        $allMatches = Matches::with(['homeTeam','awayTeam'])->get();    
         return view('index', compact('matches', 'allMatchesSearch', 'TopStads','allMatches','search'));
     }
     

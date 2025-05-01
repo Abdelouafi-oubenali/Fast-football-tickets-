@@ -21,11 +21,11 @@ class Equipe extends Model
 
     public function homeMatches()
     {
-        return $this->hasMany(tickets::class, 'home_team_id');
+        return $this->hasMany(Matches::class, 'home_team_id');
     }
 
     public function awayMatches()
     {
-        return $this->hasMany(tickets::class, 'away_team_id');
+        return $this->hasMany(Matches::class, 'away_team_id');
     }
 }

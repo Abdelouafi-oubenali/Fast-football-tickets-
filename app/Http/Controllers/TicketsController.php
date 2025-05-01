@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Place;
 use App\Models\Matchs;
 
-use App\Models\tickets;
+use App\Models\Matches;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMatchsRequest;
@@ -53,14 +53,12 @@ class TicketsController extends Controller
         $data = $request->validated();
         
         // Créer le match
-        $match = tickets::create([
+        $match = Matches::create([
             'date' => $data['date'],
             'time' => $data['time'],
             'Stadium' => $data['Stadium'],
             'home_team_id' => $data['home_team_id'],
             'away_team_id' => $data['away_team_id'],
-            'home_team_score' => $data['home_team_score'] ?? null,
-            'away_team_score' => $data['away_team_score'] ?? null,
         ]);
           
         // Créer les catégories pour ce match
@@ -90,7 +88,7 @@ class TicketsController extends Controller
         return view('admin.tickets.edit', compact('ticket','stades','equipes'));
     }
 
-    public function update(StoreticketsRequest $request, tickets $ticket)
+    public function update(StoreticketsRequest $request, Matches $ticket)
     {
         $data = $request->validated();
     

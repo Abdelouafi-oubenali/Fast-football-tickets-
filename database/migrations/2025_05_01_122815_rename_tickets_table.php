@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('tickets', 'match');
+        Schema::rename('tickets', 'matches');
     }
     
     public function down()
     {
-        Schema::rename('match', 'tickets');
+        Schema::rename('matches', 'tickets');
     }
     
 };

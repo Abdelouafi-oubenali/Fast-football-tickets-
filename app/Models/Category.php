@@ -10,7 +10,7 @@ class Category extends Model
 
     public function match()
     {
-        return $this->belongsTo(tickets::class, 'match_id');
+        return $this->belongsTo(Matches::class, 'match_id');
     }
     
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tickets;
+use App\Models\Matches;
 use App\Models\TicketsInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\statiwticControler;
@@ -40,7 +40,7 @@ class VenteController extends Controller
     
         $ventes = $query->latest()->get();
     
-        $matches = tickets::with(['homeTeam','awayTeam'])->get();
+        $matches = Matches::with(['homeTeam','awayTeam'])->get();
     
         return view('admin.vente-de-tickets', compact(
             'ventes',

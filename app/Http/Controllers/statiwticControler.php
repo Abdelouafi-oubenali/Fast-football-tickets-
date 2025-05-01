@@ -9,7 +9,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipe;
 use App\Models\Matchs;
 use App\Models\Stades;
-use App\Models\Tickets;
+use App\Models\Matches;
 use App\Models\TicketsInfo;
 use Illuminate\Http\Request;
 
@@ -17,12 +17,12 @@ class statiwticControler extends Controller
 {
     public function TotalTickts()
     {
-        return Tickets::count(); 
+        return Matches::count(); 
     }
 
     public function TotalMatchs () 
     {
-        return Tickets::count(); 
+        return Matches::count(); 
 
     }
 

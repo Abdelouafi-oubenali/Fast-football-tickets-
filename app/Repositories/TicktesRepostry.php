@@ -2,14 +2,14 @@
 namespace App\Repositories;
 
 use App\Models\Matchs;
-use App\Models\tickets;
+use App\Models\Matches;
 use App\Repositories\MatchRepositoryInterface;
 
 class TicktesRepostry implements TicketsRepositryIntirface
 {
     protected $model;
 
-    public function __construct(tickets $model)
+    public function __construct(Matches $model)
     {
         $this->model = $model;
     }

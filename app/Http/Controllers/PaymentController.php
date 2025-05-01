@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Stripe\Stripe;
-use App\Models\tickets;
+use App\Models\Matches;
 use App\Models\Category;
 use App\Models\TicketsInfo;
 use Illuminate\Http\Request;
@@ -45,9 +45,10 @@ class PaymentController extends Controller
             'ticket_info_id' => 'required|exists:tickets_infos,id',
             'amount' => 'required|numeric|min:1',
         ]);
-
+        
+        // dd("hellow abdelouafi ounenali");
         $ticketInfo = TicketsInfo::with(['match.homeTeam', 'match.awayTeam'])
-            ->findOrFail($validated['ticket_info_id']);
+        ->findOrFail($validated['ticket_info_id']);
 
         try {
             $session = Session::create([
@@ -184,7 +185,7 @@ class PaymentController extends Controller
     public function downloadTicketPdf($ticketInfoId)
     {
         $ticketInfo = TicketsInfo::findOrFail($ticketInfoId);
-        $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($ticketInfo->match_id);
+        $match = Matches::with(['homeTeam', 'awayTeam'])->findOrFail($ticketInfo->match_id);
 
         $pdf = Pdf::loadView('payment.PDF', [
             'match' => $match,

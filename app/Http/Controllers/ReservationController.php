@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stades;
-use App\Models\tickets;
+use App\Models\matches ;
 use App\Models\Category;
 use App\Models\Enrollment;
 use App\Models\enrollments;
@@ -33,7 +33,7 @@ class ReservationController extends Controller
     }
     public function index($id)
     {
-        $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($id);
+        $match = matches ::with(['homeTeam', 'awayTeam'])->findOrFail($id);
         $stades = Stades::where('name', $match->Stadium)->first();
         $categories = Category::where('match_id', $id)->get();
         $stade = $match->Stadium;
@@ -47,7 +47,7 @@ class ReservationController extends Controller
 
     public function show($id)
     {
-        $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($id);
+        $match = matches ::with(['homeTeam', 'awayTeam'])->findOrFail($id);
         $stades = Stades::where('name', $match->Stadium)->first();
         $categories = Category::where('match_id', $id)->get();
         
@@ -118,7 +118,7 @@ class ReservationController extends Controller
     
     public function store(ReservationStore $request)
     {
-        $match = tickets::with(['homeTeam', 'awayTeam'])->findOrFail($request->match_id);
+        $match = matches ::with(['homeTeam', 'awayTeam'])->findOrFail($request->match_id);
         $stades = Stades::where('name', $match->Stadium)->first();
     
         $existingReservation = TicketsInfo::where('user_id', Auth::id())
