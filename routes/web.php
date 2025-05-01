@@ -91,3 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment/cancel/{ticket_info_id}', [PaymentController::class, 'cancel'])->name('payment.cancel');
     Route::get('/tickets/download/{ticketInfoId}', [PaymentController::class, 'downloadTicketPdf'])->name('tickets.download');
 });
+
+Route::get('/banned', function () {
+    return view('auth.banned');
+})->name('banned');

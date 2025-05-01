@@ -22,7 +22,7 @@ class statiwticControler extends Controller
 
     public function TotalMatchs () 
     {
-        return Matchs::count(); 
+        return Tickets::count(); 
 
     }
 

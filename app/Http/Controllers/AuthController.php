@@ -40,10 +40,17 @@ class AuthController extends Controller
        public function login (LoginRequest $request)
        {
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+           if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            $user = Auth::user();
+
+            if ($user->status == 'banned') 
+            {
+                Auth::logout(); 
+                return redirect()->route('banned'); 
+            }
+
             $request->session()->regenerate();
         
-            $user = Auth::user();
         
             if ($user->role == 'admin' || $user->role == 'organisateur') {
                 return redirect()->intended('/dashboard');
