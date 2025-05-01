@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Stripe\Stripe;
 use App\Models\Matches;
 use App\Models\Category;
-use App\Models\TicketsInfo;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Barryvdh\DomPDF\Facade\Pdf; 
@@ -42,12 +42,12 @@ class PaymentController extends Controller
     public function checkout(Request $request)
     {
         $validated = $request->validate([
-            'ticket_info_id' => 'required|exists:tickets_infos,id',
+            'ticket_info_id' => 'required|exists:Ticket,id',
             'amount' => 'required|numeric|min:1',
         ]);
         
         // dd("hellow abdelouafi ounenali");
-        $ticketInfo = TicketsInfo::with(['match.homeTeam', 'match.awayTeam'])
+        $ticketInfo = Ticket::with(['match.homeTeam', 'match.awayTeam'])
         ->findOrFail($validated['ticket_info_id']);
 
         try {
@@ -93,7 +93,7 @@ class PaymentController extends Controller
     public function success(Request $request, $ticket_info_id)
     {
         try {
-            $ticketInfo = TicketsInfo::with('match')->findOrFail($ticket_info_id);
+            $ticketInfo = Ticket::with('match')->findOrFail($ticket_info_id);
             
             $ticketInfo->update([
                 'status' => 'paid',
@@ -163,7 +163,7 @@ class PaymentController extends Controller
     public function cancel($ticket_info_id)
     {
         try {
-            $ticketInfo = TicketsInfo::with('match')->findOrFail($ticket_info_id);
+            $ticketInfo = Ticket::with('match')->findOrFail($ticket_info_id);
             
             return view('resravasion.cancel', [
                 'ticketInfo' => $ticketInfo,
@@ -184,7 +184,7 @@ class PaymentController extends Controller
 
     public function downloadTicketPdf($ticketInfoId)
     {
-        $ticketInfo = TicketsInfo::findOrFail($ticketInfoId);
+        $ticketInfo = Ticket::findOrFail($ticketInfoId);
         $match = Matches::with(['homeTeam', 'awayTeam'])->findOrFail($ticketInfo->match_id);
 
         $pdf = Pdf::loadView('payment.PDF', [

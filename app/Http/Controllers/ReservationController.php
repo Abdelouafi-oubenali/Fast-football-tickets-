@@ -7,7 +7,7 @@ use App\Models\matches ;
 use App\Models\Category;
 use App\Models\Enrollment;
 use App\Models\enrollments;
-use App\Models\TicketsInfo;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReservationStore;
 
@@ -121,7 +121,7 @@ class ReservationController extends Controller
         $match = matches ::with(['homeTeam', 'awayTeam'])->findOrFail($request->match_id);
         $stades = Stades::where('name', $match->Stadium)->first();
     
-        $existingReservation = TicketsInfo::where('user_id', Auth::id())
+        $existingReservation = Ticket::where('user_id', Auth::id())
         ->where('match_id', $request->match_id)
         ->first();
     
@@ -136,7 +136,7 @@ class ReservationController extends Controller
 
 
     // dd("helow");
-    TicketsInfo::create([
+    Ticket::create([
         'user_id' => Auth::id() ?? 22, 
         'match_id' => $request->match_id,
         'category' => $request->tribune,
@@ -145,7 +145,7 @@ class ReservationController extends Controller
         'totla_price' => $request->total,
     ]);
     
-        $enrollment = TicketsInfo::where('match_id', $request->match_id)->first();
+        $enrollment = Ticket::where('match_id', $request->match_id)->first();
     
         $category = $request->tribune;
         $quantity = $request->quantity;
