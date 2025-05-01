@@ -69,7 +69,6 @@ class ProfileController extends Controller
         $tickets = Ticket::with('match')
                     ->where('user_id', $user->id)  
                     ->get();    
-        // dd($tickets);
         return view('profile.historique', compact('tickets'));
     }
     
