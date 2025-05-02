@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matches;
-use App\Models\TicketsInfo;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Http\Controllers\statiwticControler;
 
@@ -21,9 +21,9 @@ class VenteController extends Controller
         $TotalResrvasionPaid = $this->totalTeckts->TotalResrvasionPaid();
         $TotalResrvasionPending = $this->totalTeckts->TotalResrvasionPending();
         $TotalTickts = $this->totalTeckts->TotalTickts();
-    
+        
  
-        $query = TicketsInfo::with('match', 'user');
+        $query = Ticket::with('match', 'user');
     
         if ($request->filled('match_id') && $request->match_id !== 'all') {
             $query->where('match_id', $request->match_id);

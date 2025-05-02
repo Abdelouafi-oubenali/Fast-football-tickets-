@@ -10,7 +10,7 @@ use App\Models\Equipe;
 use App\Models\Matchs;
 use App\Models\Stades;
 use App\Models\Matches;
-use App\Models\TicketsInfo;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class statiwticControler extends Controller
@@ -37,17 +37,17 @@ class statiwticControler extends Controller
     }
     public function TotalResrvasion ()
     {
-        return TicketsInfo::count();
+        return Ticket::count();
     }
 
     public function TotalResrvasionPaid()
     {
-        $total = TicketsInfo::where('status', 'paid')->count();
+        $total = Ticket::where('status', 'paid')->count();
         return $total;
     }
     public function TotalResrvasionPending()
     {
-        $total = TicketsInfo::where('status', 'pending')->count();
+        $total = Ticket::where('status', 'pending')->count();
         return $total;
     }
     
