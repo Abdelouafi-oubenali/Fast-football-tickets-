@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 class HomController extends Controller
 {
-    private function getequpe ()
-    {
-
-    }
     public function index(Request $request)
     {
         $search = $request->input('search');
