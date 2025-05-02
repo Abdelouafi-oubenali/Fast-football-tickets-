@@ -36,14 +36,13 @@
 					
 					<div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
 					  <time datetime="2023-10-20" class="block text-xs text-gray-500">
-						20 Octobre, 2023
-					  </time>
+						{{\Carbon\Carbon::parse($match->date)->toFormattedDateString()}} 					  </time>
 					  
 					  <a href="reservation/info/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
 			
-					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
+					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade  {{$match->Stadium}}</p>
 					  
 					  <div class="flex items-center gap-2">
 						<span class="text-green-500 font-medium">
@@ -197,13 +196,13 @@
                     </div>
                     <div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
                       <time datetime="2022-10-10" class="block text-xs text-gray-500">
-                        5 Novembre, 2023
+                         {{\Carbon\Carbon::parse($match->date)->toFormattedDateString()}} - {{\Carbon\Carbon::parse($match->time)->format('H:i')}}
                       </time>
                       <a href="reservation/info/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
           
-                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Complexe Sportif Prince Moulay Abdellah, Rabat</p>
+                      <p class="line-clamp-3 text-sm/relaxed text-gray-500">Complexe Sportif Prince {{$match->Stadium}}</p>
           
                       <div class="flex items-center gap-2">
                         <span class="text-green-500 font-medium">
@@ -273,14 +272,14 @@
 					
 					<div class="bg-white p-4 sm:p-6 flex flex-col gap-2">
 					  <time datetime="2023-10-20" class="block text-xs text-gray-500">
-						20 Octobre, 2023
+						{{\Carbon\Carbon::parse($match->date)->toFormattedDateString()}} - {{\Carbon\Carbon::parse($match->time)->format('H:i')}}
 					  </time>
 					  
 					  <a href="reservation/info/{{$match->id}}">
                         <h3 class="text-lg text-gray-900">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</h3>
                       </a>
 			
-					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade Mohammed V, Casablanca</p>
+					  <p class="line-clamp-3 text-sm/relaxed text-gray-500">Stade  {{$match->Stadium}}</p>
 					  
 					  <div class="flex items-center gap-2">
 						<span class="text-green-500 font-medium">
@@ -316,7 +315,7 @@
 								<img class="group-hover:transform-gpu group-hover:scale-100 scale-107 transition-all object-cover w-[full] h-full brightness-50" src="{{asset('storage/' . $stad->photo)}}" alt="">
 							</div>
 							<div class="absolute bottom-6 left-6 flex gap-2 items-center">
-								<span class="text-2xl font-bold text-white">{{$stad->ville}}</span>
+								<span class="text-2xl font-bold text-white">{{$stad->name}}</span>
 								<span class="text-2xl font-bold text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="size-6">
 										<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
