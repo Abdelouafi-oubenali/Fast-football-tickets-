@@ -27,7 +27,6 @@ class AuthController extends Controller
             'password' => $request->password
         ]);
 
-        // Auth::login($user);
         return redirect('/login');
 
        }

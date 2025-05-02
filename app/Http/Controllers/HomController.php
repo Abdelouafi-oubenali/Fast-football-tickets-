@@ -17,6 +17,10 @@ class HomController extends Controller
         $search = $request->input('search');
     
         $query = Matches::with(['homeTeam', 'awayTeam']);
+     
+        $query = Matches::with(['homeTeam', 'awayTeam'])
+        ->whereDate('date', '=', now()->toDateString());
+    
     
         if ($search) {
             $query->whereHas('homeTeam', function ($q) use ($search) {
@@ -28,8 +32,13 @@ class HomController extends Controller
         $matches = $query->take(4)->get();
         $allMatchesSearch = $query->get();
         $TopStads = Stades::limit(4)->get();
-        $allMatches = Matches::with(['homeTeam','awayTeam'])->get();    
-        return view('index', compact('matches', 'allMatchesSearch', 'TopStads','allMatches','search'));
+
+        $allMatches = Matches::with(['homeTeam', 'awayTeam'])
+        ->whereDate('date', '>=', now()->toDateString())
+        ->get();
+    
+        // dd($matches) ;  
+        return view('index', compact('matches', 'allMatchesSearch','allMatches','search','TopStads'));
     }
     
     
