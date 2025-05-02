@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Place;
-use App\Models\Matchs;
 
+use App\Models\Matchs;
 use App\Models\Matches;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,10 +35,18 @@ class TicketsController extends Controller
         $this->FootballEqupeRepository = $FootballEqupeRepository;
     }
 
-    public function index()
+    public function index($id = null)
     {
-        $matches = $this->matchRepository->all()->load('homeTeam', 'awayTeam','categories');
-        // dd($matches);
+        if($id != null){
+           $matches = $this->matchRepository->all()->load('homeTeam', 'awayTeam','categories');
+        }else {
+            $matches = Matches::whereDate('date', '>=', now()->toDateString())
+            ->with(['homeTeam', 'awayTeam', 'categories'])
+            ->get();
+
+        }
+        
+
         return view('admin.tickets.index', compact('matches'));
     }
 
