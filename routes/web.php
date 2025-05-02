@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('equipe', EquipeController::class);
     Route::resource('stades', StadiumController::class);
     Route::resource('tickets', TicketsController::class);
+    Route::get('/matchs/historique/{id}', [TicketsController::class ,"index"]);
+
     Route::resource('users', UserController::class);
 
     // User Management
