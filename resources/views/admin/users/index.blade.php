@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<div class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center p-4 " >
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-green-900 to-green-800 flex items-center justify-center p-4 " >
   <div class="w-full max-w-4xl">
     <div class="text-center mb-16">
       <div class="inline-block p-3 rounded-full bg-white/10 backdrop-blur-sm mb-6">
@@ -27,7 +27,7 @@
       <div class="bg-white rounded-xl overflow-hidden shadow-2xl" style="width: 29rem; margin-left: -2rem;">
         <div class="p-6">
           <div class="flex items-center mb-6">
-            <div class="p-2 bg-purple-600 rounded-lg mr-3">
+            <div class="p-2 bg-green-600 rounded-lg mr-3">
               <i class="fas fa-calendar-alt text-white text-xl"></i>
             </div>
             <h2 class="text-2xl font-bold text-gray-800">Organisateur</h2>
@@ -37,7 +37,7 @@
             <div class="divide-y divide-gray-300">
               <div class="py-6 flex flex-col sm:flex-row">
                 <div class="h-48 w-full sm:w-48 bg-gray-200 rounded-lg overflow-hidden mb-4 sm:mb-0">
-                  <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/25729294-esports-tournoi-organisateur-icone-dans-vecteur-illustration-vectoriel.jpg" alt="Photo de profil organisateur" class="h-full w-[5rem] object-cover">
+                  <img src="https://i.pinimg.com/736x/4a/0a/39/4a0a39c5c5f0971a9131bddb213aaf25.jpg" alt="Photo de profil organisateur" class="h-full w-[12rem] object-cover">
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="divide-y divide-gray-300">
               <div class="py-6 flex flex-col sm:flex-row">
                 <div class="h-48 w-full sm:w-48 bg-gray-200 rounded-lg overflow-hidden mb-4 sm:mb-0">
-                  <img src="https://cdn-icons-png.flaticon.com/512/6009/6009864.png" alt="Photo de profil client" class="h-full w-[5rem] object-cover">
+                  <img src="https://i.pinimg.com/736x/09/db/22/09db22891428315402565870a57152fb.jpg" alt="Photo de profil client" class="h-full w-[12rem] object-cover">
                 </div>
               </div>
             </div>
