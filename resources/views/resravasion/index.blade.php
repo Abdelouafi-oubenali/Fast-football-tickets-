@@ -63,10 +63,7 @@
                             <span class="font-medium">Journée:</span>
                             <span>34ème journée</span>
                         </li>
-                        <li class="flex justify-between">
-                            <span class="font-medium">Arbitre principal:</span>
-                            <span>François Dupont</span>
-                        </li>
+                    
                     </ul>
                 </div>
             </div>
