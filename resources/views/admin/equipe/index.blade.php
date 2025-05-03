@@ -41,12 +41,6 @@
                 <table class="min-w-full divide-y divide-gray-200 w-[75rem]" style="width: 72rem">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                                    <label for="checkbox-all" class="sr-only">checkbox</label>
-                                </div>
-                            </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Nom de l'équipe
                             </th>
@@ -67,12 +61,7 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($teams as $team)
                         <tr class="hover:bg-gray-50">
-                            <td class="p-4 w-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-{{ $team->id }}" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                                    <label for="checkbox-table-{{ $team->id }}" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
+
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     @if($team->logo)
@@ -87,7 +76,7 @@
                             </td>
                             
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $team->city }}
+                                {{ $team->ville }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -95,7 +84,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ \Carbon\Carbon::parse($team->creation_date)->format('d/m/Y') }}
+                              {{$team->founded_year}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                                 <div class="flex justify-center space-x-3">
@@ -152,14 +141,3 @@
 
 @endsection
 
-@section('scripts')
-<script>
-    // Pour gérer la sélection de toutes les cases à cocher
-    document.getElementById('checkbox-all').addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-    });
-</script>
-@endsection
