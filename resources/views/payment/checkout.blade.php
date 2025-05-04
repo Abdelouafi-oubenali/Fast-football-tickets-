@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">Paiement</div>
             <div class="card-body">
-                <p>Montant: {{ number_format($amount, 2) }} €</p>
+                <p>Montant: {{ number_format($amount, 2) }} DH</p>
                 <button type="submit" class="btn btn-primary">Payer avec Stripe</button>
             </div>
         </div>

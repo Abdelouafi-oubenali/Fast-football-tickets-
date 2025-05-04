@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         data.categories.forEach(category => {
             const option = document.createElement('option');
             option.value = category.price;
-            option.textContent = `${category.name} - ${category.price}€`;
+            option.textContent = `${category.name} - ${category.price}DH`;
             option.setAttribute('data-name', category.name);
             categorySelect.appendChild(option);
         });
@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const price = parseFloat(categorySelect.value) || 0;
         const quantity = parseInt(quantityInput.value) || 0;
         
-        unitPrice.textContent = price ? `${price}€` : '--';
-        totalPrice.textContent = price ? `${(price * quantity).toFixed(2)}€` : '--';
+        unitPrice.textContent = price ? `${price}DH` : '--';
+        totalPrice.textContent = price ? `${(price * quantity).toFixed(2)}DH` : '--';
     }
     
     document.getElementById('categorySelect').addEventListener('change', updateUnitPrice);
@@ -134,10 +134,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input name="quantity" type="hidden" value="${ticketData.quantity}">
                 <input name="price" type="hidden" value="${ticketData.price}">
                 <input name="total" type="hidden" value="${ticketData.total.toFixed(2)}">
-                <p class="text-sm text-gray-600">${ticketData.quantity} x ${ticketData.price}€</p>
+                <p class="text-sm text-gray-600">${ticketData.quantity} x ${ticketData.price}DH</p>
             </div>
             <div class="flex items-center">
-                <p class="font-bold text-blue-600 mr-3">${ticketData.total.toFixed(2)}€</p>
+                <p class="font-bold text-blue-600 mr-3">${ticketData.total.toFixed(2)}DH</p>
                 <button class="text-red-500 hover:text-red-700 remove-ticket">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -171,11 +171,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let total = 0;
         ticketElements.forEach(element => {
             const priceText = element.querySelector('.font-bold.text-blue-600').textContent;
-            const price = parseFloat(priceText.replace('€', ''));
+            const price = parseFloat(priceText.replace('DH', ''));
             total += price;
         });
         
-        grandTotal.textContent = `${total.toFixed(2)}€`;
+        grandTotal.textContent = `${total.toFixed(2)}DH`;
     }
     
     document.getElementById('checkoutButton').addEventListener('click', function() {

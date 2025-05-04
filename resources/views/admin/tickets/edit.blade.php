@@ -110,7 +110,6 @@
                                     <tr class="bg-gray-100">
                                         <th class="border px-4 py-2 text-left">Catégorie</th>
                                         <th class="border px-4 py-2 text-left">Prix Standard Dh</th>
-                                        {{-- <th class="border px-4 py-2 text-left">Prix Abonné (€)</th> --}}
                                         <th class="border px-4 py-2 text-left">Places Disponibles</th>
                                         <th class="border px-4 py-2 text-left">Actif</th>
                                     </tr>

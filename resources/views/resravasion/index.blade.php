@@ -120,7 +120,7 @@
                     @foreach ($categories as $category)
                         <div class="flex justify-between p-1 border-b border-gray-200">
                             <p>{{ $category->nom }}</p>
-                            <p class="font-medium">{{ $category->prix }} €</p>
+                            <p class="font-medium">{{ $category->prix }} DH</p>
                         </div>
                     @endforeach
                 </div>
@@ -186,7 +186,7 @@ function selectTribune(tribune) {
     document.getElementById('selectedTribune').textContent = tribuneNames[tribune];
     document.getElementById('selectedCategory').textContent = 'Standard';
     document.getElementById('selectedQuantity').textContent = '1';
-    document.getElementById('totalPrice').textContent = prices[tribune] + ' €';
+    document.getElementById('totalPrice').textContent = prices[tribune] + ' DH';
 }
 </script>
 

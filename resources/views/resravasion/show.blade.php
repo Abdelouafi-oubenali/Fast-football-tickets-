@@ -27,7 +27,7 @@
         <div id="totalSummary" class="mt-4 pt-3 border-t border-gray-200 hidden">
             <div class="flex justify-between">
                 <p class="font-semibold">Total général:</p>
-                <p id="grandTotal" class="font-bold text-blue-600">0€</p>
+                <p id="grandTotal" class="font-bold text-blue-600">0</p>
             </div>
             <button id="checkoutButton" class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
                 Procéder au paiement
@@ -123,11 +123,12 @@
             
             <div class="space-y-4">
                 @foreach($tribunes as $code => $tribune)
+                
                 <div class="border-b pb-4">
                     <h4 class="font-semibold text-blue-600">{{ $tribune['name'] }}</h4>
                     <ul class="mt-2 space-y-1 text-sm">
                         @foreach($tribune['categories'] as $category)
-                        <li>- {{ $category['name'] }}: {{ $category['price'] }}€</li>
+                        <li>- {{ $category['name'] }}: {{ $category['price'] }}DH</li>
                         @endforeach
                         <li>- Capacité: {{ number_format($tribune['capacity'], 0, ',', ' ') }} places</li>
                         @if(!empty($tribune['advantages']))

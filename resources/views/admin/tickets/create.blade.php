@@ -101,8 +101,8 @@
                                         <thead>
                                             <tr class="bg-gray-100">
                                                 <th class="border px-4 py-2 text-left">Catégorie</th>
-                                                <th class="border px-4 py-2 text-left">Prix Standard (€)</th>
-                                                <th class="border px-4 py-2 text-left">Prix Abonné (€)</th>
+                                                <th class="border px-4 py-2 text-left">Prix Standard (DH)</th>
+                                                <th class="border px-4 py-2 text-left">Prix Abonné (DH)</th>
                                                 <th class="border px-4 py-2 text-left">Places Disponibles</th>
                                                 <th class="border px-4 py-2 text-left">Actif</th>
                                             </tr>
@@ -186,19 +186,6 @@
             </div>
         </main>
 
-        <!-- Footer -->
-        <footer class="bg-gray-800 text-gray-300 py-4">
-            <div class="container mx-auto px-4 text-sm">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div>&copy; 2025 FootTicket Admin. Tous droits réservés.</div>
-                    <div class="mt-2 md:mt-0">
-                        <a href="#" class="text-gray-300 hover:text-white mx-2">Aide</a>
-                        <a href="#" class="text-gray-300 hover:text-white mx-2">Support</a>
-                        <a href="#" class="text-gray-300 hover:text-white mx-2">Documentation</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 
     <style>

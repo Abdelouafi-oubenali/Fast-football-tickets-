@@ -78,7 +78,7 @@
                             <div class="p-4">
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="text-gray-600" x-text="match.stadium"></span>
-                                    <span class="font-bold text-blue-800" x-text="'À partir de ' + match.minPrice + '€'"></span>
+                                    <span class="font-bold text-blue-800" x-text="'À partir de ' + match.minPrice + 'DH'"></span>
                                 </div>
                                 <button 
                                     @click="selectMatch(match)" 
@@ -111,15 +111,15 @@
                             <div class="flex space-x-4 mt-1">
                                 <div>
                                     <span class="inline-block w-4 h-4 bg-green-500 rounded-full mr-1"></span>
-                                    <span>30€</span>
+                                    <span>30DH</span>
                                 </div>
                                 <div>
                                     <span class="inline-block w-4 h-4 bg-blue-500 rounded-full mr-1"></span>
-                                    <span>50€</span>
+                                    <span>50DH</span>
                                 </div>
                                 <div>
                                     <span class="inline-block w-4 h-4 bg-purple-500 rounded-full mr-1"></span>
-                                    <span>80€</span>
+                                    <span>80DH</span>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                                     seat.price === 30 ? 'bg-green-500 text-white' :
                                     seat.price === 50 ? 'bg-blue-500 text-white' : 'bg-purple-500 text-white'
                                 }`"
-                                :title="`Place ${seat.id} - ${seat.price}€`"
+                                :title="`Place ${seat.id} - ${seat.price}DH`"
                             >
                                 <span x-text="seat.id"></span>
                             </div>
@@ -156,7 +156,7 @@
                             <span x-text="selectedSeats.length"></span> place(s) sélectionnée(s)
                         </div>
                         <div class="text-xl font-bold text-blue-800">
-                            Total: <span x-text="totalPrice + '€'"></span>
+                            Total: <span x-text="totalPrice + 'DH'"></span>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
                                 <template x-for="(seat, index) in selectedSeats" :key="index">
                                     <div class="flex justify-between items-center">
                                         <span>Place <span x-text="seat.id"></span></span>
-                                        <span class="font-bold" x-text="seat.price + '€'"></span>
+                                        <span class="font-bold" x-text="seat.price + 'DH'"></span>
                                     </div>
                                 </template>
                             </div>
@@ -208,7 +208,7 @@
                             <div class="border-t pt-4">
                                 <div class="flex justify-between items-center text-lg font-bold">
                                     <span>Total</span>
-                                    <span class="text-blue-800" x-text="totalPrice + '€'"></span>
+                                    <span class="text-blue-800" x-text="totalPrice + 'DH'"></span>
                                 </div>
                             </div>
                         </div>
@@ -276,7 +276,7 @@
                                 <button 
                                     type="submit"
                                     class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-md font-bold transition">
-                                    Payer <span x-text="totalPrice + '€'"></span>
+                                    Payer <span x-text="totalPrice + 'DH'"></span>
                                 </button>
                             </form>
                         </div>
