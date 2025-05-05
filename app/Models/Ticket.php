@@ -15,7 +15,7 @@ class Ticket extends Model
         'quantity',
         'status',
         'price',
-        'totla_price',
+        'total_price',
         'paid_at' 
     ];
 

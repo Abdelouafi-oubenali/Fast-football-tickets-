@@ -142,7 +142,7 @@ class ReservationController extends Controller
         'category' => $request->tribune,
         'quantity' => $request->quantity,
         'price' => $request->price,
-        'totla_price' => $request->total,
+        'total_price' => $request->total,
     ]);
     
         $enrollment = Ticket::where('match_id', $request->match_id)->first();

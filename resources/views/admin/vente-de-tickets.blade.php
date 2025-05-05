@@ -97,7 +97,7 @@
                             <div class="text-sm text-gray-500">{{$teckt->user->email}}</div>
                         </td>
                         <td class="px-6 py-4">{{$teckt->quantity}}</td>
-                        <td class="px-6 py-4 font-medium">{{$teckt->totla_price}} DH</td>
+                        <td class="px-6 py-4 font-medium">{{$teckt->total_price}} DH</td>
                         <td class="px-6 py-4">
                              @php
                                 $status = $teckt->status;

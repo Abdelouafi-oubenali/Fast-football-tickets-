@@ -70,7 +70,7 @@
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Montant total</p>
-                            <p class="font-medium">{{ $ticketInfo->totla_price }} DH</p>
+                            <p class="font-medium">{{ $ticketInfo->total_price }} DH</p>
                         </div>
                     </div>
                 </div>

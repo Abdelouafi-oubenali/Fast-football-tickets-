@@ -23,7 +23,7 @@
                     <p class="mb-2"><span class="font-medium">Stade:</span> {{ $match->Stadium }}</p>
                     <p class="mb-2"><span class="font-medium">Tribune:</span> {{ $ticketInfo->category }}</p>
                     <p class="mb-2"><span class="font-medium">Nombre de places:</span> {{ $ticketInfo->quantity }}</p>
-                    <p class="mb-2"><span class="font-medium">Montant total:</span> {{ $ticketInfo->totla_price }} DH</p>
+                    <p class="mb-2"><span class="font-medium">Montant total:</span> {{ $ticketInfo->total_price }} DH</p>
                 </div>
             </div>
             
