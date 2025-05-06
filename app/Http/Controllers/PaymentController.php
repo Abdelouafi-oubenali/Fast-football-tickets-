@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Log;
+use App\Models\Payment ;
 
 class PaymentController extends Controller
 {
@@ -94,11 +95,18 @@ class PaymentController extends Controller
     {
         try {
             $ticketInfo = Ticket::with('match')->findOrFail($ticket_info_id);
-            
             $ticketInfo->update([
                 'status' => 'paid',
                 'paid_at' => now()
             ]);
+            
+            $payment_data = Payment::create([
+                'user_id' => $ticketInfo->user_id,
+                'amount' => $ticketInfo->total_price,
+                'status' => 'paid',
+                'paid_at' => $ticketInfo->paid_at
+            ]);
+            
 
             $pdf = Pdf::loadView('payment.PDF', [
                 'match' => $ticketInfo->match,
