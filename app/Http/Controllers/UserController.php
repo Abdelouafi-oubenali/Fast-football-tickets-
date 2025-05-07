@@ -16,24 +16,34 @@ class UserController extends Controller
         abort(403, 'Accès non autorisé');
     }
 
-    public function manage_users($userRequest)
+    public function manage_users($userRequest, Request $request)
     {
+        $search = $request->input('search');
+    
         if ($userRequest == 1) {
             if (Gate::allows('is-admin')) {
-                    $organisateurs = User::where('role', 'organisateur')->get();
-                    return view('admin.users.organisateurs.index', compact('organisateurs'));
-                }else{
-                    abort(403, 'Unauthorized action.');
+                $organisateurs = User::where('role', 'organisateur');
+                if ($search) {
+                    $organisateurs->where('nom', 'like', '%'.$search.'%');
                 }
+                $organisateurs = $organisateurs->get();
+                return view('admin.users.organisateurs.index', compact('organisateurs'));
+            } else {
+                abort(403, 'Unauthorized action.');
             }
-        else{
+        } else {
             if (Gate::allows('is-admin') || Gate::allows('is-organisateur')) {
-                $users = User::where('role', 'client')->get();
+                $users = User::where('role', 'client');
+                
+                if ($search) {
+                    $users->where('nom', 'like', '%'.$search.'%');
+                }
+                
+                $users = $users->get();
                 return view('admin.users.client.index', compact('users'));
             }   
         }
         
-             
         abort(403, 'Unauthorized action.');
     }
 

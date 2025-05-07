@@ -19,25 +19,19 @@
                 </button>
             </div>
 
-            <!-- Search and Filter -->
-            <div class="mb-6 flex flex-col md:flex-row gap-4">
-                <div class="flex-grow">
-                    <input type="text" placeholder="Rechercher un utilisateur..." class="w-full px-4 py-2 border rounded-md">
-                </div>
-                <div class="flex gap-2">
-                    <select class="px-4 py-2 border rounded-md">
-                        <option value="">Tous les rôles</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">Utilisateur</option>
-                        <option value="editor">Éditeur</option>
-                    </select>
-                    <select class="px-4 py-2 border rounded-md">
-                        <option value="">Tous les statuts</option>
-                        <option value="active">Actif</option>
-                        <option value="inactive">Inactif</option>
-                    </select>
-                </div>
-            </div>
+            <!-- Search  -->
+            <form method="GET" action="" class="flex gap-2">
+                <input 
+                    type="text" 
+                    name="search" 
+                    placeholder="Rechercher un utilisateur..." 
+                    class="w-full px-4 py-2 border rounded-md"
+                    value="{{ request('search') }}"
+                >
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">
+                    Rechercher
+                </button>
+            </form>
 
             <!-- Users Table -->
             <div class="bg-white shadow-md rounded-md overflow-hidden">
