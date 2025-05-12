@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 
-@section('title','dashbord page ')
+@section('title','gestion des match  ')
 
 @section('content')
 
@@ -22,12 +22,12 @@
                     <option>Terminé</option>
                 </select>
             </div>
-            <button 
+            <a href="/match/create" 
                 onclick="openAddMatchModal()"
                 class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
             >
                 + Ajouter un match
-            </button>
+            </a>
         </div>
 
         <!-- Tableau des matchs -->
@@ -45,7 +45,7 @@
                             Stade
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Places disponibles
+                            Stadium
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Statut
@@ -59,10 +59,10 @@
                     <!-- Le contenu sera généré en JavaScript -->
                     <tbody id="matchesTable" class="bg-white divide-y divide-gray-200">
                    </tr>
+                   @foreach($matches as $match)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">2025-02-22 21:00</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Lyon vs Lille</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Groupama Stadium</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{$match->date}} 21:00</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{$match->homeTeam->name}} vs {{$match->awayTeam->name}}</td>                        <td class="px-6 py-4 whitespace-nowrap"> {{$match->stadium}}</td>
                         <td class="px-6 py-4 whitespace-nowrap">12000</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -70,14 +70,19 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button onclick="editMatch(2)" class="text-blue-600 hover:text-blue-900 mr-3">
+                            <a href="../match/{{ $match->id }}/edit"  class="text-blue-600 hover:text-blue-900 mr-3">
                                 <i class="fas fa-pencil-alt"></i>
-                            </button>
-                            <button onclick="deleteMatch(2)" class="text-red-600 hover:text-red-900">
+                            </a>
+                            <form action="{{ route('match.destroy', $match->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE') 
+                            <button type="submit" class="text-red-600 hover:text-red-900">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
+                          </form>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
                 </tbody>
             </table>
