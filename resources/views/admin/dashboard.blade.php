@@ -5,8 +5,8 @@
 @section('content')
 <div class="flex">
     <!-- Main Content -->
-    <div class="ml-64 flex-1 p-6">
-        <div class="flex justify-between items-center mb-6">
+    <div class="ml-64 flex-1 p-6 pl-16">
+        <div class="flex justify-between items-center mb-6 pl-">
             <h2 class="text-2xl font-bold text-gray-800">Tableau de bord</h2>
             <div class="flex items-center">
                 <div class="relative mr-4">

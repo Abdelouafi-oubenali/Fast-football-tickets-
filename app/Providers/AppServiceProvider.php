@@ -19,12 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         $this->app->bind(FootballEqupeRepositoryInterface::class, FootballEqupeRepository::class);
         $this->app->bind(StadRepositoryInterface::class, StadeReposittory::class);
         $this->app->bind(MatchRepositoryInterface::class, MatchRepository::class);
         $this->app->bind(TicketsRepositryIntirface::class, TicktesRepostry::class);
-
-
 
     }
     /**

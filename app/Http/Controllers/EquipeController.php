@@ -59,9 +59,20 @@ class EquipeController extends Controller
     public function update(StoreEquipeRequest $request, $id)
     {
         $data = $request->validated();
+        // dd($request) ;
+    
+        if ($request->hasFile('logo')) {
+            // dd($data);   
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $data['logo'] = $logoPath;
+        }
+
+    
         $this->teamRepository->update($data, $id);
-        return redirect('equipe')->with('success', 'Team created successfully.');
+    
+        return redirect('equipe')->with('success', 'Team updated successfully.');
     }
+    
 
     public function destroy($id)
     {

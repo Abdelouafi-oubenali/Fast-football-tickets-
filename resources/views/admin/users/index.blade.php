@@ -18,8 +18,7 @@
         Gestion des Utilisateurs
       </h1>
       <p class="text-purple-200 text-lg max-w-2xl mx-auto">
-        Gérez facilement les profils organisateurs et clients avec notre interface intuitive
-      </p>
+        Gérez facilement les profils organisateurs et clients pour la sécurité de notre plateforme.      </p>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">

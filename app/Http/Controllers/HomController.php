@@ -25,7 +25,11 @@ class HomController extends Controller
                 $q->where('name', 'like', '%' . $search . '%');
             });
         }
-        $matches = $query->take(4)->get();
+        $matches = Matches::with(['homeTeam', 'awayTeam'])
+        ->whereDate('date', '=', now()->toDateString())
+        ->get();
+        // dd( now()->toDateString());
+        // $ = $query->take(4)->get();
         $allMatchesSearch = $query->get();
         $TopStads = Stades::limit(4)->get();
 

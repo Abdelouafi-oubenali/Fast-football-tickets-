@@ -61,23 +61,6 @@
                         <input type="number" id="capacite" name="capacity" min="0" value="{{ $stadium->capacity }}" 
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                     </div>
-                    
-                    <div>
-                        <label for="statut" class="block text-sm font-medium text-gray-700 mb-1">Statut <span class="text-red-500">*</span></label>
-                        <select id="statut" name="statut"  
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                            <option value="disponible" {{ $stadium->statut == 'disponible' ? 'selected' : '' }}>Disponible</option>
-                            <option value="maintenance" {{ $stadium->statut == 'maintenance' ? 'selected' : '' }}>En maintenance</option>
-                            <option value="reserve" {{ $stadium->statut == 'reserve' ? 'selected' : '' }}>Réservé</option>
-                            <option value="ferme" {{ $stadium->statut == 'ferme' ? 'selected' : '' }}>Fermé</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="proprietaire" class="block text-sm font-medium text-gray-700 mb-1">Propriétaire</label>
-                        <input type="text" id="proprietaire" name="proprietaire" value="{{ $stadium->proprietaire }}"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                    </div>
 
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Image du stade</label>
@@ -99,27 +82,7 @@
                     </div>
                 </div>
 
-                <div class="mt-8 border-t border-gray-200 pt-5">
-                    <h3 class="text-lg font-medium text-gray-800 mb-4">Contact et Responsable</h3>
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        <div>
-                            <label for="contactNom" class="block text-sm font-medium text-gray-700 mb-1">Nom du responsable</label>
-                            <input type="text" id="contactNom" name="contactNom" value="{{ $stadium->contactNom }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" id="contactEmail" name="contactEmail" value="{{ $stadium->contactEmail }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="contactTelephone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                            <input type="tel" id="contactTelephone" name="contactTelephone" value="{{ $stadium->contactTelephone }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        </div>
-                    </div>
-                </div>
-
+        
                 <div class="mt-8 pt-5 border-t border-gray-200 flex justify-end">
                     <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg mr-4 hover:bg-gray-300 transition-colors">
                         Annuler

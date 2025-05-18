@@ -94,9 +94,9 @@
                             <a href="../stades/{{ $stad->id }}/edit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm">
                                 <i class="fas fa-edit mr-1"></i> Modifier
                             </a>
-                            <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg text-sm">
+                            {{-- <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg text-sm">
                                 <i class="fas fa-calendar-plus mr-1"></i> Réserver
-                            </button>
+                            </button> --}}
                             <form method="POST" action="{{ route('stades.destroy', $stad->id) }}">
                                 @csrf
                                 @method('DELETE')

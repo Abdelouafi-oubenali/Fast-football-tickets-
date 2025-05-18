@@ -76,7 +76,7 @@
             </div>
 
             <!-- Champ Rôle -->
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
                     Rôle
                 </label>
@@ -93,7 +93,7 @@
                 @error('role')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             <!-- Champ Mot de passe -->
             <div class="grid grid-cols-2 gap-4 mb-4">
@@ -158,7 +158,7 @@
             <div class="text-center mt-4">
                 <p class="text-sm text-gray-600">
                     Déjà un compte ? 
-                    <a href="#" class="text-blue-500 hover:text-blue-700">
+                    <a href="/login" class="text-blue-500 hover:text-blue-700">
                         Connectez-vous
                     </a>
                 </p>

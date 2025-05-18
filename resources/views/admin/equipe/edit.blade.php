@@ -13,15 +13,12 @@
 
         <!-- Formulaire principal -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <form method="POST" action="{{ route('equipe.update', $equipe->id) }}">
-                @csrf
-                @method('PUT') <!-- Ajout de la méthode PUT pour la mise à jour -->
-            
-                <!-- Section d'information d'équipe -->
+            <form method="POST" action="{{ route('equipe.update', $equipe->id) }}" enctype="multipart/form-data">                @csrf
+                @method('PUT')
+
                 <div class="p-6 border-b border-gray-200">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Informations de l'équipe</h2>
                     
-                    <!-- Affichage des erreurs de validation -->
                     @if ($errors->any())
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                             <ul>
@@ -33,29 +30,26 @@
                     @endif
             
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        <!-- Nom de l'équipe -->
                         <div>
                             <label for="team-name" class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe *</label>
                             <input type="text" id="name" name="name" required 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                                    value="{{ old('name', $equipe->name) }}">
                         </div>
-                        
-                        <!-- Département -->
-                        <div>
-                            <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Département *</label>
-                            <select id="department" name="department" required 
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Sélectionner un département</option>
-                                <option value="marketing" {{ old('department', $equipe->department) == 'marketing' ? 'selected' : '' }}>Marketing</option>
-                                <option value="development" {{ old('department', $equipe->department) == 'development' ? 'selected' : '' }}>Développement</option>
-                                <option value="design" {{ old('department', $equipe->department) == 'design' ? 'selected' : '' }}>Design</option>
-                                <option value="sales" {{ old('department', $equipe->department) == 'sales' ? 'selected' : '' }}>Commercial</option>
-                                <option value="hr" {{ old('department', $equipe->department) == 'hr' ? 'selected' : '' }}>Ressources Humaines</option>
-                                <option value="finance" {{ old('department', $equipe->department) == 'finance' ? 'selected' : '' }}>Finance</option>
-                            </select>
-                        </div>
-                        
+                               <!-- Champ pour le logo -->
+                               <div>
+                                <label for="team-logo" class="block text-sm font-medium text-gray-700 mb-1">Logo de l'équipe</label>
+                                <div class="flex items-center">
+                                    <input type="file" id="team-logo" name="logo" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                           accept="image/*">
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">Format recommandé: PNG, JPG. Taille max: 2MB</p>
+                                @error('logo')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                         <!-- Description de l'équipe -->
                         <div class="md:col-span-2">
                             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description de l'équipe</label>

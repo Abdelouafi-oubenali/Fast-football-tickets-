@@ -81,25 +81,6 @@
                         @enderror
                     </div>
 
-                    <!-- Statut -->
-                    <div>
-                        <label for="statut" class="block text-sm font-medium text-gray-700 mb-1">Statut <span class="text-red-500">*</span></label>
-                        <select id="statut" name="statut"  
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                            <option value="disponible">Disponible</option>
-                            <option value="maintenance">En maintenance</option>
-                            <option value="reserve">Réservé</option>
-                            <option value="ferme">Fermé</option>
-                        </select>
-                    </div>
-
-                    <!-- Propriétaire -->
-                    <div>
-                        <label for="proprietaire" class="block text-sm font-medium text-gray-700 mb-1">Propriétaire</label>
-                        <input type="text" id="proprietaire" name="proprietaire"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                    </div>
-
                     <!-- Image du stade -->
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Image du stade</label>
@@ -122,59 +103,7 @@
                     </div>
 
                 </div>
-
-                <div class="mt-8 border-t border-gray-200 pt-5">
-                    <h3 class="text-lg font-medium text-gray-800 mb-4">Équipements et Installations</h3>
-                    
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-                        <div class="flex items-center">
-                            <input id="parking" name="installations[]" value="parking" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                            <label for="parking" class="ml-2 block text-sm text-gray-700">Parking</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="vestiaires" name="installations[]" value="vestiaires" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                            <label for="vestiaires" class="ml-2 block text-sm text-gray-700">Vestiaires</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="eclairage" name="installations[]" value="eclairage" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                            <label for="eclairage" class="ml-2 block text-sm text-gray-700">Éclairage</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="restauration" name="installations[]" value="restauration" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                            <label for="restauration" class="ml-2 block text-sm text-gray-700">Restauration</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="wifi" name="installations[]" value="wifi" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                            <label for="wifi" class="ml-2 block text-sm text-gray-700">Wi-Fi</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="handicap" name="installations[]" value="handicap" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                            <label for="handicap" class="ml-2 block text-sm text-gray-700">Accès handicapé</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 border-t border-gray-200 pt-5">
-                    <h3 class="text-lg font-medium text-gray-800 mb-4">Contact et Responsable</h3>
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        <div>
-                            <label for="contactNom" class="block text-sm font-medium text-gray-700 mb-1">Nom du responsable</label>
-                            <input type="text" id="contactNom" name="contactNom"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" id="contactEmail" name="contactEmail"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="contactTelephone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                            <input type="tel" id="contactTelephone" name="contactTelephone"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        </div>
-                    </div>
-                </div>
-
+                
                 <div class="mt-8 pt-5 border-t border-gray-200 flex justify-end">
                     <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg mr-4 hover:bg-gray-300 transition-colors">
                         Annuler
