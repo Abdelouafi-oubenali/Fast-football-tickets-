@@ -158,7 +158,7 @@
             <div class="text-center mt-4">
                 <p class="text-sm text-gray-600">
                     Déjà un compte ? 
-                    <a href="#" class="text-blue-500 hover:text-blue-700">
+                    <a href="login" class="text-blue-500 hover:text-blue-700">
                         Connectez-vous
                     </a>
                 </p>
