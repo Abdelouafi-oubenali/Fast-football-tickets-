@@ -85,10 +85,8 @@
                     id="role"
                     name="role"
                 >
-                    <option value="Entraîneur">Entraîneur</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Directeur Sportif">Directeur Sportif</option>
-                    <option value="Autre">Autre</option>
+                    <option value="Entraîneur">client</option>
+
                 </select>
                 @error('role')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
