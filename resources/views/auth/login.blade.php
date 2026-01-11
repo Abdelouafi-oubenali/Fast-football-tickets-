@@ -158,7 +158,7 @@
                     <div class="mt-6 text-center">
                         <p class="mt-2 text-sm text-gray-600">
                             Vous n'avez pas de compte ? 
-                            <a href="/regster" class="font-medium text-blue-600 hover:text-blue-500">
+                            <a href="/register" class="font-medium text-blue-600 hover:text-blue-500">
                                 Créez-en un
                             </a>
                         </p>
