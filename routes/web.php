@@ -97,3 +97,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/banned', function () {
     return view('auth.banned');
 })->name('banned');
+
+// Route fallback pour les URLs non définies
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});

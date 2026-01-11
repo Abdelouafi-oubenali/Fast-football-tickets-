@@ -22,7 +22,7 @@ class UserController extends Controller
     
         if ($userRequest == 1) {
             if (Gate::allows('is-admin')) {
-                $organisateurs = User::where('role', 'organisateur');
+                $organisateurs = User::whereIn('role', ['organisateur', 'admin']);
                 if ($search) {
                     $organisateurs->where('nom', 'like', '%'.$search.'%');
                 }
@@ -90,4 +90,11 @@ class UserController extends Controller
         $user->delete();
         return redirect('/manage-users/1')->with('success', 'Utilisateur supprimé avec succès.');
     }
+
+
+    public function show($id)
+    {
+        abort(404);
+    }
+
 }
