@@ -29,18 +29,14 @@
 	</head>
 <body>
 
-    <header>
 
         @include('partials.header_man') 
-    </header>
     
     <main>
         @yield('content')
     </main>
 
-    <footer>
         @include('partials.footer')
-    </footer>
 
     
 	<script>

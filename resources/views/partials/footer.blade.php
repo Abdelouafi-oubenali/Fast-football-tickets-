@@ -6,7 +6,7 @@
                     FootTicket
                 </a>
             </div>
-            <p class="mt-3 text-gray-400">Creating memorable events with ease.</p>
+            <!-- <p class="mt-3 text-gray-400">Creating memorable events with ease.</p> -->
         </div>
 
         <div>
@@ -15,9 +15,7 @@
                 <li>
                     <a href="/" class="hover:text-[#d63621]">Home</a>
                 </li>
-                <li>
-                    <a href="/events" class="hover:text-[#d63621]">Events</a>
-                </li>
+               
                 <li>
                     <a href="/faqs" class="hover:text-[#d63621]">FAQs</a>
                 </li>
