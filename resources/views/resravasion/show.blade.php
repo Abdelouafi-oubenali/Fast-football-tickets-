@@ -72,7 +72,7 @@
             <div class="mb-4">
                 <label for="categorySelect" class="block text-gray-700 mb-2">Catégorie de place:</label>
                 <select id="categorySelect" class="w-full px-4 py-2 border rounded-lg">
-                    <option value="">Sélectionnez une catégorie</option>
+                    
                 </select>
             </div>
             
